@@ -1,0 +1,29 @@
+musiikin_esityskokoonpano.tbl -- termien avaukset osakentässä $m
+File generated: Tue Jun  2 14:57:11 2015
+
+A 	| a l t t o 
+B 	| b a s s o 
+B a r 	| b a r i t o n i 
+K t 	| k o n t r a t e n o r i 
+M z 	| m e z z o s o p r a a n o 
+S 	| s o p r a a n o 
+T 	| t e n o r i 
+j o u s e t 	| v i u l u , 0x20 a l t t o v i u l u , 0x20 s e l l o 
+j o u s i k v a r t e t t i 	| v i u l u t 0x20 ( 2 ) , 0x20 a l t t o v i u l u , 0x20 s e l l o 
+j o u s i k v i n t e t t i 	| v i u l u t 0x20 ( 2 ) , 0x20 a l t t o v i u l u t 0x20 ( 2 ) , 0x20 s e l l o 
+j o u s i o r k . 	| j o u s i o r k e s t e r i 
+j o u s i t r i o 	| v i u l u , 0x20 a l t t o v i u l u , 0x20 s e l l o 
+k a m a r i o r k . 	| o r k e s t e r i 
+k 0xc3 0xa4 t . 	| k 0xc3 0xa4 t i s e s t i 
+o r k . 	| o r k e s t e r i 
+p i a n o , 0x20 j o u s e t 	| p i a n o , 0x20 v i u l u , 0x20 s e l l o 
+p i a n o k v a r t e t t i 	| p i a n o , 0x20 v i u l u , 0x20 a l t t o v i u l u , 0x20 s e l l o 
+p i a n o k v i n t e t t i 	| p i a n o , 0x20 v i u l u t 0x20 ( 2 ) , 0x20 a l t t o v i u l u , 0x20 s e l l o 
+p i a n o t r i o 	| p i a n o , 0x20 v i u l u , 0x20 s e l l o 
+p u h a l l i n k v i n t e t t i 	| h u i l u , 0x20 o b o e , 0x20 k l a r i n e t t i , 0x20 k 0xc3 0xa4 y r 0xc3 0xa4 t o r v i , 0x20 f a g o t t i 
+p u h a l l i n o r k . 	| p u h a l l i n o r k e s t e r i 
+p u h a l t i m e t 	| h u i l u , 0x20 o b o e , 0x20 k l a r i n e t t i , 0x20 k 0xc3 0xa4 y r 0xc3 0xa4 t o r v i , 0x20 f a g o t t i 
+p u u p u h a l l i n k v a r t e t t i 	| h u i l u , 0x20 o b o e , 0x20 k l a r i n e t t i , 0x20 f a g o t t i 
+p u u p u h a l t i m e t 	| h u i l u , 0x20 o b o e , 0x20 k l a r i n e t t i , 0x20 f a g o t t i 
+s o i t i n 0xc3 0xa4 0xc3 0xa4 n i 	| m 0xc3 0xa4 0xc3 0xa4 r i t t 0xc3 0xa4 m 0xc3 0xa4 t 0xc3 0xb6 n 0x20 s o i t i n 
+#DEFAULT	| COPY

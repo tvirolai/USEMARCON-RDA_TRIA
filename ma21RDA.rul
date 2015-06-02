@@ -1,28 +1,28 @@
 RDA-konversio
 versio ?.?.2015 / Kansalliskirjasto
 
-000/1-18/	| 000/1-18/	| S
-000/19/		| 000/19/	| ' '
-000/20-24/	| 000/20-24/	| S
+000/1-18/ | 000/1-18/ | S
+000/19/ | 000/19/ | ' '
+000/20-24/ | 000/20-24/ | S
 
-000/19/	      | 040$e     | 'rda'
+000/19/ | 040$e | 'rda'
 
-336I1            | 336I1           | S
-336I2            | 336I2           | S
-336$a            | 336$a           | Table ('336_a.tbl')
-336$a            | 336$b           | Table ('336_b.tbl')
-336$2            | 336$2           | 'rdacontent'
+336I1 | 336I1	| S
+336I2 | 336I2	| S
+336$a | 336$a | Table ('336_a.tbl')
+336$a | 336$b | Table ('336_b.tbl')
+336$2 | 336$2 | 'rdacontent'
 
-337I1            | 337I1           | S
-337I2            | 337I2           | S
-337$a            | 337$a           | Table ('337_a.tbl')
-337$b            | 337$b           | Table ('337_b.tbl')
-337$2            | 337$2           | 'rdamedia'
+337I1 | 337I1 | S
+337I2 | 337I2 | S
+337$a | 337$a | Table ('337_a.tbl')
+337$b | 337$b | Table ('337_b.tbl')
+337$2 | 337$2 | 'rdamedia'
 
 #if (Exists(@338))
-338I1            | 338I1           | S
-338I2            | 338I2           | S
-338$a            | 338$a           | Table ('338_a.tbl')
-338$a						 | 338$b					 | Table ('338_b.tbl')
-338$2            | 338$2           | 'rdacarrier'
+338I1 | 338I1 | S
+338I2 | 338I2 | S
+338$a | 338$a | Table ('338_a.tbl')
+338$a | 338$b | Table ('338_b.tbl')
+338$2 | 338$2 | 'rdacarrier'
 #endif

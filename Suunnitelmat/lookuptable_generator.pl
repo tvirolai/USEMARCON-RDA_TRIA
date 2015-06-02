@@ -25,15 +25,15 @@ my $timestamp = "File generated: ". localtime . "\n\n";
 #########################################################################
 # Fill in required specifications here.
 my $inputfile = ReadData ("RDAkonversiosuunnitelma_Ulla.xlsx") || die $!;
-my $outputfile = "337_b.tbl"; # An example
-my $preamble = "337_b.tbl -- RDA-mediatyyppien koodit kentässä 337 \$b"; # An example
+my $outputfile = "musiikin_sovitusmerkinto.tbl"; # An example
+my $preamble = "musiikin_sovitusmerkinto.tbl -- termien avaukset osakentässä \$o"; # An example
 my $default_value = "COPY"; # COPY copies input value to output as is, if value is not found in Look Up Table
 
 my $sheet = "2";
-my $inputvalue_firstcell = "A208";
-my $inputvalue_lastcell = "A216";
-my $outputvalue_firstcell = "K208";
-my $outputvalue_lastcell = "K216";
+my $inputvalue_firstcell = "A66";
+my $inputvalue_lastcell = "A94";
+my $outputvalue_firstcell = "G66";
+my $outputvalue_lastcell = "G94";
 
 #########################################################################
 
