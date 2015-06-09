@@ -5,19 +5,239 @@ versio ?.?.2015 / Kansalliskirjasto
 000/19/ | 000/19/ | ' '
 000/20-24/ | 000/20-24/ | S
 
+001	| <DEL   | S
+
+003	| <DEL   | S
+
 000/19/ | 040$e | 'rda'
+
+300I1 | 300I1 | S
+300I2 | 300I2 | S
+300 | 300   | S
+
+// LUODAAN 338-kentät 300$a-kentän kirjauksien perusteella, jos niitä ei ole tietueessa valmiina
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, 'CD-levy') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'äänilevy'
+300 | 338$b | 'sd'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, 'äänilevy') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'äänilevy'
+300 | 338$b | 'sd'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Cc]-kas') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'äänikasetti'
+300 | 338$b | 'ss'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Aa][Tt]-kas') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'äänikasetti'
+300 | 338$b | 'ss'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Cc][Cc]-kas') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'äänikasetti'
+300 | 338$b | 'ss'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]nikas') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'äänikasetti'
+300 | 338$b | 'ss'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'tietolevy'
+300 | 338$b | 'cd'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'videolevy'
+300 | 338$b | 'vd'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideolevy') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'videolevy'
+300 | 338$b | 'vd'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'videokasetti'
+300 | 338$b | 'vf'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]alvo') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'piirtoheitinkalvo'
+300 | 338$b | 'gt'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'dia'
+300 | 338$b | 'gs'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd]iaa') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'dia'
+300 | 338$b | 'gs'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrokortti') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'mikrokortti'
+300 | 338$b | 'he'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ortti') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'kortti'
+300 | 338$b | 'no'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Aa]rkki') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'arkki'
+300 | 338$b | 'nb'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilmirulla') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'mikrofilmirulla'
+300 | 338$b | 'hj'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]änikela') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'äänikela'
+300 | 338$b | 'st'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]aulu') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'muu'
+300 | 338$b | 'nz'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]erkkojulkaisu') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'verkkoaineisto'
+300 | 338$b | 'cr'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh][Tt][Mm][Ll]') >= 0) And If (@008/24/ = 'o')
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'verkkoaineisto'
+300 | 338$b | 'cr'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ii][Bb]ooks') >= 0) And If (@008/24/ = 'o')
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'verkkoaineisto'
+300 | 338$b | 'cr'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ff][Ll][Aa][Cc]') >= 0) And If (@008/24/ = 'o')
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'verkkoaineisto'
+300 | 338$b | 'cr'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]iedosto') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'verkkoaineisto'
+300 | 338$b | 'cr'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Uu][Ss][Bb]-muisti') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'muu'
+300 | 338$b | 'cz'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]artasto') >= 0)
+300I1 | 338I1 | ''
+300I2 | 338I2 | ''
+300 | 338$a | 'nide'
+300 | 338$b | 'nc'
+300 | 338$2 | 'rdacarrier'
+#endif
+
+// 338-KENTTIEN LUOMINEN LOPPUU
 
 336I1 | 336I1	| S
 336I2 | 336I2	| S
 336$a | 336$a | Table ('336_a.tbl')
 336$a | 336$b | Table ('336_b.tbl')
-336$2 | 336$2 | 'rdacontent'
+336$a | 336$2 | 'rdacontent'
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
 337$a | 337$a | Table ('337_a.tbl')
-337$b | 337$b | Table ('337_b.tbl')
-337$2 | 337$2 | 'rdamedia'
+337$a | 337$b | Table ('337_b.tbl')
+337$a | 337$2 | 'rdamedia'
 
 #if (Exists(@338))
 338I1 | 338I1 | S
@@ -25,4 +245,10 @@ versio ?.?.2015 / Kansalliskirjasto
 338$a | 338$a | Table ('338_a.tbl')
 338$a | 338$b | Table ('338_b.tbl')
 338$2 | 338$2 | 'rdacarrier'
+#endif
+
+#if ((TAG != 'DEL') And (TAG <900))
+???I1           | ???I1           | S
+???I2           | ???I2           | S
+???             | ???             | S
 #endif
