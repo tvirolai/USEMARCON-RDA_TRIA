@@ -1,6 +1,8 @@
 RDA-konversio
 versio ?.?.2015 / Kansalliskirjasto
 
+#define macro Ulkoasu | RegReplace('kartt.', 'karttoja'); RegReplace('kuv.', 'kuvitettu'); RegReplace('mv.', 'mustavalkoinen'); RegReplace('vär.', 'värillinen'); RegReplace('värikuv.', 'värikuvitus'); RegReplace('ääni', 'äänellinen'); RegReplace('s.\\)', 'sivua)')
+
 000/1-18/ | 000/1-18/ | S
 000/19/ | 000/19/ | ' '
 000/20-24/ | 000/20-24/ | S
@@ -13,7 +15,16 @@ versio ?.?.2015 / Kansalliskirjasto
 
 300I1 | 300I1 | S
 300I2 | 300I2 | S
-300 | 300   | S
+300$a | 300$a | S; RegReplace('n. ', 'noin'); \\
+									 RegReplace('ss.', 'sivut'); \\
+									 RegReplace('S. \\d-\\d', 'sivut'); \\
+									 RegReplace('s. ', 'sivua'); \\
+									 RegReplace('s.\\)', 'sivua)'); \\
+									 RegReplace('kuv.', 'kuvitettu'); \\
+									 RegReplace('verkkojulkaisu', 'verkkoaineisto')
+300$b | 300$b | S; Ulkoasu
+300$c | 300$c | S
+300$e | 300$e | S; Ulkoasu
 
 // LUODAAN 338-kentät 300$a-kentän kirjauksien perusteella, jos niitä ei ole tietueessa valmiina
 
@@ -232,12 +243,14 @@ versio ?.?.2015 / Kansalliskirjasto
 336$a | 336$a | Table ('336_a.tbl')
 336$a | 336$b | Table ('336_b.tbl')
 336$a | 336$2 | 'rdacontent'
+336$8 | 336$8 | S
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
 337$a | 337$a | Table ('337_a.tbl')
 337$a | 337$b | Table ('337_b.tbl')
 337$a | 337$2 | 'rdamedia'
+337$8 | 337$8 | S
 
 #if (Exists(@338))
 338I1 | 338I1 | S
@@ -246,6 +259,28 @@ versio ?.?.2015 / Kansalliskirjasto
 338$a | 338$b | Table ('338_b.tbl')
 338$2 | 338$2 | 'rdacarrier'
 #endif
+
+500I1 | 500I1 | S
+500I2 | 500I2 | S
+500   | 500   | S; RegReplace('et al.', 'ja muita')
+
+511I1 | 511I1 | S
+511I2 | 511I2 | S
+511   | 511   | S; RegReplace('et al.', 'ja muita')
+
+530I1 | 530I1 | S
+530I2 | 530I2 | S
+530   | 500   | S; RegReplace('paperimuodossa', 'painettuna'); \\
+									 RegReplace('Verkkojulkaisu', 'Verkkojulkaisu'); \\
+									 RegReplace('verkkojulkaisuna', 'verkkoaineistona')
+
+776I1 | 776I1 | S
+776I2 | 776I2 | S
+776   | 776   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+856I1 | 856I1 | S
+856I2 | 856I2 | S
+856   | 856   | S; RegReplace('verkkojulkaisuun', 'verkkoaineistoon')
 
 #if ((TAG != 'DEL') And (TAG <900))
 ???I1           | ???I1           | S
