@@ -1,7 +1,23 @@
 RDA-konversio
 versio ?.?.2015 / Kansalliskirjasto
 
-#define macro Ulkoasu | RegReplace('kartt.', 'karttoja'); RegReplace('kuv.', 'kuvitettu'); RegReplace('mv.', 'mustavalkoinen'); RegReplace('vär.', 'värillinen'); RegReplace('värikuv.', 'värikuvitus'); RegReplace('ääni', 'äänellinen'); RegReplace('s.\\)', 'sivua)')
+
+// TODO: Osakohteiden tunnistaminen: on osakohde, jos löytyy kenttä 773 (linkki emoon)
+
+#define macro 300ae | RegReplace('n. ', 'noin'); \
+                      RegReplace('ss.', 'sivut'); \
+                      RegReplace('S. \\d-\\d', 'sivut'); \
+                      RegReplace('s. ', 'sivua'); \
+                      RegReplace('kuv.', 'kuvitettu'); \
+                      RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+#define macro 300be | RegReplace('kartt.', 'karttoja'); \
+                      RegReplace('kuv.', 'kuvitettu'); \
+                      RegReplace('mv.', 'mustavalkoinen'); \
+                      RegReplace('vär.', 'värillinen'); \
+                      RegReplace('värikuv.', 'värikuvitus'); \
+                      RegReplace('ääni', 'äänellinen'); \
+                      RegReplace('s.\\)', 'sivua)')
 
 000/1-18/ | 000/1-18/ | S
 000/19/ | 000/19/ | ' '
@@ -15,16 +31,10 @@ versio ?.?.2015 / Kansalliskirjasto
 
 300I1 | 300I1 | S
 300I2 | 300I2 | S
-300$a | 300$a | S; RegReplace('n. ', 'noin'); \\
-                   RegReplace('ss.', 'sivut'); \\
-                   RegReplace('S. \\d-\\d', 'sivut'); \\
-                   RegReplace('s. ', 'sivua'); \\
-                   RegReplace('s.\\)', 'sivua)'); \\
-                   RegReplace('kuv.', 'kuvitettu'); \\
-                   RegReplace('verkkojulkaisu', 'verkkoaineisto')
-300$b | 300$b | S; Ulkoasu
+300$a | 300$a | S; 300ae
+300$b | 300$b | S; 300be
 300$c | 300$c | S
-300$e | 300$e | S; Ulkoasu
+300$e | 300$e | S; 300be
 
 // LUODAAN 338-kentät 300$a-kentän kirjauksien perusteella, jos niitä ei ole tietueessa valmiina
 
@@ -234,6 +244,22 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$a | 'nide'
 300 | 338$b | 'nc'
 300 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@516$a, 'verkkoaineisto') >= 0)
+516I1 | 338I1 | ''
+516I1 | 338I2 | ''
+516$a | 338$a | 'verkkoaineisto'
+516$a | 338$b | 'cr'
+516$a | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@538$a, 'USB-muisti') >= 0)
+538I1 | 338I1 | ''
+538I1 | 338I2 | ''
+538$a | 338$a | 'muu'
+538$a | 338$b | 'cz'
+538$a | 338$2 | 'rdacarrier'
 #endif
 
 // 338-KENTTIEN LUOMINEN LOPPUU
