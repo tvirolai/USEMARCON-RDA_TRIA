@@ -17,6 +17,7 @@ versio ?.?.2015 / Kansalliskirjasto
                       RegReplace('vär.', 'värillinen'); \
                       RegReplace('värikuv.', 'värikuvitus'); \
                       RegReplace('ääni', 'äänellinen'); \
+
                       RegReplace('s.\\)', 'sivua)')
 
 000/1-18/ | 000/1-18/ | S
@@ -36,7 +37,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300$c | 300$c | S
 300$e | 300$e | S; 300be
 
-// LUODAAN 338-kentät 300$a-kentän kirjauksien perusteella, jos niitä ei ole tietueessa valmiina
+// LUODAAN 338-KENTÄT 300$A-KENTÄN KIRJAUKSIEN PERUSTEELLA, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
 
 #if (Not Exists(@338)) And If (RegFind(@300$a, 'CD-levy') >= 0)
 300I1 | 338I1 | ''
@@ -296,9 +297,9 @@ versio ?.?.2015 / Kansalliskirjasto
 
 530I1 | 530I1 | S
 530I2 | 530I2 | S
-530   | 500   | S; RegReplace('paperimuodossa', 'painettuna'); \\
-									 RegReplace('Verkkojulkaisu', 'Verkkojulkaisu'); \\
-									 RegReplace('verkkojulkaisuna', 'verkkoaineistona')
+530   | 500   | S; RegReplace('paperimuodossa', 'painettuna'); \
+                   RegReplace('Verkkojulkaisu', 'Verkkojulkaisu'); \
+                   RegReplace('verkkojulkaisuna', 'verkkoaineistona')
 
 776I1 | 776I1 | S
 776I2 | 776I2 | S
