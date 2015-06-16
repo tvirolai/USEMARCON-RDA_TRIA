@@ -1,8 +1,8 @@
 RDA-konversio
 versio ?.?.2015 / Kansalliskirjasto
 
-
-// TODO: Osakohteiden tunnistaminen: on osakohde, jos löytyy kenttä 773 (linkki emoon)
+// On osakohde: If (Exists(@773))
+// Ei ole osakohde: If (Not Exists(@773))
 
 #define macro 300ae | RegReplace('n. ', 'noin'); \
                       RegReplace('ss.', 'sivut'); \
@@ -17,18 +17,102 @@ versio ?.?.2015 / Kansalliskirjasto
                       RegReplace('vär.', 'värillinen'); \
                       RegReplace('värikuv.', 'värikuvitus'); \
                       RegReplace('ääni', 'äänellinen'); \
+                      RegReplace('s.\\)', 'sivua\\)')
 
-                      RegReplace('s.\\)', 'sivua)')
+// Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
+// TODO: Äänialojen lyhenteiden tunnistaminen?
+#define macro esityskokoonpano | RegReplace('^jousitrio', 'viulu, alttoviulu, sello'); \
+                                 RegReplace('^jousikvartetti', 'viulut (2), alttoviulu, sello'); \
+                                 RegReplace('^jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
+                                 RegReplace('^puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
+                                 RegReplace('^puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
+                                 RegReplace('pianotrio', 'piano, viulu, sello'); \
+                                 RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
+                                 RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
+                                 RegReplace('^ork.', 'orkesteri'); \
+                                 RegReplace('jousiork.', 'jousiorkesteri'); \
+                                 RegReplace('kamariork.', 'orkesteri'); \
+                                 RegReplace('puhallinork.', 'puhallinorkesteri'); \
+                                 RegReplace('S', 'sopraano'); \
+                                 RegReplace('S \\(\\d', 'sopraanot'); \
+                                 RegReplace('S \\(\\d', 'sopraanot'); \
+                                 RegReplace('Mz', 'mezzosopraano'); \
+                                 RegReplace('Mz \\(\\d', 'mezzosopraanot'); \
+                                 RegReplace('A', 'altto'); \
+                                 RegReplace('A \\(\\d', 'altot'); \
+                                 RegReplace('Kt', 'kontratenori'); \
+                                 RegReplace('Kt \\(\\d', 'kontratenorit'); \
+                                 RegReplace('T', 'tenori'); \
+                                 RegReplace('T \\(\\d', 'tenorit'); \
+                                 RegReplace('Bar', 'baritoni'); \
+                                 RegReplace('Bar \\(\\d', 'baritonit'); \
+                                 RegReplace('B', 'basso'); \
+                                 RegReplace('B \\(\\d', 'bassot'); \
+                                 RegReplace('kät.', 'kätisesti'); \
+                                 RegReplace('soitinääni', 'määrittämätön soitin'); \
+
+#define macro sovitusmerkinto | RegReplace('sov.', 'sovitettu')
 
 000/1-18/ | 000/1-18/ | S
 000/19/ | 000/19/ | ' '
 000/20-24/ | 000/20-24/ | S
 
-001	| <DEL   | S
+001 | <DEL   | S
 
-003	| <DEL   | S
+003 | <DEL   | S
 
 000/19/ | 040$e | 'rda'
+
+130I1 | 130I1  | S
+130I2 | 130I2  | S
+130$m | <A30$m | esityskokoonpano
+130$o | <A30$o | sovitusmerkinto; esityskokoonpano
+130$? | <A30$? | S
+
+A30 | 130 | S
+
+240I1 | 240I1  | S
+240I2 | 240I2  | S
+240$m | <F40$m | esityskokoonpano
+240$o | <F40$o | sovitusmerkinto; esityskokoonpano
+240$? | <F40$? | S
+
+F40   | 240 | S
+
+245I1 | 245I1  | S
+245I2 | 245I2  | S
+245$a | <F45$a | S
+245$b | <F45$b | S
+245$c | <F45$c | S; RegReplace('\\[et al.\\]', '[ja muita]')
+245$f | <F45$f | S
+245$g | <F45$g | S
+245$p | <F45$p | S
+245$6 | <F45$6 | S
+245$8 | <F45$8 | S
+245$k | <F45$k | S
+245$n | <F45$n | S
+
+F45 | 245 | S
+
+#if (Not Exists(@773))
+260I1 | 260I1 | S
+260I2 | 260I2 | S
+260$a | 260$a | S; RegReplace('\\[S.l', '[Kustannuspaikka tuntematon]'); RegReplace('\\[s.l.\\]', '[kustannuspaikka tuntematon]')
+260$b | 260$b | S; RegReplace('\\[s.n.\\]', '[kustantaja tuntematon]')
+260$c | 260$c | If (RegFind(S, '\\d{4}') >= 0) Then '[' + RegMatch(0) + ']'; Else S
+//S; RegReplace('\\[s.a.\\]', '[julkaisuaika tuntematon]')
+260$? | 260$? | S
+#endif
+
+#if (RegFind(@260$c, '\\d{4}') >= 0)
+260I1 | <X64I1 | ' '
+260I2 | <X64I2 | '4'
+260$c | <X64$c | '© ' + RegMatch(0);
+X64I1 | 264I1  | S
+X64I2 | 264I2  | S
+X64   | 264    | S
+#endif
+
 
 300I1 | 300I1 | S
 300I2 | 300I2 | S
@@ -39,7 +123,15 @@ versio ?.?.2015 / Kansalliskirjasto
 
 // LUODAAN 338-KENTÄT 300$A-KENTÄN KIRJAUKSIEN PERUSTEELLA, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, 'CD-levy') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) And If (Not Exists(@773))
+256I1 | 338I1 | ''
+256I2 | 338I2 | ''
+256 | 338$a | 'verkkoaineisto'
+256 | 338$b | 'cr'
+256 | 338$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, 'CD-levy') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'äänilevy'
@@ -47,7 +139,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, 'äänilevy') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, 'äänilevy') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'äänilevy'
@@ -55,7 +147,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Cc]-kas') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Cc]-kas') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'äänikasetti'
@@ -63,7 +155,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Aa][Tt]-kas') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Aa][Tt]-kas') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'äänikasetti'
@@ -71,7 +163,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Cc][Cc]-kas') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Cc][Cc]-kas') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'äänikasetti'
@@ -79,7 +171,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]nikas') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]nikas') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'äänikasetti'
@@ -87,7 +179,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'tietolevy'
@@ -95,7 +187,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'videolevy'
@@ -103,7 +195,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideolevy') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideolevy') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'videolevy'
@@ -111,7 +203,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'videokasetti'
@@ -119,7 +211,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]alvo') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]alvo') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'piirtoheitinkalvo'
@@ -127,7 +219,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'dia'
@@ -135,7 +227,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd]iaa') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd]iaa') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'dia'
@@ -143,7 +235,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrokortti') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrokortti') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'mikrokortti'
@@ -151,7 +243,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ortti') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ortti') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'kortti'
@@ -159,7 +251,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Aa]rkki') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Aa]rkki') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'arkki'
@@ -167,7 +259,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilmirulla') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilmirulla') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'mikrofilmirulla'
@@ -175,7 +267,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]änikela') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]änikela') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'äänikela'
@@ -183,7 +275,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]aulu') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]aulu') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'muu'
@@ -191,7 +283,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]erkkojulkaisu') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]erkkojulkaisu') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'verkkoaineisto'
@@ -199,7 +291,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh][Tt][Mm][Ll]') >= 0) And If (@008/24/ = 'o')
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh][Tt][Mm][Ll]') >= 0) And If (@008/24/ = 'o') And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'verkkoaineisto'
@@ -207,7 +299,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ii][Bb]ooks') >= 0) And If (@008/24/ = 'o')
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ii][Bb]ooks') >= 0) And If (@008/24/ = 'o') And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'verkkoaineisto'
@@ -215,7 +307,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ff][Ll][Aa][Cc]') >= 0) And If (@008/24/ = 'o')
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ff][Ll][Aa][Cc]') >= 0) And If (@008/24/ = 'o') And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'verkkoaineisto'
@@ -223,7 +315,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]iedosto') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]iedosto') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'verkkoaineisto'
@@ -231,7 +323,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Uu][Ss][Bb]-muisti') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Uu][Ss][Bb]-muisti') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'muu'
@@ -239,7 +331,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]artasto') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]artasto') >= 0) And If (Not Exists(@773))
 300I1 | 338I1 | ''
 300I2 | 338I2 | ''
 300 | 338$a | 'nide'
@@ -247,7 +339,7 @@ versio ?.?.2015 / Kansalliskirjasto
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@516$a, 'verkkoaineisto') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@516$a, 'verkkoaineisto') >= 0) And If (Not Exists(@773))
 516I1 | 338I1 | ''
 516I1 | 338I2 | ''
 516$a | 338$a | 'verkkoaineisto'
@@ -255,7 +347,7 @@ versio ?.?.2015 / Kansalliskirjasto
 516$a | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@538$a, 'USB-muisti') >= 0)
+#if (Not Exists(@338)) And If (RegFind(@538$a, 'USB-muisti') >= 0) And If (Not Exists(@773))
 538I1 | 338I1 | ''
 538I1 | 338I2 | ''
 538$a | 338$a | 'muu'
@@ -265,8 +357,8 @@ versio ?.?.2015 / Kansalliskirjasto
 
 // 338-KENTTIEN LUOMINEN LOPPUU
 
-336I1 | 336I1	| S
-336I2 | 336I2	| S
+336I1 | 336I1 | S
+336I2 | 336I2 | S
 336$a | 336$a | Table ('336_a.tbl')
 336$a | 336$b | Table ('336_b.tbl')
 336$a | 336$2 | 'rdacontent'
@@ -301,9 +393,81 @@ versio ?.?.2015 / Kansalliskirjasto
                    RegReplace('Verkkojulkaisu', 'Verkkojulkaisu'); \
                    RegReplace('verkkojulkaisuna', 'verkkoaineistona')
 
+600I1 | 600I1  | S
+600I2 | 600I2  | S
+600$m | <C60$m | esityskokoonpano
+600$o | <C60$o | sovitusmerkinto; esityskokoonpano
+600$? | <C60$? | S
+
+C60 | 600 | S
+
+610I1 | 610I1  | S
+610I2 | 610I2  | S
+610$m | <D61$m | esityskokoonpano
+610$o | <D61$o | sovitusmerkinto; esityskokoonpano
+610$? | <D61$? | S
+
+D61 | 610 | S
+
+630I1 | 630I1  | S
+630I2 | 630I2  | S
+630$m | <E63$m | esityskokoonpano
+630$o | <E63$o | sovitusmerkinto; esityskokoonpano
+630$? | <E63$? | S
+
+E63 | 630 | S
+
+700I1 | 700I1  | S
+700I2 | 700I2  | S
+700$m | <G70$m | esityskokoonpano
+700$o | <G70$o | sovitusmerkinto; esityskokoonpano
+700$? | <G70$? | S
+
+G70 | 700 | S
+
+710I1 | 710I1  | S
+710I2 | 710I2  | S
+710$m | <H71$m | esityskokoonpano
+710$o | <H71$o | sovitusmerkinto, esityskokoonpano
+710$? | <H71$? | S
+
+H71 | 710 | S
+
+730I1 | 730I1  | S
+730I2 | 730I2  | S
+730$m | <J73$m | esityskokoonpano
+730$o | <J73$o | sovitusmerkinto, esityskokoonpano
+730$? | <J73$? | S
+
+J73 | 730 | S
+
 776I1 | 776I1 | S
 776I2 | 776I2 | S
 776   | 776   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+800I1 | 800I1  | S
+800I2 | 800I2  | S
+800$m | <K80$m | esityskokoonpano
+800$o | <K80$o | sovitusmerkinto, esityskokoonpano
+800$? | <K80$? | S
+
+K80 | 800 | S
+
+810I1 | 810I1  | S
+810I2 | 810I2  | S
+810$m | <L81$m | esityskokoonpano
+810$o | <L81$o | sovitusmerkinto, esityskokoonpano
+810$? | <L81$? | S
+
+L81 | 810 | S
+
+830I1 | 830I1  | S
+830I2 | 830I2  | S
+830$m | <M83$m | esityskokoonpano
+830$o | <M83$o | sovitusmerkinto, esityskokoonpano
+830$? | <M83$? | S
+
+M83 | 830 | S
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S
