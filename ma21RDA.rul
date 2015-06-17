@@ -3,13 +3,14 @@ versio ?.?.2015 / Kansalliskirjasto
 
 #define macro 300ae | RegReplace('n\\. ', 'noin'); \
                       RegReplace('ss\\.', 'sivut'); \
-                      RegReplace('S\\. \\d-\\d', 'sivut'); \
                       RegReplace('s\\,', 'sivua,'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
                       RegReplace('1 vol\\.', '1 nide'); \
                       If (RegFind(S, '[023456789] vol\\.') >= 0) RegReplace('vol\\.', 'nidettä'); \
-                      If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua')
+                      If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
+                      If (RegFind('S\\.(.)*\\d*-\\d*') >= 0) RegReplace('S\\.', 'sivut'); \
+                      If (RegFind('S\\.(.)*\\d*[^-]') >= 0) RegReplace('S\\.', 'sivu')
 
 #define macro 300be | RegReplace('kartt\\.', 'karttoja'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
