@@ -1,0 +1,222 @@
+
+
+-----------------------------------
+USEMARCON v3.17 started at Fri Jul 24 10:57:08 2015
+
+WARNING (7104) - Invalid or redundant subfield found in output record (record 1, ID 006958992) : Field 240: 'aKvintetot,mpiano, viulu, sellotKvintetot' (subfield '$t')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,cC 2011' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,cC 2011' (ind '0')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 600: 'aBrainin, Norbert,c(fiktiivinen hahmo)' (ind ' ')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 630: 'tTriot' (ind ' ')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 630: 'tTriot' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 800: 'aMäkelän Aikku,d16. vuosisata' (subfield '$t')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$t')
+WARNING (7107) - Mandatory subfield expected in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$a')
+WARNING (7102) - Invalid first indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,cc2010' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,cc2010' (ind '0')
+INFO (1003) - End of MARC file 
+5 Converted Records: 5 without error and 0 with error(s)
+
+
+-----------------------------------
+USEMARCON v3.17 started at Fri Jul 24 10:58:08 2015
+
+ERROR (5100) - Rule analysis error (record 1, ID 006958992) : ERROR 'Could not compile regular expression 'cop.|©|℗|[Cc|^p': missing terminating ] for character class at missing terminating ] for character class (offset 18) in rule "Condition (RegFind(S, 'cop.|©|℗|[Cc|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0)" at line 168
+WARNING (7104) - Invalid or redundant subfield found in output record (record 1, ID 006958992) : Field 240: 'aKvintetot,mpiano, viulu, sellotKvintetot' (subfield '$t')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,cC 2011' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,cC 2011' (ind '0')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 600: 'aBrainin, Norbert,c(fiktiivinen hahmo)' (ind ' ')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 630: 'tTriot' (ind ' ')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 630: 'tTriot' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 800: 'aMäkelän Aikku,d16. vuosisata' (subfield '$t')
+ERROR (5100) - Rule analysis error (record 2, ID 003009306) : ERROR 'Could not compile regular expression 'cop.|©|℗|[Cc|^p': missing terminating ] for character class at missing terminating ] for character class (offset 18) in rule "Condition (RegFind(S, 'cop.|©|℗|[Cc|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0)" at line 168
+WARNING (7104) - Invalid or redundant subfield found in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$t')
+WARNING (7107) - Mandatory subfield expected in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$a')
+WARNING (7102) - Invalid first indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,cc2010' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,cc2010' (ind '0')
+ERROR (5100) - Rule analysis error (record 3, ID 006972600) : ERROR 'Could not compile regular expression 'cop.|©|℗|[Cc|^p': missing terminating ] for character class at missing terminating ] for character class (offset 18) in rule "Condition (RegFind(S, 'cop.|©|℗|[Cc|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0)" at line 168
+ERROR (5100) - Rule analysis error (record 5, ID 006972600) : ERROR 'Could not compile regular expression 'cop.|©|℗|[Cc|^p': missing terminating ] for character class at missing terminating ] for character class (offset 18) in rule "Condition (RegFind(S, 'cop.|©|℗|[Cc|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0)" at line 168
+INFO (1003) - End of MARC file 
+5 Converted Records: 1 without error and 4 with error(s)
+
+
+-----------------------------------
+USEMARCON v3.17 started at Fri Jul 24 10:58:17 2015
+
+WARNING (7104) - Invalid or redundant subfield found in output record (record 1, ID 006958992) : Field 240: 'aKvintetot,mpiano, viulu, sellotKvintetot' (subfield '$t')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,c[2011]' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,c[2011]' (ind '0')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 600: 'aBrainin, Norbert,c(fiktiivinen hahmo)' (ind ' ')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 630: 'tTriot' (ind ' ')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 630: 'tTriot' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 800: 'aMäkelän Aikku,d16. vuosisata' (subfield '$t')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$t')
+WARNING (7107) - Mandatory subfield expected in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$a')
+WARNING (7102) - Invalid first indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,c[2010]' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,c[2010]' (ind '0')
+INFO (1003) - End of MARC file 
+5 Converted Records: 5 without error and 0 with error(s)
+
+
+-----------------------------------
+USEMARCON v3.17 started at Fri Jul 24 10:59:54 2015
+
+WARNING (7104) - Invalid or redundant subfield found in output record (record 1, ID 006958992) : Field 240: 'aKvintetot,mpiano, viulu, sellotKvintetot' (subfield '$t')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,c[2011]' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,c[2011]' (ind '0')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 600: 'aBrainin, Norbert,c(fiktiivinen hahmo)' (ind ' ')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 630: 'tTriot' (ind ' ')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 630: 'tTriot' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 800: 'aMäkelän Aikku,d16. vuosisata' (subfield '$t')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$t')
+WARNING (7107) - Mandatory subfield expected in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$a')
+WARNING (7102) - Invalid first indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,c[2010]' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,c[2010]' (ind '0')
+INFO (1003) - End of MARC file 
+5 Converted Records: 5 without error and 0 with error(s)
+
+
+-----------------------------------
+USEMARCON v3.17 started at Fri Jul 24 11:00:03 2015
+
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 007047014) : Field 505: 'aKadensseja W.A. Mozartin seuraaviin teoksiin: konsertto no 1, KV207 ; konsertto no. 2, KV211 ; Konsertto no. 3, KV216 ; konsertto no.4, KV218 ; konsertto no. 5, KV219 ; Adagio KV261 ; Rondo concertante KV269 ; Rondo KV373.' (ind ' ')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 3, ID 006891642) : Field 598: 'aÄänite5OAMK' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 5, ID 006891643) : Field 598: 'aÄänite5OAMK' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 6, ID 006891641) : Field 598: 'aÄänite5OAMK' (subfield '$5')
+WARNING (7102) - Invalid first indicator found in output record (record 11, ID 006408126) : Field 382: 'bfagottin1akamariorkesteri' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 11, ID 006408126) : Field 382: 'bfagottin1akamariorkesteri' (ind '1')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bfagottin1akamariorkesteri' (subfield '$b')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bfagottin1akamariorkesteri' (subfield '$n')
+WARNING (7102) - Invalid first indicator found in output record (record 11, ID 006408126) : Field 382: 'bpianon1ajousiorkesteri' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 11, ID 006408126) : Field 382: 'bpianon1ajousiorkesteri' (ind '1')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bpianon1ajousiorkesteri' (subfield '$b')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bpianon1ajousiorkesteri' (subfield '$n')
+WARNING (7102) - Invalid first indicator found in output record (record 11, ID 006408126) : Field 382: 'bfagottin2ajousiorkesteri' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 11, ID 006408126) : Field 382: 'bfagottin2ajousiorkesteri' (ind '1')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bfagottin2ajousiorkesteri' (subfield '$b')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bfagottin2ajousiorkesteri' (subfield '$n')
+WARNING (7102) - Invalid first indicator found in output record (record 11, ID 006408126) : Field 382: 'bcembalon1ajousiorkesteri' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 11, ID 006408126) : Field 382: 'bcembalon1ajousiorkesteri' (ind '1')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bcembalon1ajousiorkesteri' (subfield '$b')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 11, ID 006408126) : Field 382: 'bcembalon1ajousiorkesteri' (subfield '$n')
+WARNING (7107) - Mandatory subfield expected in output record (record 11, ID 006408126) : Field 518: '81\c82\c84\coÄänitettyd17.-20.12.2007pBad Krozingenin linnassa (Bad Krozingen, Saksa).' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 11, ID 006408126) : Field 518: '83\coÄänitettyd21.-21.8.2012pNuglar-St. Pantaleonin Panthaleoninkirkossa (Nuglar-St. Pantaleon, Solothurn, Sveitsi).' (subfield '$a')
+ERROR (5100) - Rule analysis error (record 34, ID 006320540) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+ERROR (5100) - Rule analysis error (record 34, ID 006320540) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+ERROR (5100) - Rule analysis error (record 50, ID 006878521) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+WARNING (7107) - Mandatory subfield expected in output record (record 102, ID 006777735) : Field 518: 'oÄänitettydheinäkuussa 2000pSuomen evankelis-luterilaisen kirkon Kuhmon seurakunnan kirkossa (Kuhmo, Suomi).' (subfield '$a')
+ERROR (5100) - Rule analysis error (record 105, ID 006866440) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+ERROR (5100) - Rule analysis error (record 105, ID 006866440) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+ERROR (5100) - Rule analysis error (record 105, ID 006866440) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+ERROR (5100) - Rule analysis error (record 105, ID 006866440) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+WARNING (7104) - Invalid or redundant subfield found in output record (record 107, ID 006867771) : Field 790: 'a0231623605AURA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 116, ID 006891046) : Field 598: 'aÄänite5OAMK' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 118, ID 002087753) : Field 084: 'a30.812ykl9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 125, ID 006748889) : Field 790: 'a0311836605VIOLA' (subfield '$5')
+ERROR (5100) - Rule analysis error (record 156, ID 006877793) : syntax error near , in rule "RegReplace('sov\\.', 'sovitettu'), RegReplace('pianotrio', 'piano, viulu, sello')" at line 580
+WARNING (7104) - Invalid or redundant subfield found in output record (record 162, ID 006740876) : Field 790: 'a0062961605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 168, ID 006671046) : Field 790: 'a0012175605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 169, ID 006738544) : Field 790: 'a0039500605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 188, ID 006682519) : Field 790: 'a0068876605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 193, ID 001460130) : Field 084: 'a78.812ykl9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 198, ID 006682521) : Field 790: 'a0068876605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 239, ID 006680049) : Field 790: 'a0060233605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 276, ID 006739614) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 278, ID 006739616) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 279, ID 006739617) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 280, ID 006739615) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 283, ID 006739621) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 284, ID 006739631) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 285, ID 006739632) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 292, ID 006739622) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 293, ID 006739623) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 294, ID 006739618) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 299, ID 006891552) : Field 598: 'aNuottijulkaisu5OAMK' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 305, ID 000686906) : Field 084: 'a78.12ykl9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 305, ID 000686906) : Field 084: 'a78.9172ykl9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 305, ID 000686906) : Field 084: 'a78.552ykl9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 305, ID 000686906) : Field 520: 'aDeutsches Resumée: Die konzertante Kammermusik in Europa in den frühen 1920er Jahren : eine historische und interaktionalistische Untersuchung zu expressionistischen und neobarocken Tendenzen.9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 305, ID 000686906) : Field 520: 'aEnglish abstract: Concertante chamber music in Europe of the early 1920s : a historical and analytical discourse on the Expressionist and 'Neobaroque' tendencies.9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 305, ID 000686906) : Field 648: 'a1920-luku2ysa9FENNI<KEEP>' (subfield '$9')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 308, ID 006739609) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 309, ID 006739610) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 310, ID 006739613) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 311, ID 006739611) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 312, ID 006739612) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 313, ID 006739627) : Field 790: 'a0056272605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 347, ID 006743222) : Field 790: 'a0078049605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 360, ID 006674413) : Field 790: 'a0034798605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 373, ID 002373162) : Field 880: '6245-02/(NaСимфония но. 4hNuottijulkaisu :b"Пам'яті Д. Д. Шостаковича" для камерного оркестру = Симфония но. 4 : "��амяти Д. Д. Шостаковича" /cВ. Бибик ; [редактори О. В. Яворик, Г. М. Сасько]' (subfield '$h')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 377, ID 006737687) : Field 790: 'a0031832605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 393, ID 006682047) : Field 790: 'a0066830605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 405, ID 006673639) : Field 790: 'a0023165605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 410, ID 006867707) : Field 790: 'a0190580605AURA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 412, ID 006662584) : Field 790: 'a0001685605VIOLA' (subfield '$5')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 436, ID 006675987) : Field 790: 'a0051846605VIOLA' (subfield '$5')
+WARNING (7107) - Mandatory subfield expected in output record (record 462, ID 003015504) : Field 028: 'bYleisradio' (subfield '$a')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 468, ID 006679120) : Field 790: 'a0057501605VIOLA' (subfield '$5')
+WARNING (7107) - Mandatory subfield expected in output record (record 482, ID 003015231) : Field 028: 'bPWM' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 485, ID 003013294) : Field 028: 'bEdition Suecia' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 499, ID 003015245) : Field 028: 'bPWM' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 512, ID 006975461) : Field 490: 'v88' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 512, ID 006975461) : Field 830: 'v88' (subfield '$a')
+WARNING (7102) - Invalid first indicator found in output record (record 524, ID 002279862) : Field 505: 'aOrnamentikai jegyzetekkel - With ornamental notes - Mit Bemerkungen zu den Ornamenten' (ind ' ')
+WARNING (7102) - Invalid first indicator found in output record (record 562, ID 006962517) : Field 773: '7nncmw(FIN01)006962515aMozart, Wolfgang Amadeus, säv.tSerenade and March. -dLondon : Eulenburg, [s.a.]. -m1 pienoispartituuri ( 90 s.)' (ind ' ')
+WARNING (7102) - Invalid first indicator found in output record (record 563, ID 006962516) : Field 773: '7nncmw(FIN01)006962515aMozart, Wolfgang Amadeus, säv.tSerenade and March. -dLondon : Eulenburg, [s.a.]. -m1 pienoispartituuri ( 90 s.)' (ind ' ')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 600, ID 006895778) : Field 598: 'aNuottijulkaisu5OAMK' (subfield '$5')
+WARNING (7107) - Mandatory subfield expected in output record (record 619, ID 006964054) : Field 028: 'bPeters' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 630, ID 006970529) : Field 490: 'v26' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 630, ID 006970529) : Field 830: 'v26' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 633, ID 003013016) : Field 028: 'bChester' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 638, ID 006921250) : Field 940: 'aMatthäuspassion. Matthäus-Passion. Matteus-passio. Passio Domini Nostri J.C. secundum Evangelistam Matthaus. Passio secundum Matthaeum. Kommt, ihr Töchter, helft mir klagen' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 645, ID 006905961) : Field 940: 'aVariaatio. Vuodenajat baletista: Kylmyyden variaatio' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 647, ID 006905963) : Field 940: 'aHusaarin balladi. Baletti. Johdanto' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 648, ID 006905965) : Field 940: 'aHusaarin balladi. Baletti. Neidot ja Nurin' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 649, ID 006905964) : Field 940: 'aHusaarin balladi. Baletti. Rakkauden herätys' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 650, ID 006905971) : Field 940: 'aHusaarin balladi. Baletti. Finaali' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 651, ID 006905968) : Field 940: 'aHusaarin balladi. Baletti. Venäläisten sotureiden tanssi' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 652, ID 006905969) : Field 940: 'aHusaarin balladi. Baletti. Johdanto III näytökseen' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 653, ID 006905970) : Field 940: 'aHusaarin balladi. Baletti. Suran ja Rzevskogin duetto' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 654, ID 006905967) : Field 940: 'aHusaarin balladi. Baletti. Sura ja ranskalainen' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 655, ID 006905966) : Field 940: 'aHusaarin balladi. Baletti. Jäähyväiset lapsuudelle' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 670, ID 006905955) : Field 940: 'aJohdanto. Johdannot' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 672, ID 006905954) : Field 940: 'aIlta-serenadi. Ilta serenadi.' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 673, ID 006905959) : Field 940: 'aValssi' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 674, ID 006905957) : Field 940: 'aValssi' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 675, ID 006905958) : Field 940: 'aValssi' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 676, ID 006905972) : Field 940: 'aIloinen rondo' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 680, ID 006905948) : Field 940: 'aDécembre. Noël. Joulukuu. Joulunpyhät' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 681, ID 006905947) : Field 940: 'aOctober. Chant d'automne. Lokakuu. Syyslaulu' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 682, ID 006905946) : Field 940: 'aAoût. La moisson. Elokuu. Elonkorjuu' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 683, ID 006905943) : Field 940: 'aSinfonia. C-duuri' (subfield '$y')
+WARNING (7107) - Mandatory subfield expected in output record (record 685, ID 006905953) : Field 940: 'aKonsertto d-molli. Madrikaali tyyliin' (subfield '$y')
+INFO (1003) - End of MARC file 
+755 Converted Records: 751 without error and 4 with error(s)
+
+
+-----------------------------------
+USEMARCON v3.17 started at Mon Jul 27 10:03:00 2015
+
+WARNING (7104) - Invalid or redundant subfield found in output record (record 1, ID 006958992) : Field 240: 'aKvintetot,mpiano, viulu, sellotKvintetot' (subfield '$t')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,c[2011]' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 260: 'aHuuhaa,c[2011]' (ind '0')
+WARNING (7102) - Invalid first indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 300: 'a300 sivua' (ind '0')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 600: 'aBrainin, Norbert,c(fiktiivinen hahmo)' (ind ' ')
+WARNING (7103) - Invalid second indicator found in output record (record 1, ID 006958992) : Field 630: 'tTriot' (ind ' ')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 630: 'tTriot' (subfield '$a')
+WARNING (7107) - Mandatory subfield expected in output record (record 1, ID 006958992) : Field 800: 'aMäkelän Aikku,d16. vuosisata' (subfield '$t')
+WARNING (7104) - Invalid or redundant subfield found in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$t')
+WARNING (7107) - Mandatory subfield expected in output record (record 2, ID 003009306) : Field 240: 'tKvartetotmppiano, viulu, sello,nop16,rEs-duuri;osovitettu, piano, viulu, alttoviulu, sello' (subfield '$a')
+WARNING (7102) - Invalid first indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,c[2010]' (ind '1')
+WARNING (7103) - Invalid second indicator found in output record (record 2, ID 003009306) : Field 260: 'aHuuhaa,c[2010]' (ind '0')
+INFO (1003) - End of MARC file 
+5 Converted Records: 5 without error and 0 with error(s)

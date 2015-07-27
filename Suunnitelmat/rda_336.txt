@@ -1,0 +1,201 @@
+MELINDA: 336-KENTTIEN SISäLLöT
+23-06-2015 16:57:03
+
+1 verkkokirja
+2.1.\x
+2.1\x
+31Teksti
+340 s.
+8 1.1\x
+8 2.1\x
+Animationer och spel
+Bild
+Bild (kartografisk)
+Bild (rörlig ; tredimensionell)
+Bild (rörlig ; tvådimensionell)
+Bild (still)
+Bild (still).
+Data
+E-bok.
+ENNAKKOTIETO
+Esine
+Esine (kartografinen)
+Flere innehållstyper
+Föremål (kartografisk)
+Kirja
+Kuva
+Kuva (kaksiulotteinen)
+Kuva (kartografinen)
+Kuva (kartografinen).
+Kuva (liikkuva , kaksiulotteinen)
+Kuva (liikkuva : kaksiulotteinen)
+Kuva (liikkuva ; kaksiulotteinen)
+Kuva (liikkuva ; kaksiulotteinen).
+Kuva (liikkuva ; kaksiulotteinen]
+Kuva (liikkuva ; kolmiulotteinen)
+Kuva (liikkuva ; kolmiulotteinen).
+Kuva (liikkuva)
+Kuva (liikkuva: kolmiulotteinen)
+Kuva (liikkuva; kaksiulotteinen)
+Kuva (sill)
+Kuva (sill.)
+Kuva (stil).
+Kuva (still ; kaksiulotteinen)
+Kuva (still ; kaksiulotteinen).
+Kuva (still ; kolmiuloitteinen)
+Kuva (still ; kolmiulotteinen).
+Kuva (still ; kosketeltava)
+Kuva (still ; liikkuva). Puhe. Ääni. Musiikki (esitetty)
+Kuva (still)
+Kuva (still) teksti
+Kuva (still),
+Kuva (still).
+Kuva (still). Teksti
+Kuva (still).Teksti
+Kuva (still.)
+Kuva (still.).
+Kuva ; liikkuva kaksiulotteinen)
+Kuva(still).
+Kuva.
+Kuva. (still)
+Kuvat (still)
+Kuvat (still).
+Ljud
+Musiikki
+Musiikki (esitetty ; notatoitu)
+Musiikki (esitetty)
+Musiikki (esitetty).
+Musiikki (notatoitu ; kosketeltava)
+Musiikki (notatoitu)
+Musiikki (notatoitu).
+Musik (notation)
+Musik (performance)
+Musikki (esitetty)
+Määrittelemätön sisältötyyppi
+Notatoitu
+Nuotti (notatoitu)
+Obestämd innehållstyp
+Painettu aineisto
+Painettu teos
+Puhe
+Puhe.
+Puhe. Teksti
+Still-kuva
+Suorakäyttöpalvelu
+TEKSTI
+TEXT
+Taksti
+Tal
+Taxt
+Tekksti
+Teksi
+Teksit
+Tekst
+Tekst.
+Teksti
+Teksti
+Teksti (kosketeltava)
+Teksti (notatoitu)
+Teksti :
+Teksti L'é
+Teksti,
+Teksti.
+Teksti171
+Teksti9780521769921
+Teksti:
+Teksti: Malin Klingenberg ; kuvat: Joanna Vikström Eklöv
+Tekstiaineisto
+Tekstiei välittävää laitetta
+Tekstit
+Tekstiä
+Tekstiä.
+Tekstí
+Tekstsi
+Tekstu
+Tekti
+Tektsi
+Telsti
+Teskti
+Testi
+Tex
+Texr
+Text
+Text (45 s.)
+Text (73 s.)
+Text (78 s.)
+Text (86 s.)
+Text.
+Texti
+Texto
+Texto (visual)
+Texy
+Tietokoneohjelma
+Tietokoneohjelma (liikkuva ; kaksiulotteinen)
+Tietokoneohjelma.
+Tkesti
+Tksti
+Useita sisältötyyppejä
+Useita sisält��tyyppejä
+Useita sisätlötyyppejä
+Video
+Videotallenne /
+Videotallenne/
+[Elektroninen aineisto] :
+[Moniviestin] :
+[Video] /
+[Video] :
+[Videokasetti] :
+[Videokasetti].
+[Videokassett]
+[Videotallenne (DVD)] /
+[Videotallenne (DVD)] :
+[Videotallenne (DVD)].
+[Videotallenne]
+[Videotallenne] /
+[Videotallenne] :
+[Videotallenne] ;
+[Videotallenne] =
+[Videotallenne].
+[Videotallenne]/
+[Videoupptagning]
+[Videoupptagning] /
+[Videoupptagning] :
+[Videoupptagning].
+[videotallenne] :
+aKuva (liikkuva ; kaksiulotteinen)
+audio
+cartographic image
+dog
+ei välittävää laitetta
+elektroninen
+eng
+englanti
+ext
+ingen medietyp
+kuv.Teksti
+kuva
+kuva (kartografinen)
+kuva (liikkuva ; kaksiulotteinen)
+kuva (still)
+kuva (still.)
+mikromuoto
+musiikki
+musiikki (esitetty)
+musiikki (notatoitu)
+performed music
+puhe
+spoken word
+still image
+tekst
+teksti
+teksti.
+tekstiä
+text
+text rdacontent
+text.
+useita sisältötyyppejä
+video
+videorecording
+videotallenne
+volym
+Ääni

@@ -1,5 +1,7 @@
 RDA-konversio
-versio 16.7.2015 / Kansalliskirjasto
+versio ?.7.2015 / Kansalliskirjasto
+
+#define version 317
 
 #define macro 300ae | RegReplace('n\\. ', 'noin'); \
                       RegReplace('ss\\.', 'sivut'); \
@@ -9,8 +11,8 @@ versio 16.7.2015 / Kansalliskirjasto
                       RegReplace('1 vol\\.', '1 nide'); \
                       If (RegFind(S, '[023456789] vol\\.') >= 0) RegReplace('vol\\.', 'nidettä'); \
                       If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
-                      If (RegFind('S\\.(.)*\\d*-\\d*') >= 0) RegReplace('S\\.', 'sivut'); \
-                      If (RegFind('S\\.(.)*\\d*[^-]') >= 0) RegReplace('S\\.', 'sivu')
+                      If (RegFind(S, 'S\\.(.)*\\d*-\\d*') >= 0) RegReplace('S\\.', 'sivut'); \
+                      If (RegFind(S, 'S\\.(.)*\\d*[^-]') >= 0) RegReplace('S\\.', 'sivu')
 
 #define macro 300be | RegReplace('kartt\\.', 'karttoja'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
@@ -28,7 +30,8 @@ versio 16.7.2015 / Kansalliskirjasto
 #define macro esityskokoonpano | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('^ork.', 'orkesteri'); \
+                                 If (RegFind(S, '[^A-Za-z]ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri'); \
+                                 If (RegFind(S, '^ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri'); \
                                  RegReplace('jousiork.', 'jousiorkesteri'); \
                                  RegReplace('kamariork.', 'orkesteri'); \
                                  RegReplace('puhallinork.', 'puhallinorkesteri'); \
@@ -47,7 +50,7 @@ versio 16.7.2015 / Kansalliskirjasto
                                  RegReplace('Bar \\(\\d', 'baritonit'); \
                                  RegReplace('B', 'basso'); \
                                  RegReplace('B \\(\\d', 'bassot'); \
-                                 RegReplace('kät.', 'kätisesti'); \
+                                 RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
@@ -64,7 +67,8 @@ versio 16.7.2015 / Kansalliskirjasto
 
 #define macro kvintetot        | RegReplace('jouset', 'viulut (2), alttoviulut (2), sello'); \
                                  RegReplace('puupuhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
-                                 RegReplace('piano, jouset', 'piano, viulut (2), alttoviulu, sello')
+                                 RegReplace('piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
+                                 RegReplace('puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
 #define macro sovitusmerkinto | RegReplace('sov\\.', 'sovitettu')
 
@@ -74,10 +78,10 @@ versio 16.7.2015 / Kansalliskirjasto
 #define macro fiktiivinen | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
                             RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
 
-#define macro aikamaareet | RegReplace('s\\.', 'syntynyt'); \
-                            RegReplace('k\\.', 'kuollut'); \
+#define macro aikamaareet | RegReplace('^s\\.', 'syntynyt'); \
+                            RegReplace('^k\\.', 'kuollut'); \
                             RegReplace('n\\.', 'noin'); \
-                            RegReplace('vs', 'vuosisata')
+                            RegReplace('vs\\.', 'vuosisata')
                                                
 000/1-18/ | 000/1-18/ | S
 000/19/ | 000/19/ | 'i' // ??
@@ -94,8 +98,6 @@ versio 16.7.2015 / Kansalliskirjasto
                    RegReplace('sid', 'sidottu'); \
                    RegReplace('nid', 'nidottu'); \
                    RegReplace('virh', 'virheellinen')
-
-000/19/ | 040$e | 'rda'
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
@@ -120,7 +122,7 @@ A30 | 130 | S
 240I1 | 240I1  | S
 240I2 | 240I2  | S
 240$m | <F40$m | If (RegFind(@240$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@240$t, 'Kvartetot') >= 0) kvartetot;\
+                 If (RegFind(@240$t, 'Kvartetot') >= 0) kvartetot; \
                  If (RegFind(@240$t, 'Kvintetot') >= 0) kvintetot; \
                  Else esityskokoonpano
 240$o | <F40$o | sovitusmerkinto; esityskokoonpano
@@ -128,6 +130,18 @@ A30 | 130 | S
 240$? | <F40$? | S
 
 F40   | 240 | S
+
+243I1 | 243I1  | S
+243I2 | 243I2  | S
+243$m | <B43$m | If (RegFind(@243$a, 'Triot') >= 0) triot; \
+                 If (RegFind(@243$a, 'Kvartetot') >= 0) kvartetot; \
+                 If (RegFind(@243$a, 'Kvintetot') >= 0) kvintetot; \
+                 Else esityskokoonpano
+243$o | <B43$o | sovitusmerkinto; esityskokoonpano
+243$p | <B43$p | If (Not NextSub='p') Then raamattu
+243$? | <B43$? | S
+
+B43 | 243 | S
 
 245I1 | 245I1  | S
 245I2 | 245I2  | S
@@ -150,18 +164,20 @@ F45 | 245 | S
 260$a | 260$a | S; RegReplace('\\[S.l.\\]', '[Kustannuspaikka tuntematon]'); RegReplace('\\[s.l.\\]', '[kustannuspaikka tuntematon]')
 260$b | 260$b | S; RegReplace('\\[s.n.\\]', '[kustantaja tuntematon]')
 260$c | 260$c | RegReplace('\\[s.a.\\]', '[julkaisuaika tuntematon]'); \
-                If (RegFind(S, 'cop.|©|℗|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0) '[' + RegMatch(0) + ']' \
+                If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0) '[' + RegMatch(0) + ']' \
                 Else S;
 260$? | 260$? | S
 #endif
 
-#if (RegFind(@260$c, 'cop.|©') >= 0) And (RegFind(@260$c, '\\d{4}') >= 0) And (Not Exists(@773))
+#if (RegFind(@260$c, 'cop.|©|[Cc]') >= 0) And (RegFind(@260$c, '\\d{4}') >= 0) And (Not Exists(@773))
 260I1 | <X64I1 | ' '
 260I2 | <X64I2 | '4'
 260$c | <X64$c | '© ' + RegMatch(0);
 X64I1 | 264I1  | S
 X64I2 | 264I2  | S
-X64   | 264    | S
+// Kenttään 264$c viedään myös mahdolliset hakasulkeet
+X64$c | 264$c  | If (RegFind(260$c, '\\[') >= 0) '[' + S + ']' Else S
+X64$? | 264$?  | S
 #endif
 
 #if (RegFind(@260$c, '^p|℗') >= 0) And (RegFind(@260$c, '\\d{4}') >= 0) And (Not Exists(@773))
@@ -170,7 +186,8 @@ X64   | 264    | S
 260$c | <X64$c | '℗ ' + RegMatch(0);
 X64I1 | 264I1  | S
 X64I2 | 264I2  | S
-X64   | 264    | S
+X64$c | 264$c  | If (RegFind(260$c, '\\[') >= 0) '[' + S + ']' Else S
+X64$? | 264$?  | S
 #endif
 
 300I1 | 300I1 | S
@@ -422,7 +439,7 @@ X64   | 264    | S
 300 | 338$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@516$a, 'verkkoaineisto') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) And If (Not Exists(@773))
 516I1 | 338I1 | ' '
 516I1 | 338I2 | ' '
 516$a | 338$a | 'verkkoaineisto'
@@ -443,8 +460,8 @@ X64   | 264    | S
 336I1 | 336I1 | S
 336I2 | 336I2 | S
 336$a | 336$a | Table ('336_a.tbl')
-336$a | 336$b | Table ('336_b.tbl')
-336$a | 336$2 | 'rdacontent'
+336$a | 336$b | If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
+336$a | 336$2 | If (Exists(%336$b)) Then 'rdacontent'
 336$8 | 336$8 | S
 
 337I1 | 337I1 | S
@@ -476,11 +493,19 @@ X64   | 264    | S
                 RegReplace('[^s]?s\\.|ss\\.', 'sivut', 'g')
 511$? | 511$? | S
 
+516I1 | 516I1 | S
+516I1 | 516I2 | S
+516   | 516   | S
+
 530I1 | 530I1 | S
 530I2 | 530I2 | S
 530   | 530   | S; RegReplace('paperimuodossa', 'painettuna'); \
-                   RegReplace('Verkkojulkaisu', 'Verkkojulkaisu'); \
+                   RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
                    RegReplace('verkkojulkaisuna', 'verkkoaineistona')
+
+538I1 | 538I1 | S
+538I1 | 538I2 | S
+538   | 538   | S
 
 600I1 | 600I1  | S
 600I2 | 600I2  | S

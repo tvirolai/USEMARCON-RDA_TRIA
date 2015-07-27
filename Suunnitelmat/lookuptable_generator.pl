@@ -11,8 +11,8 @@
 # Copyright (c) 2014 The National Library Of Finland
 # Author: Tuomo Virolainen (tuomo.virolainen@helsinki.fi)
 #
-# This program is free software; you can redistribute it and/or modify it under the terms of either: 
-# a) the GNU General Public License as published by the Free Software Foundation; 
+# This program is free software; you can redistribute it and/or modify it under the terms of either:
+# a) the GNU General Public License as published by the Free Software Foundation;
 # either version 1 (https://www.gnu.org/licenses/old-licenses/gpl-1.0.txt), or (at your option) any later version http://www.fsf.org/licenses/licenses.html#GNUGPL), or 
 # b) the "Artistic License" (http://dev.perl.org/licenses/artistic.html).
 
@@ -25,15 +25,15 @@ my $timestamp = "File generated: ". localtime . "\n\n";
 #########################################################################
 # Fill in required specifications here.
 my $inputfile = ReadData ("RDAkonversiosuunnitelma_Ulla.xlsx") || die $!;
-my $outputfile = "musiikin_sovitusmerkinto.tbl"; # An example
-my $preamble = "musiikin_sovitusmerkinto.tbl -- termien avaukset osakentässä \$o"; # An example
+my $outputfile = "testi.tbl"; # An example
+my $preamble = "Testataan vaan tällä kertaa"; # An example
 my $default_value = "COPY"; # COPY copies input value to output as is, if value is not found in Look Up Table
 
-my $sheet = "2";
-my $inputvalue_firstcell = "A66";
-my $inputvalue_lastcell = "A94";
-my $outputvalue_firstcell = "G66";
-my $outputvalue_lastcell = "G94";
+my $sheet = "4";
+my $inputvalue_firstcell = "A4";
+my $inputvalue_lastcell = "A60";
+my $outputvalue_firstcell = "D4";
+my $outputvalue_lastcell = "D60";
 
 #########################################################################
 
