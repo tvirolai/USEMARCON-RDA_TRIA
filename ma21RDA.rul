@@ -30,20 +30,16 @@ versio ?.7.2015 / Kansalliskirjasto
 #define macro esityskokoonpano | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 If (RegFind(S, '[^A-Za-z]ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri'); \
-                                 If (RegFind(S, '^ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri'); \
                                  RegReplace('jousiork.', 'jousiorkesteri'); \
                                  RegReplace('kamariork.', 'orkesteri'); \
                                  RegReplace('puhallinork.', 'puhallinorkesteri'); \
-                                 RegReplace('S', 'sopraano'); \
+                                 RegReplace('^S|S$|S\\s', 'sopraano'); \
                                  RegReplace('S \\(\\d', 'sopraanot'); \
                                  RegReplace('S \\(\\d', 'sopraanot'); \
-                                 RegReplace('Mz', 'mezzosopraano'); \
-                                 RegReplace('Mz \\(\\d', 'mezzosopraanot'); \
-                                 RegReplace('A', 'altto'); \
-                                 RegReplace('A \\(\\d', 'altot'); \
-                                 RegReplace('Kt', 'kontratenori'); \
-                                 RegReplace('Kt \\(\\d', 'kontratenorit'); \
+                                 RegReplace('Mz sdf', 'mezzosopraano'); \
+                                 RegReplace('A sdf', 'altto '); \
+                                 RegReplace('Kt sdf', 'kontratenori'); \
+                                 RegReplace('(Kt )\\((\\d*)', 'kontratenorit (\\2'); \
                                  RegReplace('T', 'tenori'); \
                                  RegReplace('T \\(\\d', 'tenorit'); \
                                  RegReplace('Bar', 'baritoni'); \
@@ -52,11 +48,15 @@ versio ?.7.2015 / Kansalliskirjasto
                                  RegReplace('B \\(\\d', 'bassot'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
+                                 If (RegFind(S, 'A \\(\\d') >=0) RegReplace('A ', 'altot '); \
+                                 If (RegFind(S, 'Mz \\(\\d') >=0) RegReplace('Mz', 'mezzosopraanot'); \
                                  If (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
                                  If (RegFind(S, ', jousikvintetti') <0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
                                  If (RegFind(S, ', puupuhallinkvartetti') <0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
-                                 If (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+                                 If (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
+                                 If (RegFind(S, '[^A-Za-z]ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri'); \
+                                 If (RegFind(S, '^ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri')
                                 
 #define macro triot            | RegReplace('jouset', 'viulu, alttoviulu, sello'); \
                                  RegReplace('piano, jouset', 'piano, viulu, sello')

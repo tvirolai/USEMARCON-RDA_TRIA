@@ -22,8 +22,8 @@
 =630  1\$tTriot
 =700  1\$aBrainin, Norbert,$eviulu.
 =700  1\$aSchidlof, Peter,$ealttoviulu.
-=700  1\$aLovett, Martin,$d21. vs,$eselo.
-=700  1\$aBritten, Benjamin,$dk. n. 1990,$epiano.
+=700  1\$aLovett, Martin,$d21. vs,$eselo.$oKt (43)
+=700  1\$aBritten, Benjamin,$dk. n. 1990,$epiano.$oMz (412)
 =700  1\$aMozart, Wolfgang Amadeus,$esäveltäjä.$tlodi dodi, ja ork.,$msopraanolaulaja, triangeliensemble, ork.
 =740  0\$aPhantasie Piano Quartet.
 =800  0\$aMäkelän Aikku,$d16. vs.
@@ -71,7 +71,7 @@
 =650  \7$akamarimusiikki - kvartetot$2musa
 =650  \7$akvartetot - sovitukset - Saksa - 1790-luku$2musa
 =650  \7$akvartetot - sovitukset - piano - jousisoittimet$2musa
-=700  1\$aRoitzsch, F. A.,$etoimittaja.
+=700  1\$aRoitzsch, F. A.,$etoimittaja.$mA (10)
 
 =LDR  00922cja a22002174i 4500
 =001  006961663
@@ -81,7 +81,7 @@
 =035  \\$a(FI-MELINDA)006961663
 =084  \\$a78.5131$2ykl
 =100  1\$aDvorák, Antonín,$esäveltäjä.
-=240  10$aKvartetot,$mpiano, jouset,$nop87,$rEs-duuri,$osov.
+=240  10$aKvartetot,$mpiano, jouset,$nop87,$rEs-duuri,$otestataan äänialaa: B S
 =245  10$aPiano quartet in E flat, op. 87 /$cAntonín Dvorák.
 =336  \\$aMusiikki (esitetty)
 =337  \\$aaudio
@@ -98,7 +98,7 @@
 =008  991214s19\?\\\\xx\||||||||||||||||||||||
 =084  \\$a78.5131$2ykl
 =100  1\$aTestitietuehan tämä
-=130  1\$aKvintetot,$mjouset
+=130  1\$aKvintetot,$mjouset,$oT
 =240  10$aJoo,$osovitettu, jousikvartetti
 =245  10$aQuartett :$bKlavier, Violine, Viola und Violoncello : Opus 16 /$cLudwig van Beethoven ; revidiert von F. A. Roitzsch.
 =260  \\$aLeipzig :$bPeters,$c[19-?]
@@ -111,5 +111,6 @@
 =650  \7$akvartetot - sovitukset - Saksa - 1790-luku$2musa
 =650  \7$akvartetot - sovitukset - piano - jousisoittimet$2musa
 =700  1\$aRoitzsch, F. A.,$etoimittaja.
+
 
 
