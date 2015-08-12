@@ -1,5 +1,5 @@
 RDA-konversio
-versio ?.7.2015 / Kansalliskirjasto
+versio 12.8.2015 / Kansalliskirjasto
 
 #define version 317
 
@@ -82,9 +82,18 @@ versio ?.7.2015 / Kansalliskirjasto
                             RegReplace('^k\\.', 'kuollut'); \
                             RegReplace('n\\.', 'noin'); \
                             RegReplace('vs\\.', 'vuosisata')
+
+#define macro sidosasut |  RegReplace('sid', 'sidottu'); \
+                           RegReplace('nid', 'nidottu'); \
+                           RegReplace('virh', 'virheellinen'); \
+                           RegReplace('inb', 'inbunden'); \
+                           RegReplace('hft', 'häftad'); \
+                           RegReplace('pbk', 'paperback'); \
+                           RegReplace('hbk', 'hardback'); \
+                           RegReplace('alk. paper', 'alkaline paper')
                                                
 000/1-18/ | 000/1-18/ | S
-000/19/ | 000/19/ | 'i' // ??
+000/19/ | 000/19/ | 'i'
 000/20-24/ | 000/20-24/ | S
 
 001 | <DEL   | S
@@ -93,11 +102,15 @@ versio ?.7.2015 / Kansalliskirjasto
 
 020I1 | 020I1 | S
 020I2 | 020I2 | S
-020   | 020   | S; Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
-                   Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
-                   RegReplace('sid', 'sidottu'); \
-                   RegReplace('nid', 'nidottu'); \
-                   RegReplace('virh', 'virheellinen')
+020   | 020   | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
+                Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
+                sidosasut
+
+024I1 | 024I1 | S
+024I2 | 024I2 | S
+024   | 024   | Replace('.,' By ','); \ // Tapaukset tyyliin "024$q sid., muovikannet"
+                Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
+                sidosasut
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S

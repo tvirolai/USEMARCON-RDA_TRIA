@@ -1,1 +1,0 @@
-/home/tuomo/usemarcon317/program/usemarcon /home/tuomo/Dropbox/Koodi/USEMARCON-konversiot/USEMARCON-RDA/ma21RDA.ini /home/tuomo/Dropbox/Koodi/USEMARCON-konversiot/USEMARCON-RDA/Suunnitelmat/BWpoimittuja.bib ./output.mrc
