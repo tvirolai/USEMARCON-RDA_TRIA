@@ -3,7 +3,7 @@ versio 14.9.2015 / Kansalliskirjasto
 
 #define version 317
 
-#define macro 300ae | RegReplace('n\\. ', 'noin'); \
+#define macro 300AE | RegReplace('n\\. ', 'noin'); \
                       RegReplace('ss\\.', 'sivut'); \
                       RegReplace('s\\,', 'sivua,'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
@@ -14,7 +14,7 @@ versio 14.9.2015 / Kansalliskirjasto
                       If (RegFind(S, 'S\\.(.)*\\d*-\\d*') >= 0) RegReplace('S\\.', 'sivut'); \
                       If (RegFind(S, 'S\\.(.)*\\d*[^-]') >= 0) RegReplace('S\\.', 'sivu')
 
-#define macro 300be | RegReplace('kartt\\.', 'karttoja'); \
+#define macro 300BE | RegReplace('kartt\\.', 'karttoja'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
                       RegReplace('mv\\.', 'mustavalkoinen'); \
                       RegReplace('vär\\.', 'värillinen'); \
@@ -244,10 +244,10 @@ X64$? | 264$?  | S
 
 300I1 | 300I1 | S
 300I2 | 300I2 | S
-300$a | 300$a | 300ae //; If ((Not (Exists($c) Or Exists($d) Or Exists($e))) And (RegFind(S, '\.$') < 0)) Then S + '.' Else 300ae
-300$b | 300$b | 300be
+300$a | 300$a | 300AE //; If ((Not (Exists($c) Or Exists($d) Or Exists($e))) And (RegFind(S, '\.$') < 0)) Then S + '.' Else 300AE
+300$b | 300$b | 300BE
 300$c | 300$c | S
-300$e | 300$e | 300be
+300$e | 300$e | 300BE
 
 // LUODAAN 338-KENTÄT, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
 
