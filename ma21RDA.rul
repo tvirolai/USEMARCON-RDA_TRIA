@@ -48,8 +48,6 @@ versio 14.9.2015 / Kansalliskirjasto
                                  RegReplace('(B)([^A-Za-zÄÖÅäöå]|\$)', 'basso\\2', 'g'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
-                                 If (RegFind(S, 'A \\(\\d') >=0) RegReplace('A ', 'altot '); \
-                                 If (RegFind(S, 'Mz \\(\\d') >=0) RegReplace('Mz', 'mezzosopraanot'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') <0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
