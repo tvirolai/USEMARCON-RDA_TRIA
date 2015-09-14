@@ -8,17 +8,18 @@
 =035  \\$a(FI-MELINDA)006958992
 =045  \\$bd1910
 =084  \\$a78.5131$2ykl
-=100  1\$aBridge, Frank,$cfikt.,$dk. 1999,$esäveltäjä.
+=110  1\$aRaajaton,$cfikt.,$dk. 1999,$esäveltäjä.
 =240  10$aKvintetot,$mpiano, jouset$tKvintetot
 =245  10$aPhantasie Quartet.
 =300  10$a300 s.
 =260  10$aHuuhaa,$cC 2011
-=336  \\$aMusiikki (esitetty ; notatoitu)
-=337  \\$aaudio
+=336  \\$aMusiikki (esitetty ; notatoitu)$aKuva (liikkuva ; kaksiulotteinen)
+=337  \\$avideo
 =516  \\$aVerkkoaineisto
 =530  \\$aVerkkojulkaisu
 =650  \7$akvartetot$xpiano$xjousisoittimet$zEnglanti$zIso-Britannia$y1910-luku$2musa
 =600  1\$aBrainin, Norbert,$cfiktiivinen henkilö
+=610  1\$aBeatles,$cfikt.
 =630  1\$tTriot
 =700  1\$aBrainin, Norbert,$eviulu.
 =700  1\$aSchidlof, Peter,$ealttoviulu.
@@ -43,7 +44,7 @@
 =245  10$aQuartett :$bEb major for Pianoforte, Violine, Viola und Violoncell /$cvon Ludwig van Beethoven.
 =260  10$aHuuhaa,$cc2010
 =300  \\$a1 vol.
-=336  \\$aMusiikki (notatoitu)
+=336  \\$aKuva (liikkuva ; kaksiulotteinen).$aMusiikki (esitetty)
 =337  \\$aei välittävää laitetta
 =650  \7$akvartetot$xpiano$xjousisoittimet$zSaksa$y1790-luku$2musa
 =650  \7$akvartetot$xpiano$xpuhallinsoittimet$zSaksa$y1790-luku$2musa
@@ -111,6 +112,8 @@
 =650  \7$akvartetot - sovitukset - Saksa - 1790-luku$2musa
 =650  \7$akvartetot - sovitukset - piano - jousisoittimet$2musa
 =700  1\$aRoitzsch, F. A.,$etoimittaja.
+
+
 
 
 
