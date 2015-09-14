@@ -1,5 +1,5 @@
 RDA-konversio
-versio 12.8.2015 / Kansalliskirjasto
+versio 14.9.2015 / Kansalliskirjasto
 
 #define version 317
 
@@ -27,70 +27,73 @@ versio 12.8.2015 / Kansalliskirjasto
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
 // TODO: Äänialojen lyhenteiden tunnistaminen järkevästi. Missä kontekstissa 'B' = 'basso' ja milloin ei?
 
-#define macro esityskokoonpano | RegReplace('pianotrio', 'piano, viulu, sello'); \
+#define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
                                  RegReplace('jousiork.', 'jousiorkesteri'); \
                                  RegReplace('kamariork.', 'orkesteri'); \
                                  RegReplace('puhallinork.', 'puhallinorkesteri'); \
-                                 RegReplace('^S|S$|S\\s', 'sopraano'); \
+                                 RegReplace('(S)([^A-Za-zÄÖÅööå])|S$', 'sopraano\\2', 'g'); \
                                  RegReplace('S \\(\\d', 'sopraanot'); \
-                                 RegReplace('S \\(\\d', 'sopraanot'); \
-                                 RegReplace('Mz sdf', 'mezzosopraano'); \
-                                 RegReplace('A sdf', 'altto '); \
-                                 RegReplace('Kt sdf', 'kontratenori'); \
-                                 RegReplace('(Kt )\\((\\d*)', 'kontratenorit (\\2'); \
-                                 RegReplace('T', 'tenori'); \
+                                 RegReplace('Mz ', 'mezzosopraano'); \
+                                 RegReplace('A ', 'altto '); \
+                                 RegReplace('Kt ', 'kontratenori'); \
+                                 RegReplace('(Kt )\\((\\d*)', 'kontratenorit (\\1'); \
+                                 RegReplace('T ', 'tenori'); \
                                  RegReplace('T \\(\\d', 'tenorit'); \
-                                 RegReplace('Bar', 'baritoni'); \
+                                 RegReplace('Bar ', 'baritoni'); \
                                  RegReplace('Bar \\(\\d', 'baritonit'); \
-                                 RegReplace('B', 'basso'); \
+                                 RegReplace('B ', 'basso'); \
                                  RegReplace('B \\(\\d', 'bassot'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, 'A \\(\\d') >=0) RegReplace('A ', 'altot '); \
                                  If (RegFind(S, 'Mz \\(\\d') >=0) RegReplace('Mz', 'mezzosopraanot'); \
-                                 If (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
-                                 If (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
-                                 If (RegFind(S, ', jousikvintetti') <0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
-                                 If (RegFind(S, ', puupuhallinkvartetti') <0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
-                                 If (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
+                                 If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
+                                 If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
+                                 If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') <0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
+                                 If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') <0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
+                                 If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
                                  If (RegFind(S, '[^A-Za-z]ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri'); \
                                  If (RegFind(S, '^ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri')
                                 
-#define macro triot            | RegReplace('jouset', 'viulu, alttoviulu, sello'); \
-                                 RegReplace('piano, jouset', 'piano, viulu, sello')
+#define macro TRIOT            | RegReplace('piano, jouset', 'piano, viulu, sello'); \
+                                 RegReplace('jouset', 'viulu, alttoviulu, sello')
+                                 
 
-#define macro kvartetot        | RegReplace('jouset', 'viulut (2), alttoviulu, sello'); \
+#define macro KVARTETOT        | RegReplace('jouset', 'viulut (2), alttoviulu, sello'); \
                                  RegReplace('puupuhaltimet', 'huilu, oboe, klarinetti, fagotti'); \
                                  RegReplace('piano, jouset', 'piano, viulu, alttoviulu, sello')
 
-#define macro kvintetot        | RegReplace('jouset', 'viulut (2), alttoviulut (2), sello'); \
+#define macro KVINTETOT        | RegReplace('jouset', 'viulut (2), alttoviulut (2), sello'); \
                                  RegReplace('puupuhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
                                  RegReplace('piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
                                  RegReplace('puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
-#define macro sovitusmerkinto | RegReplace('sov\\.', 'sovitettu')
+#define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu')
 
-#define macro raamattu | RegReplace('UT', 'Uusi testamentti'); \
+#define macro RAAMATTU | RegReplace('UT', 'Uusi testamentti'); \
                          RegReplace('VT', 'Vanha testamentti')
 
-#define macro fiktiivinen | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
-                            RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
+#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
+                                 RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
 
-#define macro aikamaareet | RegReplace('^s\\.', 'syntynyt'); \
+#define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
+
+#define macro AIKAMAAREET | RegReplace('^s\\.', 'syntynyt'); \
                             RegReplace('^k\\.', 'kuollut'); \
                             RegReplace('n\\.', 'noin'); \
                             RegReplace('vs\\.', 'vuosisata')
 
-#define macro sidosasut |  RegReplace('sid', 'sidottu'); \
+#define macro SIDOSASUT |  RegReplace('sid', 'sidottu'); \
                            RegReplace('nid', 'nidottu'); \
                            RegReplace('virh', 'virheellinen'); \
                            RegReplace('inb', 'inbunden'); \
                            RegReplace('hft', 'häftad'); \
                            RegReplace('pbk', 'paperback'); \
                            RegReplace('hbk', 'hardback'); \
-                           RegReplace('alk. paper', 'alkaline paper')
+                           RegReplace('alk. paper', 'alkaline paper'); \
+                           RegReplace('verkkojulk', 'verkkojulkaisu')
                                                
 000/1-18/ | 000/1-18/ | S
 000/19/ | 000/19/ | 'i'
@@ -104,54 +107,89 @@ versio 12.8.2015 / Kansalliskirjasto
 020I2 | 020I2 | S
 020   | 020   | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
-                sidosasut
+                SIDOSASUT
 
 024I1 | 024I1 | S
 024I2 | 024I2 | S
 024   | 024   | Replace('.,' By ','); \ // Tapaukset tyyliin "024$q sid., muovikannet"
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
-                sidosasut
+                SIDOSASUT
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
 100$a | 100$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$c | 100$c  | fiktiivinen
-100$d | 100$d  | aikamaareet
+100$c | 100$c  | FIKTIIVINENHAHMO
+100$d | 100$d  | AIKAMAAREET
 100$? | 100$?  | S
+
+110I1 | 110I1  | S
+110I2 | 110I2  | S
+110$c | 110$c  | FIKTIIVINENYHTEISO
+110$? | 110$?  | S
 
 130I1 | 130I1  | S
 130I2 | 130I2  | S
-130$m | <A30$m | If (RegFind(@130$a, 'Triot') >= 0) triot; \
-                 If (RegFind(@130$a, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@130$a, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-130$o | <A30$o | sovitusmerkinto; esityskokoonpano
-130$p | <A30$p | If (Not NextSub='p') Then raamattu
+
+#if (RegFind(@130$a, 'Triot') >= 0)
+130$m | <A30$m | TRIOT
+#endif
+
+#if (RegFind(@130$a, 'Kvartetot') >= 0)
+130$m | <A30$m | KVARTETOT
+#endif
+
+#if (RegFind(@130$a, 'Kvintetot') >= 0)
+130$m | <A30$m | KVINTETOT
+#endif
+
+#if (RegFind(@130$a, 'Triot') < 0) And (RegFind(@130$a, 'Kvartetot') < 0) And (RegFind(@130$a, 'Kvintetot') < 0)
+130$m | <A30$m | ESITYSKOKOONPANO
+#endif
+
+130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+130$p | <A30$p | If (Not NextSub='p') Then RAAMATTU
 130$? | <A30$? | S
 
 A30 | 130 | S
 
+222I1 | 222I1 | S
+222I2 | 222I2 | S
+222   | 222   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
 240I1 | 240I1  | S
 240I2 | 240I2  | S
-240$m | <F40$m | If (RegFind(@240$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@240$t, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@240$t, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-240$o | <F40$o | sovitusmerkinto; esityskokoonpano
-240$p | <F40$p | If (Not NextSub='p') Then raamattu
+
+#if (RegFind(@240$t, 'Triot') >= 0)
+240$m | <F40$m | TRIOT
+#endif
+
+#if (RegFind(@240$t, 'Kvartetot') >= 0)
+240$m | <F40$m | KVARTETOT
+#endif
+
+#if (RegFind(@240$t, 'Kvintetot') >= 0)
+240$m | <F40$m | KVINTETOT
+#endif
+
+#if (RegFind(@240$t, 'Triot') < 0) And (RegFind(@240$t, 'Kvartetot') < 0) And (RegFind(@240$t, 'Kvintetot') < 0)
+240$m | <F40$m | S
+#endif
+                 
+240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+240$p | <F40$p | If (Not NextSub='p') Then RAAMATTU
 240$? | <F40$? | S
 
 F40   | 240 | S
 
 243I1 | 243I1  | S
 243I2 | 243I2  | S
-243$m | <B43$m | If (RegFind(@243$a, 'Triot') >= 0) triot; \
-                 If (RegFind(@243$a, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@243$a, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-243$o | <B43$o | sovitusmerkinto; esityskokoonpano
-243$p | <B43$p | If (Not NextSub='p') Then raamattu
+243$m | <B43$m | If (RegFind(@243$a, 'Triot') >= 0) TRIOT; \
+                 If (RegFind(@243$a, 'Kvartetot') >= 0) KVARTETOT; \
+                 If (RegFind(@243$a, 'Kvintetot') >= 0) KVINTETOT; \
+                 Else ESITYSKOKOONPANO
+243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+243$p | <B43$p | If (Not NextSub='p') Then RAAMATTU
 243$? | <B43$? | S
 
 B43 | 243 | S
@@ -522,118 +560,293 @@ X64$? | 264$?  | S
 
 600I1 | 600I1  | S
 600I2 | 600I2  | S
-600$c | <C60$c | fiktiivinen
-600$d | <C60$d | aikamaareet
-600$m | <C60$m | If (RegFind(@600$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@600$t, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@600$t, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-600$o | <C60$o | sovitusmerkinto; esityskokoonpano
-600$p | <C60$p | If (Not NextSub='p') Then raamattu
+600$c | <C60$c | FIKTIIVINENHAHMO
+600$d | <C60$d | AIKAMAAREET
+
+#if (RegFind(@600$t, 'Triot') >= 0)
+600$m | <C60$m | TRIOT
+#endif
+
+#if (RegFind(@600$t, 'Kvartetot') >= 0)
+600$m | <C60$m | KVARTETOT
+#endif
+
+#if (RegFind(@600$t, 'Kvintetot') >= 0)
+600$m | <C60$m | KVINTETOT
+#endif
+
+#if (RegFind(@600$t, 'Triot') < 0) And (RegFind(@600$t, 'Kvartetot') <0) And (RegFind(@600$t, 'Kvintetot') < 0)
+600$m | <C60$m | S
+#endif
+
+600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+600$p | <C60$p | If (Not NextSub='p') Then RAAMATTU
 600$? | <C60$? | S
 
 C60 | 600 | S
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
-610$m | <D61$m | If (RegFind(@610$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@610$t, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@610$t, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-610$o | <D61$o | sovitusmerkinto; esityskokoonpano
-610$p | <D61$p | If (Not NextSub='p') Then raamattu
+610$c | <D61$c | FIKTIIVINENYHTEISO
+
+#if (RegFind(@610$t, 'Triot') >= 0)
+610$m | <D61$m | TRIOT
+#endif
+
+#if (RegFind(@610$t, 'Kvartetot') >= 0)
+610$m | <D61$m | KVARTETOT
+#endif
+
+#if (RegFind(@610$t, 'Kvintetot') >= 0)
+610$m | <D61$m | KVINTETOT
+#endif
+
+#if (RegFind(@610$t, 'Triot') < 0) And (RegFind(@610$t, 'Kvartetot') < 0) And (RegFind(@610$t, 'Kvintetot') < 0)
+610$m | <D61$m | S
+#endif
+
+610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+610$p | <D61$p | If (Not NextSub='p') Then RAAMATTU
 610$? | <D61$? | S
 
 D61 | 610 | S
 
 630I1 | 630I1  | S
 630I2 | 630I2  | S
-630$m | <E63$m | If (RegFind(@630$a, 'Triot') >= 0) triot; \
-                 If (RegFind(@630$a, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@630$a, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-630$o | <E63$o | sovitusmerkinto; esityskokoonpano
-630$p | <E63$p | If (Not NextSub='p') Then raamattu
+
+#if (RegFind(@630$a, 'Triot') >= 0)
+630$m | <E63$m | TRIOT
+#endif
+
+#if (RegFind(@630$a, 'Kvartetot') >= 0)
+630$m | <E63$m | KVARTETOT
+#endif
+
+#if (RegFind(@630$a, 'Kvintetot') >= 0)
+630$m | <E63$m | KVINTETOT
+#endif
+
+#if (RegFind(@630$a, 'Triot') < 0) And (RegFind(@630$a, 'Kvartetot') < 0) And (RegFind(@630$a, 'Kvintetot') < 0)
+630$m | <E63$m | S
+#endif
+
+630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+630$p | <E63$p | If (Not NextSub='p') Then RAAMATTU
 630$? | <E63$? | S
 
 E63 | 630 | S
 
 700I1 | 700I1  | S
 700I2 | 700I2  | S
-700$c | <G70$c | fiktiivinen
-700$d | <G70$d | aikamaareet
-700$m | <G70$m | If (RegFind(@700$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@700$t, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@700$t, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-700$o | <G70$o | sovitusmerkinto; esityskokoonpano
-700$p | <G70$p | If (Not NextSub='p') Then raamattu
+700$c | <G70$c | FIKTIIVINENHAHMO
+700$d | <G70$d | AIKAMAAREET
+
+#if (RegFind(@700$t, 'Triot') >= 0)
+700$m | <G70$m | TRIOT
+#endif
+
+#if (RegFind(@700$t, 'Kvartetot') >= 0)
+700$m | <G70$m | KVARTETOT
+#endif
+
+#if (RegFind(@700$t, 'Kvintetot') >= 0)
+700$m | <G70$m | KVINTETOT
+#endif
+
+#if (RegFind(@700$t, 'Triot') < 0) And (RegFind(@700$t, 'Kvartetot') < 0) And (RegFind(@700$t, 'Kvintetot') < 0)
+700$m | <G70$m | S
+#endif
+
+700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+700$p | <G70$p | If (Not NextSub='p') Then RAAMATTU
 700$? | <G70$? | S
 
 G70 | 700 | S
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
-710$m | <H71$m | If (RegFind(@710$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@710$t, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@710$t, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-710$o | <H71$o | sovitusmerkinto, esityskokoonpano
-710$p | <H71$p | If (Not NextSub='p') Then raamattu
+710$c | <H71$c | FIKTIIVINENYHTEISO
+
+#if (RegFind(@710$t, 'Triot') >= 0)
+710$m | <H71$m | TRIOT
+#endif
+
+#if (RegFind(@710$t, 'Kvartetot') >= 0)
+710$m | <H71$m | KVARTETOT
+#endif
+
+#if (RegFind(@710$t, 'Kvintetot') >= 0)
+710$m | <H71$m | KVINTETOT
+#endif
+
+#if (RegFind(@710$t, 'Triot') < 0) And (RegFind(@710$t, 'Kvartetot') < 0) And (RegFind(@710$t, 'Kvintetot') < 0)
+710$m | <H71$m | S
+#endif
+
+710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+710$p | <H71$p | If (Not NextSub='p') Then RAAMATTU
 710$? | <H71$? | S
 
 H71 | 710 | S
 
 730I1 | 730I1  | S
 730I2 | 730I2  | S
-730$m | <J73$m | If (RegFind(@730$a, 'Triot') >= 0) triot; \
-                 If (RegFind(@730$a, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@730$a, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-730$o | <J73$o | sovitusmerkinto, esityskokoonpano
-730$p | <J73$p | If (Not NextSub='p') Then raamattu
+
+#if (RegFind(@730$a, 'Triot') >= 0)
+730$m | <J73$m | TRIOT
+#endif
+
+#if (RegFind(@730$a, 'Kvartetot') >= 0)
+730$m | <J73$m | KVARTETOT
+#endif
+
+#if (RegFind(@730$a, 'Kvintetot') >= 0)
+730$m | <J73$m | KVINTETOT
+#endif
+
+#if (RegFind(@730$a, 'Triot') < 0) And (RegFind(@730$a, 'Kvartetot') < 0) And (RegFind(@730$a, 'Kvintetot') < 0)
+730$m | <J73$m | S
+#endif
+
+730$o | <J73$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+730$p | <J73$p | If (Not NextSub='p') Then RAAMATTU
 730$? | <J73$? | S
 
 J73 | 730 | S
+
+760I1 | 760I1 | S
+760I2 | 760I2 | S
+760   | 760   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+762I1 | 762I1 | S
+762I2 | 762I2 | S
+762   | 762   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+765I1 | 765I1 | S
+765I2 | 765I2 | S
+765   | 765   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+767I1 | 767I1 | S
+767I2 | 767I2 | S
+767   | 767   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+770I1 | 770I1 | S
+770I2 | 770I2 | S
+770   | 770   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+772I1 | 772I1 | S
+772I2 | 772I2 | S
+772   | 772   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+773I1 | 773I1 | S
+773I2 | 773I2 | S
+773   | 773   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+774I1 | 774I1 | S
+774I2 | 774I2 | S
+774   | 774   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+775I1 | 775I1 | S
+775I2 | 775I2 | S
+775   | 775   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
 
 776I1 | 776I1 | S
 776I2 | 776I2 | S
 776   | 776   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
 
+777I1 | 777I1 | S
+777I2 | 777I2 | S
+777   | 777   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+780I1 | 780I1 | S
+780I2 | 780I2 | S
+780   | 780   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+785I1 | 785I1 | S
+785I2 | 785I2 | S
+785   | 785   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+786I1 | 786I1 | S
+786I2 | 786I2 | S
+786   | 786   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
+787I1 | 787I1 | S
+787I2 | 787I2 | S
+787   | 787   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+
 800I1 | 800I1  | S
 800I2 | 800I2  | S
-800$c | <K80$c | fiktiivinen
-800$d | <K80$d | aikamaareet
-800$m | <K80$m | If (RegFind(@800$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@800$t, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@800$t, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-800$o | <K80$o | sovitusmerkinto, esityskokoonpano
-800$p | <K80$p | If (Not NextSub='p') Then raamattu
+800$c | <K80$c | FIKTIIVINENHAHMO
+800$d | <K80$d | AIKAMAAREET
+
+#if (RegFind(@800$t, 'Triot') >= 0)
+800$m | <K80$m | TRIOT
+#endif
+
+#if (RegFind(@800$t, 'Kvartetot') >= 0)
+800$m | <K80$m | KVARTETOT
+#endif
+
+#if (RegFind(@800$t, 'Kvintetot') >= 0)
+800$m | <K80$m | KVINTETOT
+#endif
+
+#if Not Exists(@800$t) Or ((RegFind(@800$t, 'Triot') >= 0) And (RegFind(@800$t, 'Kvartetot') >= 0) And (RegFind(@800$t, 'Kvintetot') >= 0))
+800$m | <K80$m | S
+#endif
+
+800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+800$p | <K80$p | If (Not NextSub='p') Then RAAMATTU
 800$? | <K80$? | S
 
 K80 | 800 | S
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
-810$m | <L81$m | If (RegFind(@810$t, 'Triot') >= 0) triot; \
-                 If (RegFind(@810$t, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@810$t, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-810$o | <L81$o | sovitusmerkinto, esityskokoonpano
-810$p | <L81$p | If (Not NextSub='p') Then raamattu
+
+#if (RegFind(@810$t, 'Triot') >= 0)
+810$m | <L81$m | TRIOT
+#endif
+
+#if (RegFind(@810$t, 'Kvartetot') >= 0)
+810$m | <L81$m | KVARTETOT
+#endif
+
+#if (RegFind(@810$t, 'Kvintetot') >= 0)
+810$m | <L81$m | KVINTETOT
+#endif
+
+#if Not Exists(@810$t) Or ((RegFind(@810$t, 'Triot') >= 0) And (RegFind(@810$t, 'Kvartetot') >= 0) And (RegFind(@810$t, 'Kvintetot') >= 0))
+810$m | <L81$m | S
+#endif
+
+810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+810$p | <L81$p | If (Not NextSub='p') Then RAAMATTU
 810$? | <L81$? | S
 
 L81 | 810 | S
 
 830I1 | 830I1  | S
 830I2 | 830I2  | S
-830$m | <M83$m | If (RegFind(@830$a, 'Triot') >= 0) triot; \
-                 If (RegFind(@830$a, 'Kvartetot') >= 0) kvartetot; \
-                 If (RegFind(@830$a, 'Kvintetot') >= 0) kvintetot; \
-                 Else esityskokoonpano
-830$o | <M83$o | sovitusmerkinto, esityskokoonpano
-830$p | <M83$p | If (Not NextSub='p') Then raamattu
+
+#if (RegFind(@830$a, 'Triot') >= 0)
+830$m | <M83$m | TRIOT
+#endif
+
+#if (RegFind(@830$a, 'Kvartetot') >= 0)
+830$m | <M83$m | KVARTETOT
+#endif
+
+#if (RegFind(@830$a, 'Kvintetot') >= 0)
+830$m | <M83$m | KVINTETOT
+#endif
+
+#if Not Exists(@830$a) Or ((RegFind(@830$a, 'Triot') >= 0) And (RegFind(@830$a, 'Kvartetot') >= 0) And (RegFind(@830$a, 'Kvintetot') >= 0))
+830$m | <M83$m | S
+#endif
+
+830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+830$p | <M83$p | If (Not NextSub='p') Then RAAMATTU
 830$? | <M83$? | S
 
 M83 | 830 | S
