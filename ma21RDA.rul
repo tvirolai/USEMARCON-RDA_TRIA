@@ -47,25 +47,22 @@ versio 14.9.2015 / Kansalliskirjasto
                                  RegReplace('(B) (\\(\\d+)', 'bassot \\2'); \
                                  RegReplace('(B)([^A-Za-zÄÖÅäöå]|\$)', 'basso\\2', 'g'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
+                                 RegReplace('ork\\.', 'orkesteri'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') <0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
                                  If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') <0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
-                                 If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
-                                 If (RegFind(S, '[^A-Za-z]ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri'); \
-                                 If (RegFind(S, '^ork\\.') >= 0 ) RegReplace('ork.', 'orkesteri')
+                                 If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
                                 
 #define macro TRIOT            | RegReplace('piano, jouset', 'piano, viulu, sello'); \
                                  RegReplace('jouset', 'viulu, alttoviulu, sello')
                                  
-
-#define macro KVARTETOT        | RegReplace('jouset', 'viulut (2), alttoviulu, sello'); \
-                                 RegReplace('puupuhaltimet', 'huilu, oboe, klarinetti, fagotti'); \
-                                 RegReplace('piano, jouset', 'piano, viulu, alttoviulu, sello')
-
+#define macro KVARTETOT        | RegReplace('piano, jouset', 'piano, viulu, alttoviulu, sello');\
+                                 RegReplace('jouset', 'viulut (2), alttoviulu, sello'); \
+                                 RegReplace('puupuhaltimet', 'huilu, oboe, klarinetti, fagotti')
+                              
 #define macro KVINTETOT        | RegReplace('jouset', 'viulut (2), alttoviulut (2), sello'); \
-                                 RegReplace('puupuhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti'); \
                                  RegReplace('piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
                                  RegReplace('puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
@@ -159,20 +156,21 @@ A30 | 130 | S
 240I1 | 240I1  | S
 240I2 | 240I2  | S
 
-#if (RegFind(@240$t, 'Triot') >= 0)
+#if (RegFind(@240$t, 'Triot') >= 0) Or (RegFind(@240$a, 'Triot') >= 0)
 240$m | <F40$m | TRIOT
 #endif
 
-#if (RegFind(@240$t, 'Kvartetot') >= 0)
+#if (RegFind(@240$t, 'Kvartetot') >= 0) Or (RegFind(@240$a, 'Kvartetot') >= 0)
 240$m | <F40$m | KVARTETOT
 #endif
 
-#if (RegFind(@240$t, 'Kvintetot') >= 0)
+#if (RegFind(@240$t, 'Kvintetot') >= 0) Or (RegFind(@240$a, 'Kvintetot') >= 0)
 240$m | <F40$m | KVINTETOT
 #endif
 
-#if (RegFind(@240$t, 'Triot') < 0) And (RegFind(@240$t, 'Kvartetot') < 0) And (RegFind(@240$t, 'Kvintetot') < 0)
-240$m | <F40$m | S
+// Jos aiemmat säännöt eivät tärpänneet eli väliaikaista kenttää F40$m ei ole luotu
+#if Not Exists(F40$m)
+240$m | <F40$m | ESITYSKOKOONPANO
 #endif
                  
 240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
@@ -183,10 +181,23 @@ F40   | 240 | S
 
 243I1 | 243I1  | S
 243I2 | 243I2  | S
-243$m | <B43$m | If (RegFind(@243$a, 'Triot') >= 0) TRIOT; \
-                 If (RegFind(@243$a, 'Kvartetot') >= 0) KVARTETOT; \
-                 If (RegFind(@243$a, 'Kvintetot') >= 0) KVINTETOT; \
-                 Else ESITYSKOKOONPANO
+
+#if (RegFind(@243$t, 'Triot') >= 0)
+243$m | <B43$m | TRIOT
+#endif
+
+#if (RegFind(@243$t, 'Kvartetot') >= 0)
+243$m | <B43$m | KVARTETOT
+#endif
+
+#if (RegFind(@243$t, 'Kvintetot') >= 0)
+243$m | <B43$m | KVINTETOT
+#endif
+
+#if (RegFind(@243$t, 'Triot') < 0) And (RegFind(@243$t, 'Kvartetot') < 0) And (RegFind(@243$t, 'Kvintetot') < 0)
+243$m | <B43$m | ESITYSKOKOONPANO
+#endif
+
 243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 243$p | <B43$p | If (Not NextSub='p') Then RAAMATTU
 243$? | <B43$? | S
@@ -249,268 +260,189 @@ X64$? | 264$?  | S
 
 // LUODAAN 338-KENTÄT, JOS NIITÄ EI OLE TIETUEESSA VALMIINA
 
-#if (Not Exists(@338)) And If (RegFind(000/7/, 'a') >= 0) And If (Not Exists(@773)) And If (RegFind(@337$a, 'ei välittävää laitetta') >= 0)
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
+// 338-kenttiä voi olla useampia esim. moniviestimissä. Samanmuotoiset kentät luovat säännöt on ryhmitelty peräkkäin.
+// Kahta samansisältöistä kenttää ei luoda missään tilanteessa.
+
+// NIDE
+
+#if (Not Exists(@338)) \
+  And ( @000/7/ = 'a' Or @000/7/ = 'c' Or (RegFind(@300$a, '[Kk]irja|[Kk]artasto') >= 0) ) \
+  And (Not Exists(@773)) \
+  And (RegFind(@337$a, 'ei välittävää laitetta') >= 0)
+
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'nide'
 000 | 338(newest)$b | 'nc'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(000/7/, 'c') >= 0) And If (Not Exists(@773)) And If (RegFind(@337$a, 'ei välittävää laitetta') >= 0)
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'nide'
-000 | 338(newest)$b | 'nc'
+// ÄÄNILEVY
+
+#if (Not Exists(@338)) \
+  And (RegFind(@300$a, 'CD-levy|äänilevy') >= 0) \
+  And (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'äänilevy'
+000 | 338(newest)$b | 'sd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(000/8/, 's') >= 0) And If (Not Exists(@773)) And If (RegFind(@337$a, 'elektroninen') >= 0)
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
+// ÄÄNIKASETTI
+
+#if (Not Exists(@338)) \
+  And If ( \
+  (RegFind(@300$a, '[Cc]-kas') >= 0) \
+  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ää]nikas') >= 0) \
+  ) \
+  And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'äänikasetti'
+000 | 338(newest)$b | 'ss'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// TIETOLEVY
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'tietolevy'
+000 | 338(newest)$b | 'cd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// VIDEOLEVY
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy'') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'videolevy'
+000 | 338(newest)$b | 'vd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// VIDEOKASETTI
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'videokasetti'
+000 | 338(newest)$b | 'vf'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// PIIRTOHEITINKALVO
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]alvo') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'piirtoheitinkalvo'
+000 | 338(newest)$b | 'gt'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// DIA
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv|[Dd]iaa') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'dia'
+000 | 338(newest)$b | 'gs'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// MIKROKORTTI
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrokortti') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'mikrokortti'
+000 | 338(newest)$b | 'he'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// KORTTI
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ortti') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'kortti'
+000 | 338(newest)$b | 'no'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// ARKKI
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Aa]rkki') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'arkki'
+000 | 338(newest)$b | 'nb'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// MIKROFILMIRULLA
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilmirulla') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'mikrofilmirulla'
+000 | 338(newest)$b | 'hj'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// ÄÄNIKELA
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]änikela') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'äänikela'
+000 | 338(newest)$b | 'st'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// MUU
+
+#if (Not Exists(@338)) \
+  And If (RegFind(@300$a, '[Tt]aulu|[Uu][Ss][Bb]-muisti') >= 0) \
+  And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'muu'
+000 | 338(newest)$b | 'nz'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// VERKKOAINEISTO
+
+#if (Not Exists(@338)) \
+  And If ( \
+  (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
+  Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
+  Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
+  Or ( (RegFind(@300$a, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]') >= 0) And (@008/24/ = 'o') ) \
+  ) \
+  And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'verkkoaineisto'
 000 | 338(newest)$b | 'cr'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) And If (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) And If (Not Exists(@773))
-256I1 | 338(new)I1 | ' '
-256I2 | 338(newest)I2 | ' '
-256 | 338(newest)$a | 'verkkoaineisto'
-256 | 338(newest)$b | 'cr'
-256 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, 'CD-levy') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'äänilevy'
-300 | 338(newest)$b | 'sd'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, 'äänilevy') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ''
-300I2 | 338(newest)I2 | ''
-300 | 338(newest)$a | 'äänilevy'
-300 | 338(newest)$b | 'sd'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Cc]-kas') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'äänikasetti'
-300 | 338(newest)$b | 'ss'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Aa][Tt]-kas') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'äänikasetti'
-300 | 338(newest)$b | 'ss'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Cc][Cc]-kas') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'äänikasetti'
-300 | 338(newest)$b | 'ss'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]nikas') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'äänikasetti'
-300 | 338(newest)$b | 'ss'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'tietolevy'
-300 | 338(newest)$b | 'cd'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'videolevy'
-300 | 338(newest)$b | 'vd'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideolevy') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'videolevy'
-300 | 338(newest)$b | 'vd'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'videokasetti'
-300 | 338(newest)$b | 'vf'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]alvo') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'piirtoheitinkalvo'
-300 | 338(newest)$b | 'gt'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]irja') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'nide'
-300 | 338(newest)$b | 'nc'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'dia'
-300 | 338(newest)$b | 'gs'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd]iaa') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'dia'
-300 | 338(newest)$b | 'gs'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrokortti') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'mikrokortti'
-300 | 338(newest)$b | 'he'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ortti') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'kortti'
-300 | 338(newest)$b | 'no'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Aa]rkki') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'arkki'
-300 | 338(newest)$b | 'nb'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilmirulla') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'mikrofilmirulla'
-300 | 338(newest)$b | 'hj'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ää]änikela') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'äänikela'
-300 | 338(newest)$b | 'st'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]aulu') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'muu'
-300 | 338(newest)$b | 'nz'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]erkkojulkaisu') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'verkkoaineisto'
-300 | 338(newest)$b | 'cr'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh][Tt][Mm][Ll]') >= 0) And If (@008/24/ = 'o') And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'verkkoaineisto'
-300 | 338(newest)$b | 'cr'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ii][Bb]ooks') >= 0) And If (@008/24/ = 'o') And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'verkkoaineisto'
-300 | 338(newest)$b | 'cr'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ff][Ll][Aa][Cc]') >= 0) And If (@008/24/ = 'o') And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'verkkoaineisto'
-300 | 338(newest)$b | 'cr'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]iedosto') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'verkkoaineisto'
-300 | 338(newest)$b | 'cr'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Uu][Ss][Bb]-muisti') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'muu'
-300 | 338(newest)$b | 'cz'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]artasto') >= 0) And If (Not Exists(@773))
-300I1 | 338(new)I1 | ' '
-300I2 | 338(newest)I2 | ' '
-300 | 338(newest)$a | 'nide'
-300 | 338(newest)$b | 'nc'
-300 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) And If (Not Exists(@773))
-516I1 | 338(new)I1 | ' '
-516I1 | 338(newest)I2 | ' '
-516$a | 338(newest)$a | 'verkkoaineisto'
-516$a | 338(newest)$b | 'cr'
-516$a | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(@338)) And If (RegFind(@538$a, 'USB-muisti') >= 0) And If (Not Exists(@773))
-538I1 | 338(new)I1 | ' '
-538I1 | 338(newest)I2 | ' '
-538$a | 338(newest)$a | 'muu'
-538$a | 338(newest)$b | 'cz'
-538$a | 338(newest)$2 | 'rdacarrier'
+#if (Not Exists(@338)) \
+  And If (RegFind(000/8/, 's') >= 0) \
+  And If (Not Exists(@773)) \
+  And If (RegFind(@337$a, 'elektroninen') >= 0) \
+  And If (RegFind(%338$a, 'verkkoaineisto') < 0)
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'verkkoaineisto'
+000 | 338(newest)$b | 'cr'
+000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
 // 338-KENTTIEN LUOMINEN LOPPUU
@@ -661,7 +593,7 @@ E63 | 630 | S
 #endif
 
 #if (RegFind(@700$t, 'Triot') < 0) And (RegFind(@700$t, 'Kvartetot') < 0) And (RegFind(@700$t, 'Kvintetot') < 0)
-700$m | <G70$m | S
+700$m | <G70$m | ESITYSKOKOONPANO
 #endif
 
 700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
@@ -754,7 +686,7 @@ J73 | 730 | S
 #endif
 
 #if Not Exists(@800$t) Or ((RegFind(@800$t, 'Triot') >= 0) And (RegFind(@800$t, 'Kvartetot') >= 0) And (RegFind(@800$t, 'Kvintetot') >= 0))
-800$m | <K80$m | S
+800$m | <K80$m | ESITYSKOKOONPANO
 #endif
 
 800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
