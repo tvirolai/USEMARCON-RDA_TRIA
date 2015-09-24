@@ -19,7 +19,7 @@ versio 24.9.2015 / Kansalliskirjasto
                       RegReplace('mv\\.', 'mustavalkoinen'); \
                       RegReplace('vär\\.', 'värillinen'); \
                       RegReplace('värikuv\\.', 'värikuvitus'); \
-                      RegReplace('ääni ', 'äänellinen'); \
+                      RegReplace('([^A-Za-zÄÖÅäöå])(ääni)([^A-Za-zÄÖÅäöå])', '\\1äänellinen\\3'); \
                       RegReplace('nuott\\.', 'nuotteja'); \
                       If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
                       If (RegFind(S, '\\d*-\\d*') >= 0) RegReplace('[^s]?s\\.|ss\\.', 'sivut')
