@@ -89,7 +89,7 @@ versio 25.9.2015 / Kansalliskirjasto
                            RegReplace('hft', 'häftad'); \
                            RegReplace('pbk', 'paperback'); \
                            RegReplace('hbk', 'hardback'); \
-                           RegReplace('alk. paper', 'alkaline paper'); \
+                           RegReplace('alk\\. paper', 'alkaline paper'); \
                            RegReplace('verkkojulk', 'verkkojulkaisu')
                                                
 000/1-18/ | 000/1-18/ | S
