@@ -1,5 +1,5 @@
 RDA-konversio
-versio 24.9.2015 / Kansalliskirjasto
+versio 25.9.2015 / Kansalliskirjasto
 
 #define version 317
 
@@ -19,7 +19,8 @@ versio 24.9.2015 / Kansalliskirjasto
                       RegReplace('mv\\.', 'mustavalkoinen'); \
                       RegReplace('vär\\.', 'värillinen'); \
                       RegReplace('värikuv\\.', 'värikuvitus'); \
-                      RegReplace('([^A-Za-zÄÖÅäöå]|^)(ääni)([^A-Za-zÄÖÅäöå])', '\\1äänellinen\\3'); \
+                      RegReplace('([^A-Za-zÄÖÅäöå^])(ääni)([^A-Za-zÄÖÅäöå])', '\\1äänellinen\\3'); \
+                      RegReplace('(^ääni)([^A-Za-zÄÖÅäöå])', 'äänellinen\\2'); \
                       RegReplace('nuott\\.', 'nuotteja'); \
                       If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
                       If (RegFind(S, '\\d*-\\d*') >= 0) RegReplace('[^s]?s\\.|ss\\.', 'sivut')
@@ -121,7 +122,7 @@ versio 24.9.2015 / Kansalliskirjasto
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
-110$c | 110$c  | FIKTIIVINENYHTEISO
+110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
 110$? | 110$?  | S
 
 130I1 | 130I1  | S
@@ -182,19 +183,19 @@ F40   | 240 | S
 243I1 | 243I1  | S
 243I2 | 243I2  | S
 
-#if (RegFind(@243$t, 'Triot') >= 0)
+#if (RegFind(@243$a, 'Triot') >= 0)
 243$m | <B43$m | TRIOT
 #endif
 
-#if (RegFind(@243$t, 'Kvartetot') >= 0)
+#if (RegFind(@243$a, 'Kvartetot') >= 0)
 243$m | <B43$m | KVARTETOT
 #endif
 
-#if (RegFind(@243$t, 'Kvintetot') >= 0)
+#if (RegFind(@243$a, 'Kvintetot') >= 0)
 243$m | <B43$m | KVINTETOT
 #endif
 
-#if (RegFind(@243$t, 'Triot') < 0) And (RegFind(@243$t, 'Kvartetot') < 0) And (RegFind(@243$t, 'Kvintetot') < 0)
+#if (RegFind(@243$a, 'Triot') < 0) And (RegFind(@243$a, 'Kvartetot') < 0) And (RegFind(@243$a, 'Kvintetot') < 0)
 243$m | <B43$m | ESITYSKOKOONPANO
 #endif
 
