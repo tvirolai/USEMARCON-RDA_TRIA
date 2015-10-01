@@ -17,3 +17,9 @@ Kopioi konversiopaketti päätteellesi esimerkiksi "Download ZIP" -painikkeesta.
 Palaute
 -------
 marc-posti (at) helsinki.fi
+
+===========
+
+Description
+---------
+A USEMARCON rule for converting bibliographic records from MARC 21 (ISBD) to MARC 21 (RDA). Tailored for Finnish scientific libraries.
