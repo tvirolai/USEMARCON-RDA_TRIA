@@ -6,7 +6,7 @@ Konversiopakettia käytetään Melinda-tietokannan sekä Voyager-järjestelmää
 
 Kehitys
 -------
-Konversiosääntö on testausvaiheessa.
+Konversiosääntö on testausvaiheessa. Se ei ole vielä valmis tuotantokantojen muuntamiseen, mutta testaukseen voivat osallistua kaikki halukkaat.
 
 Käyttö
 --------
