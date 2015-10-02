@@ -3,6 +3,7 @@ versio 2.10.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
+
 #define macro 300AE | RegReplace('n\\. ', 'noin'); \
                       RegReplace('ss\\.', 'sivut'); \
                       RegReplace('s\\,', 'sivua,'); \
