@@ -1,5 +1,5 @@
 RDA-konversio
-versio 25.9.2015 / Kansalliskirjasto
+versio 2.10.2015 / Kansalliskirjasto
 
 #define version 317
 
@@ -9,10 +9,13 @@ versio 25.9.2015 / Kansalliskirjasto
                       RegReplace('kuv\\.', 'kuvitettu'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
                       RegReplace('1 vol\\.', '1 nide'); \
+                      RegReplace('(\\d*) (S\\.)', '\\1 sivua'); \
+                      RegReplace('(\\d*) S', '\\1 sivua'); \
+                      RegReplace('(\\d*) (min)([^A-Za-z])', '\\1 minuuttia\\3', 'g'); \
+                      RegReplace('(\\d*) (min[^a-zA-Z])(\\d*) (s)', '\\1 minuuttia \\3 sekuntia'); \
                       If (RegFind(S, '[023456789] vol\\.') >= 0) RegReplace('vol\\.', 'nidettä'); \
                       If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
-                      If (RegFind(S, 'S\\.(.)*\\d*-\\d*') >= 0) RegReplace('S\\.', 'sivut'); \
-                      If (RegFind(S, 'S\\.(.)*\\d*[^-]') >= 0) RegReplace('S\\.', 'sivu')
+                      If (RegFind(S, 'S\\.(.)*\\d*-\\d*') >= 0) RegReplace('S\\.', 'sivut')
 
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
@@ -24,6 +27,23 @@ versio 25.9.2015 / Kansalliskirjasto
                       RegReplace('([^A-Za-zÄÖÅäöå])(ääni\$)', '\\1äänellinen'); \
                       RegReplace('^ääni\$', 'äänellinen'); \
                       RegReplace('nuott\\.', 'nuotteja'); \
+                      RegReplace('^ill\\.', 'illustrated'); \
+                      RegReplace('illus\\.', 'illustrated'); \
+                      RegReplace('diagrs\\.', 'diagrams'); \
+                      RegReplace('incl\\.', 'includes'); \
+                      RegReplace('tab\\.', 'tables'); \
+                      RegReplace('fold\\. maps', 'folded maps'); \
+                      RegReplace('(\\d*) (S)', '\\1 sivua'); \
+                      RegReplace('(\\d*) irtol\\.', '\\1 irtolehteä'); \
+                      RegReplace('(\\d*) kuvas\\.', '\\1 kuvasivua'); \
+                      RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja'); \
+                      RegReplace('^taul\\.', 'taulukkoja'); \
+                      RegReplace('hakem\\.', 'hakemisto'); \
+                      RegReplace('lyh\\. luett\\.', 'lyhenneluettelo'); \
+                      RegReplace('lähdel\\.', 'lähdeluettelo'); \
+                      RegReplace('(\\d*) taul\\.', '\\1 taulukkoa'); \
+                      RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
+                      RegReplace('(\\d*) liites\\.', '\\1 liitesivua'); \
                       If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
                       If (RegFind(S, '\\d*-\\d*') >= 0) RegReplace('[^s]?s\\.|ss\\.', 'sivut')
 
@@ -57,17 +77,23 @@ versio 25.9.2015 / Kansalliskirjasto
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') <0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
                                  If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') <0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
                                  If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+
+#define macro PAINOSMERKINTO   | RegReplace('rev\\.', 'revised'); \
+                                 RegReplace('ed\\.', 'edition'); \
+                                 RegReplace('Aufl\\.', 'Auflage'); \
+                                 RegReplace('neubearb\\.', 'neubearbeite'); \
+                                 RegReplace('uppl\\.', 'upplaga')
                                 
-#define macro TRIOT            | RegReplace('piano, jouset', 'piano, viulu, sello'); \
-                                 RegReplace('jouset', 'viulu, alttoviulu, sello')
+#define macro TRIOT            | RegReplace('^piano, jouset', 'piano, viulu, sello'); \
+                                 RegReplace('^jouset', 'viulu, alttoviulu, sello')
                                  
-#define macro KVARTETOT        | RegReplace('piano, jouset', 'piano, viulu, alttoviulu, sello');\
-                                 RegReplace('jouset', 'viulut (2), alttoviulu, sello'); \
-                                 RegReplace('puupuhaltimet', 'huilu, oboe, klarinetti, fagotti')
+#define macro KVARTETOT        | RegReplace('^piano, jouset', 'piano, viulu, alttoviulu, sello');\
+                                 RegReplace('^jouset', 'viulut (2), alttoviulu, sello'); \
+                                 RegReplace('^puupuhaltimet', 'huilu, oboe, klarinetti, fagotti')
                               
-#define macro KVINTETOT        | RegReplace('jouset', 'viulut (2), alttoviulut (2), sello'); \
-                                 RegReplace('piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+#define macro KVINTETOT        | RegReplace('^jouset', 'viulut (2), alttoviulut (2), sello'); \
+                                 RegReplace('^piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
+                                 RegReplace('^puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
 #define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu')
 
@@ -105,6 +131,8 @@ versio 25.9.2015 / Kansalliskirjasto
 020I1 | 020I1 | S
 020I2 | 020I2 | S
 020   | 020   | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
+                Delete('('); \
+                Delete(')'); \
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
@@ -222,6 +250,10 @@ B43 | 243 | S
 
 F45 | 245 | S
 
+250I1 | 250I1  | S
+250I2 | 250I2  | S
+250   | 250    | PAINOSMERKINTO
+
 #if (Not Exists(@773))
 260I1 | 260I1 | S
 260I2 | 260I2 | S
@@ -256,7 +288,15 @@ X64$? | 264$?  | S
 
 300I1 | 300I1 | S
 300I2 | 300I2 | S
-300$a | 300$a | 300AE //; If ((Not (Exists($c) Or Exists($d) Or Exists($e))) And (RegFind(S, '\.$') < 0)) Then S + '.' Else 300AE
+
+#if (RegFind(@041, 'eng') >= 0)
+300$a | 300$a | 300AE; RegReplace('(\\d*) p\\.', '\\1 pages')
+#endif
+
+#if (RegFind(@041, 'eng') < 0)
+300$a | 300$a | 300AE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
+#endif
+
 300$b | 300$b | 300BE
 300$c | 300$c | S
 300$e | 300$e | 300BE
@@ -453,15 +493,34 @@ X64$? | 264$?  | S
 336I1 | 336I1 | S
 336I2 | 336I2 | S
 336$a | 336$a | Table ('336_a.tbl')
+
+#if Not (Exists(@336$b))
 336$a | 336$b | If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
 336$a | 336$2 | If (Exists(%336$b)) Then 'rdacontent'
+#endif
+
+#if (Exists(@336$b))
+336$b | 336$b | S
+336$2 | 336$2 | 'rdacontent'
+#endif
+
 336$8 | 336$8 | S
+
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
 337$a | 337$a | Table ('337_a.tbl')
+
+#if Not (Exists(@337$b))
 337$a | 337$b | Table ('337_b.tbl')
 337$a | 337$2 | 'rdamedia'
+#endif
+
+#if (Exists(@337$b))
+337$b | 337$b | S
+337$2 | 337$2 | S
+#endif
+
 337$8 | 337$8 | S
 
 #if (Exists(@338))
@@ -483,7 +542,7 @@ X64$? | 264$?  | S
 511I1 | 511I1 | S
 511I2 | 511I2 | S
 511$g | 511$g | If (RegFind(S, '\\d*-\\d*') >= 0) Then \
-                RegReplace('[^s]?s\\.|ss\\.', 'sivut', 'g')
+                RegReplace('[^s]?s\\.|ss\\.', 'sivut', 'g') Else S
 511$? | 511$? | S
 
 516I1 | 516I1 | S
