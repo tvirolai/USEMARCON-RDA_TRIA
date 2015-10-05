@@ -1,5 +1,5 @@
 RDA-konversio
-versio 2.10.2015 / Kansalliskirjasto
+versio 5.10.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -43,7 +43,8 @@ versio 2.10.2015 / Kansalliskirjasto
                       RegReplace('lähdel\\.', 'lähdeluettelo'); \
                       RegReplace('(\\d*) taul\\.', '\\1 taulukkoa'); \
                       RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
-                      RegReplace('(\\d*) liites\\.', '\\1 liitesivua'); \
+                      RegReplace('1 liites\\.', '1 liitesivu'); \
+                      RegReplace('(\\d*)(.*)(liites\\.)', '\\2liitesivua'); \
                       If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
                       If (RegFind(S, '\\d*-\\d*') >= 0) RegReplace('[^s]?s\\.|ss\\.', 'sivut')
 
@@ -118,7 +119,8 @@ versio 2.10.2015 / Kansalliskirjasto
                            RegReplace('pbk', 'paperback'); \
                            RegReplace('hbk', 'hardback'); \
                            RegReplace('alk\\. paper', 'alkaline paper'); \
-                           RegReplace('verkkojulk', 'verkkojulkaisu')
+                           RegReplace('(verkkojulk)([^A-Za-z])', 'verkkojulkaisu\\2'); \
+                           RegReplace('verkkojulk\$', 'verkkojulkaisu')
                                                
 000/1-18/ | 000/1-18/ | S
 000/19/ | 000/19/ | 'i'
