@@ -1,5 +1,5 @@
 RDA-konversio
-versio 5.10.2015 / Kansalliskirjasto (TV)
+versio 9.10.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -270,7 +270,7 @@ F45 | 245 | S
 #if (RegFind(@260$c, 'cop.|©|[Cc]') >= 0) And (RegFind(@260$c, '\\d{4}') >= 0) And (Not Exists(@773))
 260I1 | <X64I1 | ' '
 260I2 | <X64I2 | '4'
-260$c | <X64$c | '© ' + RegMatch(0);
+260$c | <X64$c | '©' + RegMatch(0);
 X64I1 | 264I1  | S
 X64I2 | 264I2  | S
 // Kenttään 264$c viedään myös mahdolliset hakasulkeet
