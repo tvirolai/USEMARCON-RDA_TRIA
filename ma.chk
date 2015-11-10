@@ -82,7 +82,7 @@ Format checking file
 036?| I1=_ | I2=_ | $6? | $8* | $a_ | $b? |
 
 // Stock Number
-037*| I1=_ | I2=_ | $6? | $8* | $a? | $b_ | $c* | $f* | $g* | $n* |
+037*| I1=_ | I2=_ | $5* | $6? | $8* | $a? | $b_ | $c* | $f* | $g* | $n* |
 
 // Record Content Licensor
 038?| I1=_ | I2=_ | $6? | $8* | $a_ |
@@ -343,7 +343,7 @@ Format checking file
 502*| I1=_ | I2=_ | $6? | $8* | $a_ | $c? | $d? | $g? | $o? |
 
 // Bibliography Note
-504*| I1=_ | I2=_ | $6? | $8* | $a_ | $b? |
+504*| I1=_ | I2=_ | $6? | $8* | $a? | $b? |
 
 // Formatted Contents Note
 505*| I1=0128 | I2=_0 | $6? | $8* | $a? | $g* | $r* | $t* | $u* | $9* |
@@ -466,7 +466,7 @@ Format checking file
 567*| I1=_8 | I2=_ | $6? | $8* | $a_ |
 
 // Local note: Tilastointimerkintä (XLUETTELOITU)
-579*| I1=_ | I2=_ | $6? | $8* | $a_ | $b_ |
+579*| I1=_ | I2=_ | $6? | $8* | $a_ | $b* |
 
 // Linking Entry Complexity Note
 580*| I1=_ | I2=_ | $6? | $8* | $a_ |
@@ -487,7 +487,7 @@ Format checking file
 586*| I1=_8 | I2=_ | $3? | $6? | $8* | $a_ |
 
 // Source of Description Note
-588*| I1=_ | I2=_ | $5? | $6? | $8* | $a? |
+588*| I1=_01 | I2=_ | $5? | $6? | $8* | $a? |
 
 // Local note: Kirjastokohtainen huomautus
 590*| I1=_ | I2=_ | $6? | $8* | $a* |$b* | $c* | $d* | $e* | $f* | $g* |    
@@ -619,7 +619,7 @@ Format checking file
 775*| I1=01 | I2=_8 | $4* | $6? | $7? | $8* | $a? | $b? | $c? | $d? | $e? | $f? | $g* | $i* | $k* | $m? | $n* | $o* | $r* | $s? | $t? | $u? | $w* | $x? | $y? | $z* |
 
 // Additional Physical Form Entry
-776*| I1=01 | I2=_8 | $4* | $6? | $7? | $8* | $9* | $a? | $b? | $c? | $d? | $g* | $i* | $k* | $m? | $n* | $o* | $r* | $s? | $t? | $u? | $w* | $x? | $y? | $z* | 
+776*| I1=01 | I2=_8 | $4* | $6? | $7? | $8* | $9* | $a? | $b? | $c? | $d? | $g* | $h? | $i* | $k* | $m? | $n* | $o* | $r* | $s? | $t? | $u? | $w* | $x? | $y? | $z* | 
 
 // Issued With Entry
 777*| I1=01 | I2=_8 | $4* | $6? | $7? | $8* | $a? | $b? | $c? | $d? | $g* | $i* | $k* | $m? | $n* | $o* | $s? | $t? | $w* | $x? | $y? |
@@ -649,7 +649,7 @@ Format checking file
 811*| I1=012 | I2=_ | $0* | $3* | $4* | $5* | $6? | $8* | $9? | $a_ | $c? | $d? | $e* | $f? | $g? | $j* | $k* | $l? | $n* | $p* | $q? | $s? | $t_ | $u? | $v? |
 
 // Uniform Title, Series Added Entry
-830*| I1=_ | I2=0123456789 | $0* | $3* | $5* | $6? | $8* | $a_ | $d* | $f? | $g? | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v? | $x? |
+830*| I1=_ | I2=0123456789 | $0* | $3* | $5* | $6? | $8* | $a_ | $d* | $f? | $g? | $k* | $l? | $m* | $n* | $o? | $p* | $r? | $s? | $t? | $v? | $w* |$x? |
 
 // Holding Institution
 850*| I1=_ | I2=_ | $8* | $a+ |
