@@ -3,7 +3,7 @@ versio 18.11.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
-#define macro 300AE | RegReplace('n\\. ', 'noin'); \
+#define macro 300AE | RegReplace('n\\.', 'noin'); \
                       RegReplace('ss\\.', 'sivut'); \
                       RegReplace('s\\,', 'sivua,'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
@@ -11,7 +11,7 @@ versio 18.11.2015 / Kansalliskirjasto (TV)
                       RegReplace('1 vol\\.', '1 nide'); \
                       RegReplace('(\\d*) (S\\.)', '\\1 sivua'); \
                       RegReplace('(\\d*) S', '\\1 sivua'); \
-                      RegReplace('(\\d*) (min)([^A-Za-z])', '\\1 minuuttia\\3', 'g'); \
+                      RegReplace('(\\d*) (min\\.)([^A-Za-z])', '\\1 minuuttia\\3', 'g'); \
                       RegReplace('(\\d*) (min[^a-zA-Z])(\\d*) (s)', '\\1 minuuttia \\3 sekuntia'); \
                       If (RegFind(S, '[023456789] vol\\.') >= 0) RegReplace('vol\\.', 'nidettä'); \
                       If (RegFind(S, '\\d* s\\.') >= 0) RegReplace('s\\.', 'sivua'); \
