@@ -770,7 +770,7 @@ H71 | 710 | S
 #endif
 
 #if (RegFind(@730$a, 'Triot') < 0) And (RegFind(@730$a, 'Kvartetot') < 0) And (RegFind(@730$a, 'Kvintetot') < 0)
-730$m | <J73$m | S
+730$m | <J73$m | ESITYSKOKOONPANO
 #endif
 
 730$o | <J73$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
