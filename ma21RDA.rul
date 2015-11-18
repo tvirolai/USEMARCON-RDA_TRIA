@@ -132,7 +132,9 @@ versio 18.11.2015 / Kansalliskirjasto (TV)
 
 020I1 | 020I1 | S
 020I2 | 020I2 | S
-020   | 020   | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
+020$a | 020$a | S; RegReplace('[\\s](.*)', '')
+020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT
+020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
                 Delete('('); \
                 Delete(')'); \
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
