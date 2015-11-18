@@ -305,7 +305,7 @@ X64$? | 264$?  | S
 300I1 | 300I1 | S
 300I2 | 300I2 | S
 
-#if (@008/36-38/ = 'eng')
+#if (RegFind(@041, 'eng') >= 0)
 300$a | 300$a | 300AE; RegReplace('(\\d*) p\\.', '\\1 pages')
 #endif
 
