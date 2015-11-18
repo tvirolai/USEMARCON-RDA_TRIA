@@ -1,5 +1,5 @@
 RDA-konversio
-versio 9.10.2015 / Kansalliskirjasto (TV)
+versio 18.11.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -150,12 +150,19 @@ versio 9.10.2015 / Kansalliskirjasto (TV)
 100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
+100$4 | 100$4  | Table ('Tekijanfunktiot.tbl')
 100$? | 100$?  | S
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
+110$4 | 110$4  | Table ('Tekijanfunktiot.tbl')
 110$? | 110$?  | S
+
+111I1 | 111I1  | S
+111I2 | 111I2  | S
+111$4 | 111$4  | Table ('Tekijanfunktiot.tbl')
+111$? | 111$?  | S
 
 130I1 | 130I1  | S
 130I2 | 130I2  | S
@@ -287,6 +294,11 @@ X64I2 | 264I2  | S
 X64$c | 264$c  | If (RegFind(260$c, '\\[') >= 0) '[' + S + ']' Else S
 X64$? | 264$?  | S
 #endif
+
+270I1 | 270I1  | S
+270I2 | 270I2  | S
+270$4 | 270$4  | Table ('Tekijanfunktiot.tbl')
+270$? | 270$?  | S
 
 300I1 | 300I1 | S
 300I2 | 300I2 | S
@@ -584,6 +596,7 @@ X64$? | 264$?  | S
 
 600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 600$p | <C60$p | If (Not NextSub='p') Then RAAMATTU
+600$4 | <C60$4 | Table ('Tekijanfunktiot.tbl')
 600$? | <C60$? | S
 
 C60 | 600 | S
@@ -610,9 +623,15 @@ C60 | 600 | S
 
 610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 610$p | <D61$p | If (Not NextSub='p') Then RAAMATTU
+610$4 | <C61$4 | Table ('Tekijanfunktiot.tbl')
 610$? | <D61$? | S
 
 D61 | 610 | S
+
+611I1 | 611I1  | S
+611I2 | 611I2  | S
+611$4 | 611$4  | Table ('Tekijanfunktiot.tbl')
+611$? | 611$?  | S
 
 630I1 | 630I1  | S
 630I2 | 630I2  | S
@@ -635,9 +654,30 @@ D61 | 610 | S
 
 630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 630$p | <E63$p | If (Not NextSub='p') Then RAAMATTU
+630$4 | <E63$4 | Table ('Tekijanfunktiot.tbl')
 630$? | <E63$? | S
 
 E63 | 630 | S
+
+650I1 | 650I1  | S
+650I2 | 650I2  | S
+650$4 | 650$4  | Table ('Tekijanfunktiot.tbl')
+650$? | 650$?  | S
+
+651I1 | 651I1  | S
+651I2 | 651I2  | S
+651$4 | 651$4  | Table ('Tekijanfunktiot.tbl')
+651$? | 651$?  | S
+
+654I1 | 654I1  | S
+654I2 | 654I2  | S
+654$4 | 654$4  | Table ('Tekijanfunktiot.tbl')
+654$? | 654$?  | S
+
+662I1 | 662I1  | S
+662I2 | 662I2  | S
+662$4 | 662$4  | Table ('Tekijanfunktiot.tbl')
+662$? | 662$?  | S
 
 700I1 | 700I1  | S
 700I2 | 700I2  | S
@@ -662,6 +702,7 @@ E63 | 630 | S
 
 700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 700$p | <G70$p | If (Not NextSub='p') Then RAAMATTU
+700$4 | <G70$4 | Table ('Tekijanfunktiot.tbl')
 700$? | <G70$? | S
 
 G70 | 700 | S
@@ -688,9 +729,15 @@ G70 | 700 | S
 
 710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
 710$p | <H71$p | If (Not NextSub='p') Then RAAMATTU
+710$4 | <H71$4 | Table ('Tekijanfunktiot.tbl')
 710$? | <H71$? | S
 
 H71 | 710 | S
+
+720I1 | 720I1  | S
+720I2 | 720I2  | S
+720$4 | 720$4  | Table ('Tekijanfunktiot.tbl')
+720$? | 720$?  | S
 
 730I1 | 730I1  | S
 730I2 | 730I2  | S
@@ -755,6 +802,7 @@ J73 | 730 | S
 
 800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
 800$p | <K80$p | If (Not NextSub='p') Then RAAMATTU
+800$4 | <K80$4 | Table ('Tekijanfunktiot.tbl')
 800$? | <K80$? | S
 
 K80 | 800 | S
@@ -780,9 +828,15 @@ K80 | 800 | S
 
 810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
 810$p | <L81$p | If (Not NextSub='p') Then RAAMATTU
+810$4 | <L81$4 | Table ('Tekijanfunktiot.tbl')
 810$? | <L81$? | S
 
 L81 | 810 | S
+
+811I1 | 811I1  | S
+811I2 | 811I2  | S
+811$4 | 811$4  | Table ('Tekijanfunktiot.tbl')
+811$? | 811$?  | S
 
 830I1 | 830I1  | S
 830I2 | 830I2  | S
