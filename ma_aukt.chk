@@ -36,7 +36,7 @@ Format checking file for MARC 21 (RDA) Authority Records - generated on Fri Nov 
 
 035* | I1=_ | I2=_ | $a? | $z* | $6? | $8* |
 
-040? | I1=_ | I2=_ | $a? | $b? | $c? | $d* | $e* | $f_ | $6? | $8* |
+040? | I1=_ | I2=_ | $a? | $b? | $c? | $d* | $e* | $f? | $6? | $8* |
 
 042? | I1=_ | I2=_ | $a* |
 
