@@ -10,7 +10,7 @@ Konversiosääntö on testausvaiheessa. Se ei ole vielä valmis tuotantokantojen
 
 Viimeisimmät muutokset
 -------
-Auktoriteettitietueiden konversiosäännön ensimmäinen versio on lisätty. Auktoriteettikonversiossa on kaikki määritysten mukaiset toiminnot (toimivuutta ei vielä juuri tosin ole testattu), sitä vastoin formaattitarkistustaulu on vielä toteuttamatta. Tämän vuoksi auktoriteettikonversio tuottaa valtavasti (vääriä) virheilmoituksia. Tämä korjataan lähipäivien aikana.
+Auktoriteettitietueiden konversiosäännön ensimmäinen versio on lisätty.
 
 Käyttö
 --------
