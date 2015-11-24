@@ -163,20 +163,20 @@ versio 24.11.2015 / Kansalliskirjasto (TV)
 100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
-100$e | 100$e  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+100$e | 100$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
 100$4 | 100$4  | Table ('Tekijanfunktiot.tbl')
 100$? | 100$?  | S
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
-110$e | 110$e  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+110$e | 110$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
 110$4 | 110$4  | Table ('Tekijanfunktiot.tbl')
 110$? | 110$?  | S
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
-111$j | 111$j  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+111$j | 111$j  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
 111$4 | 111$4  | Table ('Tekijanfunktiot.tbl')
 111$? | 111$?  | S
 
@@ -507,7 +507,9 @@ X64$? | 264$?  | S
 #endif
 
 #if (Not Exists(@338)) \
-  And If (RegFind(000/8/, 's') >= 0) \
+  And If ( (RegFind(000/8/, 's') >= 0) \
+    Or (RegFind(@256$a, '[Vv]erkko') >= 0) \
+    Or (RegFind(@020$q, '[Pp][Dd][Ff]') >= 0) ) \
   And If (Not Exists(@773)) \
   And If (RegFind(@337$a, 'elektroninen') >= 0) \
   And If (RegFind(%338$a, 'verkkoaineisto') < 0)
@@ -702,7 +704,7 @@ E63 | 630 | S
 700I2 | 700I2  | S
 700$c | <G70$c | FIKTIIVINENHAHMO
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+700$e | <G70$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending); 
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT
