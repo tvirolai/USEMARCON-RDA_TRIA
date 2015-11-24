@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 18.11.2015 / Kansalliskirjasto (TV)
+versio 24.11.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -111,7 +111,8 @@ versio 18.11.2015 / Kansalliskirjasto (TV)
                             RegReplace('n\\.', 'noin'); \
                             RegReplace('vs\\.', 'vuosisata')
 
-#define macro SIDOSASUT |  RegReplace('sid', 'sidottu'); \
+#define macro SIDOSASUT |  RegReplace('\\.', ''); \
+                           RegReplace('sid', 'sidottu'); \
                            RegReplace('nid', 'nidottu'); \
                            RegReplace('virh', 'virheellinen'); \
                            RegReplace('inb', 'inbunden'); \
@@ -130,10 +131,20 @@ versio 18.11.2015 / Kansalliskirjasto (TV)
 
 003 | <DEL   | S
 
+015I1 | 015I1 | S
+015I2 | 015I2 | S
+015$q | 015$q | Replace('.,' By ','); \\
+                Delete('('); \
+                Delete(')'); \
+                Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
+                SIDOSASUT
+015$? | 015$? | S
+
 020I1 | 020I1 | S
 020I2 | 020I2 | S
 020$a | 020$a | S; RegReplace('[\\s](.*)', '')
 020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT
+020$c | <DEL  | S
 020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
                 Delete('('); \
                 Delete(')'); \
@@ -152,20 +163,20 @@ versio 18.11.2015 / Kansalliskirjasto (TV)
 100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
-100$e | 100$e  | Table ('Funktiotermit.tbl')
+100$e | 100$e  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 100$4 | 100$4  | Table ('Tekijanfunktiot.tbl')
 100$? | 100$?  | S
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
-110$e | 110$e  | Table ('Funktiotermit.tbl')
+110$e | 110$e  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 110$4 | 110$4  | Table ('Tekijanfunktiot.tbl')
 110$? | 110$?  | S
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
-111$j | 111$j  | Table ('Funktiotermit.tbl')
+111$j | 111$j  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 111$4 | 111$4  | Table ('Tekijanfunktiot.tbl')
 111$? | 111$?  | S
 
@@ -582,7 +593,7 @@ X64$? | 264$?  | S
 600I2 | 600I2  | S
 600$c | <C60$c | FIKTIIVINENHAHMO
 600$d | <C60$d | AIKAMAAREET
-600$e | <C60$e | Table ('Funktiotermit.tbl')
+600$e | <C60$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 
 #if (RegFind(@600$t, 'Triot') >= 0)
 600$m | <C60$m | TRIOT
@@ -610,7 +621,7 @@ C60 | 600 | S
 610I1 | 610I1  | S
 610I2 | 610I2  | S
 610$c | <D61$c | FIKTIIVINENYHTEISO
-610$e | <D61$e | Table ('Funktiotermit.tbl')
+610$e | <D61$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 
 #if (RegFind(@610$t, 'Triot') >= 0)
 610$m | <D61$m | TRIOT
@@ -637,7 +648,7 @@ D61 | 610 | S
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
-611$j | 611$j  | Table ('Funktiotermit.tbl')
+611$j | 611$j  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 611$4 | 611$4  | Table ('Tekijanfunktiot.tbl')
 611$? | 611$?  | S
 
@@ -691,7 +702,7 @@ E63 | 630 | S
 700I2 | 700I2  | S
 700$c | <G70$c | FIKTIIVINENHAHMO
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Table ('Funktiotermit.tbl')
+700$e | <G70$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT
@@ -719,7 +730,7 @@ G70 | 700 | S
 710I1 | 710I1  | S
 710I2 | 710I2  | S
 710$c | <H71$c | FIKTIIVINENYHTEISO
-710$e | <H71$e | Table ('Funktiotermit.tbl')
+710$e | <H71$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 
 #if (RegFind(@710$t, 'Triot') >= 0)
 710$m | <H71$m | TRIOT
@@ -746,12 +757,12 @@ H71 | 710 | S
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
-711$j | 711$j  | Table ('Funktiotermit.tbl')
+711$j | 711$j  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 711$? | 711$?  | S
 
 720I1 | 720I1  | S
 720I2 | 720I2  | S
-720$4 | 720$4  | Table ('Tekijanfunktiot.tbl')
+720$4 | 720$4  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 720$? | 720$?  | S
 
 730I1 | 730I1  | S

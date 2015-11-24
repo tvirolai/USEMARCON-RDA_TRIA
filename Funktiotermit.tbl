@@ -1,37 +1,39 @@
 Funktiotermit.tbl -- RDA-funktiotermien avaus, englanninkielisten kääntäminen (X00, X10, X11 $e, $j)
 File generated: Wed Nov 18 12:51:30 2015
 
-a n i m . 	| a n i m a a t t o r i 
-d r a m a t . 	| d r a m a t u r g i 
-e s i t t . 	| e s i t t 0xc3 0xa4 j 0xc3 0xa4 
-g r a a f . 	| g r a a f i k k o 
-j o h t . 	| j o h t a j a 
-k a i v e r t . 	| k a i v e r t a j a 
-k e r t . 	| k e r t o j a 
-k i r j . 	| k i r j o i t t a j a 
-k o k . 	| k o k o a j a 
-k o r e o g r . 	| k o r e o g r a f i 
-k u v . 	| k u v a a j a 
-k u v . & # 1 0 ; i l l . 	| k u v i t t a j a 
-k u v a t a i t . 	| t a i t e i l i j a 
-k 0xc3 0xa4 s i k . 	| k 0xc3 0xa4 s i k i r j o i t t a j a 
-k 0xc3 0xa4 0xc3 0xa4 n t . & # 1 0 ; 0xc3 0xb6 v e r s . 	| k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
-l a v . 	| l a v a s t a j a 
-l e i k k . 	| l e i k k a a j a 
-m i k s . 	| m i k s a a j a 
-n 0xc3 0xa4 y t t . 	| n 0xc3 0xa4 y t t e l i j 0xc3 0xa4 
-o h j . & # 1 0 ; r e g . 	| o h j a a j a 
-o p e t t . 	| o p e t t a j a 
-p i i r t . 	| p i i r t 0xc3 0xa4 j 0xc3 0xa4 
-s a n . 	| s a n o i t t a j a 
-s o v .  | s o v i t t a j a 
-s u u n n . 	| s u u n n i t t e l i j a 
-s 0xc3 0xa4 v .  | s 0xc3 0xa4 v e l t 0xc3 0xa4 j 0xc3 0xa4 
+a n i m 	| a n i m a a t t o r i 
+d r a m a t  	| d r a m a t u r g i 
+e s i t t  	| e s i t t 0xc3 0xa4 j 0xc3 0xa4 
+g r a a f 	| g r a a f i k k o 
+i l l   | k u v i t t a j a 
+j o h t  	| j o h t a j a 
+k a i v e r t  	| k a i v e r t a j a 
+k e r t  	| k e r t o j a 
+k i r j  	| k i r j o i t t a j a 
+k o k  	| k o k o a j a 
+k o r e o g r  	| k o r e o g r a f i 
+k u v  	| k u v a a j a 
+k u v . & # 1 0 ; i l l  	| k u v i t t a j a 
+k u v a t a i t  	| t a i t e i l i j a 
+k 0xc3 0xa4 s i k  	| k 0xc3 0xa4 s i k i r j o i t t a j a 
+k 0xc3 0xa4 0xc3 0xa4 n t 	| k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
+l a v  	| l a v a s t a j a 
+l e i k k  	| l e i k k a a j a 
+m i k s  	| m i k s a a j a 
+n 0xc3 0xa4 y t t 	| n 0xc3 0xa4 y t t e l i j 0xc3 0xa4 
+o h j  	| o h j a a j a 
+o p e t t 	| o p e t t a j a 
+p i i r t  	| p i i r t 0xc3 0xa4 j 0xc3 0xa4 
+s a n  	| s a n o i t t a j a 
+s o v   | s o v i t t a j a 
+s u u n n  	| s u u n n i t t e l i j a 
+s 0xc3 0xa4 v   | s 0xc3 0xa4 v e l t 0xc3 0xa4 j 0xc3 0xa4 
 t a n s s i 	| t a n s s i j a 
-t o i m . & # 1 0 ; r e d . 	| t o i m i t t a j a 
-t u o t t . 	| t u o t t a j a 
-v a l o k . 	| v a l o k u v a a j a 
-0xc3 0xa4 0xc3 0xa4 n i t t . 	| 0xc3 0xa4 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
+t o i m 	| t o i m i t t a j a 
+t u o t t  	| t u o t t a j a 
+v a l o k 	| v a l o k u v a a j a 
+0xc3 0xa4 0xc3 0xa4 n i t t  	| 0xc3 0xa4 0xc3 0xa4 n i t t 0xc3 0xa4 j 0xc3 0xa4 
+0xc3 0xb6 v e r s    | k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
 
 a b r i d g e r   | l y h e n t 0xc3 0xa4 j 0xc3 0xa4 
 a c t o r   | n 0xc3 0xa4 y t t e l i j 0xc3 0xa4 
@@ -151,4 +153,12 @@ w r i t e r 0x20 o f 0x20 a d d e d 0x20 t e x t  | l i s 0xc3 0xa4 t y n 0x20 t
 w r i t e r 0x20 o f 0x20 i n t r o d u c t i o n   | j o h d a n n o n 0x20 k i r j o i t t a j a 
 w r i t e r 0x20 o f 0x20 p r e f a c e   | e s i p u h e e n 0x20 k i r j o i t t a j a 
 w r i t e r 0x20 o f 0x20 s u p p l e m e n t a r y 0x20 t e x t u a l 0x20 c o n t e n t   | o h e i s t e k s t i n 0x20 k i r j o i t t a j a
+
+S | s o p r a a n o
+M z | m e z z o s o p r a a n o
+A | a l t t o
+T | t e n o r i
+B a r | b a r i t o n i
+B | b a s s o
+
 #DEFAULT	| COPY
