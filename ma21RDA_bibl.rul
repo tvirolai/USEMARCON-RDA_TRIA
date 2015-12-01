@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 24.11.2015 / Kansalliskirjasto (TV)
+versio 26.11.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -108,7 +108,7 @@ versio 24.11.2015 / Kansalliskirjasto (TV)
 
 #define macro AIKAMAAREET | RegReplace('^s\\.', 'syntynyt'); \
                             RegReplace('^k\\.', 'kuollut'); \
-                            RegReplace('n\\.', 'noin'); \
+                            RegReplace('^n\\.', 'noin'); \
                             RegReplace('vs\\.', 'vuosisata')
 
 #define macro SIDOSASUT |  RegReplace('\\.', ''); \
@@ -286,11 +286,11 @@ F45 | 245 | S
 260$b | 260$b | S; RegReplace('\\[s.n.\\]', '[kustantaja tuntematon]')
 260$c | 260$c | RegReplace('\\[s.a.\\]', '[julkaisuaika tuntematon]'); \
                 If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0) '[' + RegMatch(0) + ']' \
-                Else S;
+                Else S
 260$? | 260$? | S
 #endif
 
-#if (RegFind(@260$c, 'cop.|©|[Cc]') >= 0) And (RegFind(@260$c, '\\d{4}') >= 0) And (Not Exists(@773))
+#if (RegFind(@260$c, 'cop|©|[Cc]') >= 0) And (RegFind(@260$c, '\\d{4}') >= 0) And (Not Exists(@773))
 260I1 | <X64I1 | ' '
 260I2 | <X64I2 | '4'
 260$c | <X64$c | '©' + RegMatch(0);
@@ -309,6 +309,12 @@ X64I1 | 264I1  | S
 X64I2 | 264I2  | S
 X64$c | 264$c  | If (RegFind(260$c, '\\[') >= 0) '[' + S + ']' Else S
 X64$? | 264$?  | S
+#endif
+
+#if (Exists(@773))
+260I1 | 260I1 | S
+260I2 | 260I2 | S
+260   | 260   | S
 #endif
 
 270I1 | 270I1  | S
