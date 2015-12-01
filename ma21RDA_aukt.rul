@@ -83,19 +83,19 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 100$e | 100$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@100$t, 'Triot') >= 0)
-100$m | 100$m | TRIOT
+100$m | 100$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@100$t, 'Kvartetot') >= 0)
-100$m | 100$m | KVARTETOT
+100$m | 100$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@100$t, 'Kvintetot') >= 0)
-100$m | 100$m | KVINTETOT
+100$m | 100$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@100$t, 'Triot') < 0) And (RegFind(@100$t, 'Kvartetot') < 0) And (RegFind(@100$t, 'Kvintetot') < 0)
-100$m | 100$m | ESITYSKOKOONPANO
+100$m | 100$m | ESITYSKOKOONPANO; ESITYSKOKOONPANO
 #endif
 
 100$o | 100$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
@@ -111,15 +111,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 110$e | 110$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@110$t, 'Triot') >= 0)
-110$m | 110$m | TRIOT
+110$m | 110$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@110$t, 'Kvartetot') >= 0)
-110$m | 110$m | KVARTETOT
+110$m | 110$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@110$t, 'Kvintetot') >= 0)
-110$m | 110$m | KVINTETOT
+110$m | 110$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@110$t, 'Triot') < 0) And (RegFind(@110$t, 'Kvartetot') < 0) And (RegFind(@110$t, 'Kvintetot') < 0)
@@ -139,15 +139,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 130$e | 130$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@130$a, 'Triot') >= 0)
-130$m | 130$m | TRIOT
+130$m | 130$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@130$a, 'Kvartetot') >= 0)
-130$m | 130$m | KVARTETOT
+130$m | 130$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@130$a, 'Kvintetot') >= 0)
-130$m | 130$m | KVINTETOT
+130$m | 130$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@130$a, 'Triot') < 0) And (RegFind(@130$a, 'Kvartetot') < 0) And (RegFind(@130$a, 'Kvintetot') < 0)
@@ -168,15 +168,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 400$e | 400$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@400$t, 'Triot') >= 0)
-400$m | 400$m | TRIOT
+400$m | 400$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@400$t, 'Kvartetot') >= 0)
-400$m | 400$m | KVARTETOT
+400$m | 400$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@400$t, 'Kvintetot') >= 0)
-400$m | 400$m | KVINTETOT
+400$m | 400$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@400$t, 'Triot') < 0) And (RegFind(@400$t, 'Kvartetot') < 0) And (RegFind(@400$t, 'Kvintetot') < 0)
@@ -196,15 +196,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 410$e | 410$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@410$t, 'Triot') >= 0)
-410$m | 410$m | TRIOT
+410$m | 410$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@410$t, 'Kvartetot') >= 0)
-410$m | 410$m | KVARTETOT
+410$m | 410$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@410$t, 'Kvintetot') >= 0)
-410$m | 410$m | KVINTETOT
+410$m | 410$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@410$t, 'Triot') < 0) And (RegFind(@410$t, 'Kvartetot') < 0) And (RegFind(@410$t, 'Kvintetot') < 0)
@@ -224,15 +224,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 430$e | 430$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@430$a, 'Triot') >= 0)
-430$m | 430$m | TRIOT
+430$m | 430$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@430$a, 'Kvartetot') >= 0)
-430$m | 430$m | KVARTETOT
+430$m | 430$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@430$a, 'Kvintetot') >= 0)
-430$m | 430$m | KVINTETOT
+430$m | 430$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@430$a, 'Triot') < 0) And (RegFind(@430$a, 'Kvartetot') < 0) And (RegFind(@430$a, 'Kvintetot') < 0)
@@ -253,15 +253,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 500$e | 500$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@500$t, 'Triot') >= 0)
-500$m | 500$m | TRIOT
+500$m | 500$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@500$t, 'Kvartetot') >= 0)
-500$m | 500$m | KVARTETOT
+500$m | 500$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@500$t, 'Kvintetot') >= 0)
-500$m | 500$m | KVINTETOT
+500$m | 500$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@500$t, 'Triot') < 0) And (RegFind(@500$t, 'Kvartetot') < 0) And (RegFind(@500$t, 'Kvintetot') < 0)
@@ -281,15 +281,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 510$e | 510$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@510$t, 'Triot') >= 0)
-510$m | 510$m | TRIOT
+510$m | 510$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@510$t, 'Kvartetot') >= 0)
-510$m | 510$m | KVARTETOT
+510$m | 510$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@510$t, 'Kvintetot') >= 0)
-510$m | 510$m | KVINTETOT
+510$m | 510$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@510$t, 'Triot') < 0) And (RegFind(@510$t, 'Kvartetot') < 0) And (RegFind(@510$t, 'Kvintetot') < 0)
@@ -309,15 +309,15 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 530$e | 530$e  | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@530$a, 'Triot') >= 0)
-530$m | 530$m | TRIOT
+530$m | 530$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@530$a, 'Kvartetot') >= 0)
-530$m | 530$m | KVARTETOT
+530$m | 530$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@530$a, 'Kvintetot') >= 0)
-530$m | 530$m | KVINTETOT
+530$m | 530$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@530$a, 'Triot') < 0) And (RegFind(@530$a, 'Kvartetot') < 0) And (RegFind(@530$a, 'Kvintetot') < 0)

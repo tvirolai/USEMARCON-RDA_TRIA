@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 26.11.2015 / Kansalliskirjasto (TV)
+versio 1.12.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -184,15 +184,15 @@ versio 26.11.2015 / Kansalliskirjasto (TV)
 130I2 | 130I2  | S
 
 #if (RegFind(@130$a, 'Triot') >= 0)
-130$m | <A30$m | TRIOT
+130$m | <A30$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@130$a, 'Kvartetot') >= 0)
-130$m | <A30$m | KVARTETOT
+130$m | <A30$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@130$a, 'Kvintetot') >= 0)
-130$m | <A30$m | KVINTETOT
+130$m | <A30$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@130$a, 'Triot') < 0) And (RegFind(@130$a, 'Kvartetot') < 0) And (RegFind(@130$a, 'Kvintetot') < 0)
@@ -213,15 +213,15 @@ A30 | 130 | S
 240I2 | 240I2  | S
 
 #if (RegFind(@240$t, 'Triot') >= 0) Or (RegFind(@240$a, 'Triot') >= 0)
-240$m | <F40$m | TRIOT
+240$m | <F40$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@240$t, 'Kvartetot') >= 0) Or (RegFind(@240$a, 'Kvartetot') >= 0)
-240$m | <F40$m | KVARTETOT
+240$m | <F40$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@240$t, 'Kvintetot') >= 0) Or (RegFind(@240$a, 'Kvintetot') >= 0)
-240$m | <F40$m | KVINTETOT
+240$m | <F40$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 // Jos aiemmat säännöt eivät tärpänneet eli väliaikaista kenttää F40$m ei ole luotu
@@ -239,15 +239,15 @@ F40   | 240 | S
 243I2 | 243I2  | S
 
 #if (RegFind(@243$a, 'Triot') >= 0)
-243$m | <B43$m | TRIOT
+243$m | <B43$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@243$a, 'Kvartetot') >= 0)
-243$m | <B43$m | KVARTETOT
+243$m | <B43$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@243$a, 'Kvintetot') >= 0)
-243$m | <B43$m | KVINTETOT
+243$m | <B43$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@243$a, 'Triot') < 0) And (RegFind(@243$a, 'Kvartetot') < 0) And (RegFind(@243$a, 'Kvintetot') < 0)
@@ -345,10 +345,9 @@ X64$? | 264$?  | S
 // NIDE
 
 #if (Not Exists(@338)) \
-  And ( @000/7/ = 'a' Or @000/7/ = 'c' Or (RegFind(@300$a, '[Kk]irja|[Kk]artasto') >= 0) ) \
+  And ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or (RegFind(@300$a, '[Kk]irja|[Kk]artasto') >= 0) ) \
   And (Not Exists(@773)) \
   And (RegFind(@337$a, 'ei välittävää laitetta') >= 0)
-
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'nide'
@@ -501,8 +500,9 @@ X64$? | 264$?  | S
   And If ( \
   (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
   Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
+  Or (RegFind(@538$a, '[I]internet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
   Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
-  Or ( (RegFind(@300$a, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]') >= 0) And (@008/24/ = 'o') ) \
+  Or ( (RegFind(@300$a, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
   ) \
   And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
@@ -514,7 +514,7 @@ X64$? | 264$?  | S
 
 #if (Not Exists(@338)) \
   And If ( (RegFind(000/8/, 's') >= 0) \
-    Or (RegFind(@256$a, '[Vv]erkko') >= 0) \
+    Or (RegFind(@256$a, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
     Or (RegFind(@020$q, '[Pp][Dd][Ff]') >= 0) ) \
   And If (Not Exists(@773)) \
   And If (RegFind(@337$a, 'elektroninen') >= 0) \
@@ -571,11 +571,15 @@ X64$? | 264$?  | S
 
 500I1 | 500I1 | S
 500I2 | 500I2 | S
-500   | 500   | S; RegReplace('et al.', 'ja muita')
+500   | 500   | S; RegReplace('et al\\.', 'ja muita')
+
+502I1 | 502I1 | S
+502I2 | 502I2 | S
+502   | 502   | S; RegReplace('Diss\\.', 'väitöskirja')
 
 510I1 | 510I1 | S
 510I2 | 510I2 | S
-510   | 510   | S; RegReplace('et al.', 'ja muita')
+510   | 510   | S; RegReplace('et al\\.', 'ja muita')
 
 511I1 | 511I1 | S
 511I2 | 511I2 | S
@@ -604,15 +608,15 @@ X64$? | 264$?  | S
 600$e | <C60$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 
 #if (RegFind(@600$t, 'Triot') >= 0)
-600$m | <C60$m | TRIOT
+600$m | <C60$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@600$t, 'Kvartetot') >= 0)
-600$m | <C60$m | KVARTETOT
+600$m | <C60$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@600$t, 'Kvintetot') >= 0)
-600$m | <C60$m | KVINTETOT
+600$m | <C60$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@600$t, 'Triot') < 0) And (RegFind(@600$t, 'Kvartetot') <0) And (RegFind(@600$t, 'Kvintetot') < 0)
@@ -632,15 +636,15 @@ C60 | 600 | S
 610$e | <D61$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 
 #if (RegFind(@610$t, 'Triot') >= 0)
-610$m | <D61$m | TRIOT
+610$m | <D61$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@610$t, 'Kvartetot') >= 0)
-610$m | <D61$m | KVARTETOT
+610$m | <D61$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@610$t, 'Kvintetot') >= 0)
-610$m | <D61$m | KVINTETOT
+610$m | <D61$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@610$t, 'Triot') < 0) And (RegFind(@610$t, 'Kvartetot') < 0) And (RegFind(@610$t, 'Kvintetot') < 0)
@@ -664,15 +668,15 @@ D61 | 610 | S
 630I2 | 630I2  | S
 
 #if (RegFind(@630$a, 'Triot') >= 0)
-630$m | <E63$m | TRIOT
+630$m | <E63$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@630$a, 'Kvartetot') >= 0)
-630$m | <E63$m | KVARTETOT
+630$m | <E63$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@630$a, 'Kvintetot') >= 0)
-630$m | <E63$m | KVINTETOT
+630$m | <E63$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@630$a, 'Triot') < 0) And (RegFind(@630$a, 'Kvartetot') < 0) And (RegFind(@630$a, 'Kvintetot') < 0)
@@ -713,15 +717,15 @@ E63 | 630 | S
 700$e | <G70$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending); 
 
 #if (RegFind(@700$t, 'Triot') >= 0)
-700$m | <G70$m | TRIOT
+700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@700$t, 'Kvartetot') >= 0)
-700$m | <G70$m | KVARTETOT
+700$m | <G70$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@700$t, 'Kvintetot') >= 0)
-700$m | <G70$m | KVINTETOT
+700$m | <G70$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@700$t, 'Triot') < 0) And (RegFind(@700$t, 'Kvartetot') < 0) And (RegFind(@700$t, 'Kvintetot') < 0)
@@ -741,15 +745,15 @@ G70 | 700 | S
 710$e | <H71$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
 
 #if (RegFind(@710$t, 'Triot') >= 0)
-710$m | <H71$m | TRIOT
+710$m | <H71$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@710$t, 'Kvartetot') >= 0)
-710$m | <H71$m | KVARTETOT
+710$m | <H71$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@710$t, 'Kvintetot') >= 0)
-710$m | <H71$m | KVINTETOT
+710$m | <H71$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@710$t, 'Triot') < 0) And (RegFind(@710$t, 'Kvartetot') < 0) And (RegFind(@710$t, 'Kvintetot') < 0)
@@ -777,15 +781,15 @@ H71 | 710 | S
 730I2 | 730I2  | S
 
 #if (RegFind(@730$a, 'Triot') >= 0)
-730$m | <J73$m | TRIOT
+730$m | <J73$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@730$a, 'Kvartetot') >= 0)
-730$m | <J73$m | KVARTETOT
+730$m | <J73$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@730$a, 'Kvintetot') >= 0)
-730$m | <J73$m | KVINTETOT
+730$m | <J73$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@730$a, 'Triot') < 0) And (RegFind(@730$a, 'Kvartetot') < 0) And (RegFind(@730$a, 'Kvintetot') < 0)
@@ -819,15 +823,15 @@ J73 | 730 | S
 800$d | <K80$d | AIKAMAAREET
 
 #if (RegFind(@800$t, 'Triot') >= 0)
-800$m | <K80$m | TRIOT
+800$m | <K80$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@800$t, 'Kvartetot') >= 0)
-800$m | <K80$m | KVARTETOT
+800$m | <K80$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@800$t, 'Kvintetot') >= 0)
-800$m | <K80$m | KVINTETOT
+800$m | <K80$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if Not Exists(@800$t) Or ((RegFind(@800$t, 'Triot') >= 0) And (RegFind(@800$t, 'Kvartetot') >= 0) And (RegFind(@800$t, 'Kvintetot') >= 0))
@@ -845,15 +849,15 @@ K80 | 800 | S
 810I2 | 810I2  | S
 
 #if (RegFind(@810$t, 'Triot') >= 0)
-810$m | <L81$m | TRIOT
+810$m | <L81$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@810$t, 'Kvartetot') >= 0)
-810$m | <L81$m | KVARTETOT
+810$m | <L81$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@810$t, 'Kvintetot') >= 0)
-810$m | <L81$m | KVINTETOT
+810$m | <L81$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if Not Exists(@810$t) Or ((RegFind(@810$t, 'Triot') >= 0) And (RegFind(@810$t, 'Kvartetot') >= 0) And (RegFind(@810$t, 'Kvintetot') >= 0))
@@ -876,15 +880,15 @@ L81 | 810 | S
 830I2 | 830I2  | S
 
 #if (RegFind(@830$a, 'Triot') >= 0)
-830$m | <M83$m | TRIOT
+830$m | <M83$m | TRIOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@830$a, 'Kvartetot') >= 0)
-830$m | <M83$m | KVARTETOT
+830$m | <M83$m | KVARTETOT; ESITYSKOKOONPANO
 #endif
 
 #if (RegFind(@830$a, 'Kvintetot') >= 0)
-830$m | <M83$m | KVINTETOT
+830$m | <M83$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
 #if Not Exists(@830$a) Or ((RegFind(@830$a, 'Triot') >= 0) And (RegFind(@830$a, 'Kvartetot') >= 0) And (RegFind(@830$a, 'Kvintetot') >= 0))
