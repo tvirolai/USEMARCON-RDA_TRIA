@@ -10,19 +10,19 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
                                  RegReplace('kamariork.', 'orkesteri'); \
                                  RegReplace('puhallinork.', 'puhallinorkesteri'); \
                                  RegReplace('(S) (\\(\\d+)', 'sopraanot \\2'); \
-                                 RegReplace('(S)([^A-Za-zÄÖÅäöå]|\$)', 'sopraano\\2', 'g'); \
+                                 RegReplace('(S)([^A-Za-zÄÖÅäöå]|\$|,)', 'sopraano\\2', 'g'); \
                                  RegReplace('(Mz) (\\(\\d+)', 'mezzosopraanot \\2'); \
-                                 RegReplace('(Mz)([^A-Za-zÄÖÅäöå]|\$)', 'mezzosopraano\\2', 'g'); \
+                                 RegReplace('(Mz)([^A-Za-zÄÖÅäöå]|\$|,)', 'mezzosopraano\\2', 'g'); \
                                  RegReplace('(A) (\\(\\d+)', 'altot \\2'); \
-                                 RegReplace('(A)([^A-Za-zÄÖÅäöå]|\$)', 'altto\\2', 'g'); \
+                                 RegReplace('(A)([^A-Za-zÄÖÅäöå]|\$|,)', 'altto\\2', 'g'); \
                                  RegReplace('(Kt) (\\(\\d+)', 'kontratenorit \\2'); \
-                                 RegReplace('(Kt)([^A-Za-zÄÖÅäöå]|\$)', 'kontratenori\\2', 'g'); \
+                                 RegReplace('(Kt)([^A-Za-zÄÖÅäöå]|\$|,)', 'kontratenori\\2', 'g'); \
                                  RegReplace('(T) (\\(\\d+)', 'tenorit \\2'); \
-                                 RegReplace('(T)([^A-Za-zÄÖÅäöå]|\$)', 'tenori\\2', 'g'); \
+                                 RegReplace('(T)([^A-Za-zÄÖÅäöå]|\$|,)', 'tenori\\2', 'g'); \
                                  RegReplace('(Bar) (\\(\\d+)', 'baritonit \\2'); \
-                                 RegReplace('(Bar)([^A-Za-zÄÖÅäöå]|\$)', 'baritoni\\2', 'g'); \
+                                 RegReplace('(Bar)([^A-Za-zÄÖÅäöå]|\$|,)', 'baritoni\\2', 'g'); \
                                  RegReplace('(B) (\\(\\d+)', 'bassot \\2'); \
-                                 RegReplace('(B)([^A-Za-zÄÖÅäöå]|\$)', 'basso\\2', 'g'); \
+                                 RegReplace('(B)([^A-Za-zÄÖÅäöå]|\$|,)', 'basso\\2', 'g'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('ork\\.', 'orkesteri'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
