@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 1.12.2015 / Kansalliskirjasto (TV)
+versio 2.12.2015 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -264,7 +264,7 @@ B43 | 243 | S
 245I2 | 245I2  | S
 245$a | <F45$a | S
 245$b | <F45$b | S
-245$c | <F45$c | S; RegReplace('\\[et al.\\]', '[ja muita]')
+245$c | <F45$c | S; RegReplace('\\[et al\\.\\]', '[ja muita]')
 245$f | <F45$f | S
 245$g | <F45$g | S
 245$p | <F45$p | S
@@ -282,9 +282,9 @@ F45 | 245 | S
 #if (Not Exists(@773))
 260I1 | 260I1 | S
 260I2 | 260I2 | S
-260$a | 260$a | S; RegReplace('\\[S.l.\\]', '[Kustannuspaikka tuntematon]'); RegReplace('\\[s.l.\\]', '[kustannuspaikka tuntematon]')
-260$b | 260$b | S; RegReplace('\\[s.n.\\]', '[kustantaja tuntematon]')
-260$c | 260$c | RegReplace('\\[s.a.\\]', '[julkaisuaika tuntematon]'); \
+260$a | 260$a | S; RegReplace('\\[S\\.l\\.\\]', '[Kustannuspaikka tuntematon]'); RegReplace('\\[s.l.\\]', '[kustannuspaikka tuntematon]')
+260$b | 260$b | S; RegReplace('\\[s\\.n\\.\\]', '[kustantaja tuntematon]')
+260$c | 260$c | RegReplace('\\[s\\.a\\.\\]', '[julkaisuaika tuntematon]'); \
                 If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0) '[' + RegMatch(0) + ']' \
                 Else S
 260$? | 260$? | S
@@ -550,7 +550,7 @@ X64$? | 264$?  | S
 337$a | 337$a | Table ('337_a.tbl')
 
 #if Not (Exists(@337$b))
-337$a | 337$b | Table ('337_b.tbl')
+337$a | 337$b | If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
 337$a | 337$2 | 'rdamedia'
 #endif
 
