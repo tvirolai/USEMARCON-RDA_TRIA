@@ -120,6 +120,7 @@ versio 2.12.2015 / Kansalliskirjasto (TV)
                            RegReplace('pbk', 'paperback'); \
                            RegReplace('hbk', 'hardback'); \
                            RegReplace('alk\\. paper', 'alkaline paper'); \
+                           RegReplace('electronic bk', 'electronic book'); \
                            RegReplace('(verkkojulk)([^A-Za-z])', 'verkkojulkaisu\\2'); \
                            RegReplace('verkkojulk\$', 'verkkojulkaisu')
                                                
