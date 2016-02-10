@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 3.12.2015 / Kansalliskirjasto (TV)
+versio 10.2.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -8,17 +8,14 @@ versio 3.12.2015 / Kansalliskirjasto (TV)
                       RegReplace('kuv\\.', 'kuvitettu'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
                       RegReplace('1 vol\\.', '1 nide'); \
-                      RegReplace('(\\d*) (min\\.)([^A-Za-z])', '\\1 minuuttia\\3', 'g')
+                      RegReplace('(\\d*) (min\\.)([^A-Za-z])', '\\1 minuuttia\\3', 'g'); \
+                      Delete('.', At Ending)
                       
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
                       RegReplace('mv\\.', 'mustavalkoinen'); \
                       RegReplace('vär\\.', 'värillinen'); \
                       RegReplace('värikuv\\.', 'värikuvitus'); \
-                      RegReplace('([^A-Za-zÄÖÅäöå^])(ääni)([^A-Za-zÄÖÅäöå])', '\\1äänellinen\\3'); \
-                      RegReplace('(^ääni)([^A-Za-zÄÖÅäöå])', 'äänellinen\\2'); \
-                      RegReplace('([^A-Za-zÄÖÅäöå])(ääni\$)', '\\1äänellinen'); \
-                      RegReplace('^ääni\$', 'äänellinen'); \
                       RegReplace('nuott\\.', 'nuotteja'); \
                       RegReplace('^ill\\.', 'illustrated'); \
                       RegReplace('illus\\.', 'illustrated'); \
@@ -38,7 +35,8 @@ versio 3.12.2015 / Kansalliskirjasto (TV)
                       RegReplace('(\\d*) taul\\.', '\\1 taulukkoa'); \
                       RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
                       RegReplace('1 liites\\.', '1 liitesivu'); \
-                      RegReplace('(\\d*) liites\\.', '\\1 liitesivua')
+                      RegReplace('liites\\.', 'liitesivua'); \
+                      Delete('.', At Ending)
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
 
@@ -103,16 +101,15 @@ versio 3.12.2015 / Kansalliskirjasto (TV)
                             RegReplace('^n\\.', 'noin'); \
                             RegReplace('vs\\.', 'vuosisata')
 
-#define macro SIDOSASUT |  RegReplace('\\.', ''); \
-                           RegReplace('sid', 'sidottu'); \
-                           RegReplace('nid', 'nidottu'); \
-                           RegReplace('virh', 'virheellinen'); \
-                           RegReplace('inb', 'inbunden'); \
-                           RegReplace('hft', 'häftad'); \
-                           RegReplace('pbk', 'paperback'); \
-                           RegReplace('hbk', 'hardback'); \
-                           RegReplace('alk\\. paper', 'alkaline paper'); \
-                           RegReplace('electronic bk', 'electronic book'); \
+#define macro SIDOSASUT |  RegReplace('sid\\.', 'sidottu'); \
+                           RegReplace('nid\\.', 'nidottu'); \
+                           RegReplace('virh\\.', 'virheellinen'); \
+                           RegReplace('inb\\.', 'inbunden'); \
+                           RegReplace('hft\\.', 'häftad'); \
+                           RegReplace('pbk\\.', 'paperback'); \
+                           RegReplace('hbk\\.', 'hardback'); \
+                           RegReplace('alk paper', 'alkaline paper'); \
+                           RegReplace('electronic bk\\.', 'electronic book'); \
                            RegReplace('(verkkojulk)([^A-Za-z])', 'verkkojulkaisu\\2'); \
                            RegReplace('verkkojulk\$', 'verkkojulkaisu')
 
@@ -126,12 +123,10 @@ versio 3.12.2015 / Kansalliskirjasto (TV)
 
 015I1 | 015I1 | S
 015I2 | 015I2 | S
-015$q | 015$q | Replace('.,' By ','); \\
+015$? | 015$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
                 Delete('('); \
                 Delete(')'); \
-                Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
-015$? | 015$? | S
 
 020I1 | 020I1 | S
 020I2 | 020I2 | S
@@ -141,7 +136,6 @@ versio 3.12.2015 / Kansalliskirjasto (TV)
 020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
                 Delete('('); \
                 Delete(')'); \
-                Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
 024I1 | 024I1 | S
@@ -157,20 +151,20 @@ versio 3.12.2015 / Kansalliskirjasto (TV)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
 100$e | 100$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
-100$4 | 100$4  | Table ('Tekijanfunktiot.tbl')
+100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Tekijanfunktiot.tbl')
 100$? | 100$?  | S
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
 110$e | 110$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
-110$4 | 110$4  | Table ('Tekijanfunktiot.tbl')
+110$4 | 110$e  | If Not (Exists(@110$e)) Then Table ('Tekijanfunktiot.tbl')
 110$? | 110$?  | S
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
 111$j | 111$j  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
-111$4 | 111$4  | Table ('Tekijanfunktiot.tbl')
+111$4 | 111$j  | If Not (Exists(@111$j)) Then Table ('Tekijanfunktiot.tbl')
 111$? | 111$?  | S
 
 130I1 | 130I1  | S
@@ -314,7 +308,7 @@ X64$? | 264$?  | S
 
 270I1 | 270I1  | S
 270I2 | 270I2  | S
-270$4 | 270$4  | Table ('Tekijanfunktiot.tbl')
+270$4 | 270$4  | S
 270$? | 270$?  | S
 
 300I1 | 300I1 | S
@@ -329,7 +323,7 @@ X64$? | 264$?  | S
 #endif
 
 300$b | 300$b | 300BE
-300$c | 300$c | S
+300$c | 300$c | S; Delete('.', At Ending)
 300$e | 300$e | 300BE
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
@@ -350,7 +344,7 @@ X64$? | 264$?  | S
 336$2 | 336$2 | 'rdacontent'
 #endif
 
-336$8 | 336$8 | S
+//336$8 | 336$8 | S
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
@@ -375,11 +369,11 @@ X64$? | 264$?  | S
 
 // NIDE
 
-#if Not (Exists(@338)) \
-  And ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or \
-      (RegFind(@300$a, '[Kk]irja|[Kk]artasto') >= 0) Or (RegFind(%336$a, 'Kartografinen') >=0) ) \
-  And (Not Exists(@773)) \
-  And (RegFind(@337$a, 'laitetta') >= 0) // I.e. 'ei välittävää laitetta'
+#if (Not Exists(@338)) \
+  And If ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or \
+        (RegFind(@300$a, '[Kk]irja|[Kk]artasto') >= 0) Or (RegFind(%336$a, 'Kartografinen') >=0) ) \
+  And If (Not Exists(@773)) \
+  And If (RegFind(@337, 'laitetta') >= 0)
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'nide'
@@ -542,14 +536,14 @@ X64$? | 264$?  | S
 
 // VERKKOAINEISTO
 
-#if (Not Exists(@338)) \
+#if (Not Exists(@338) And If (RegFind(%338, 'verkkoaineisto') < 0)) \
   And If ( \
   (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
   Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
   Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
   Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
   Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
-  Or ( (RegFind(@300$a, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+  Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
   ) \
   And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
@@ -559,13 +553,12 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-#if (Not Exists(@338)) \
+#if (Not Exists(@338) And If (RegFind(%338, 'verkkoaineisto') < 0)) \
   And If ( (RegFind(000/8/, 's') >= 0) \
-    Or (RegFind(@256$a, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
-    Or (RegFind(@020$q, '[Pp][Dd][Ff]') >= 0) ) \
+    Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
+    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) ) \
   And If (Not Exists(@773)) \
-  And If (RegFind(@337$a, 'elektroninen') >= 0) \
-  And If (RegFind(%338$a, 'verkkoaineisto') < 0)
+  And If (RegFind(@337, 'elektroninen') >= 0) \
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'verkkoaineisto'
@@ -639,7 +632,7 @@ X64$? | 264$?  | S
 
 600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 600$p | <C60$p | If (Not NextSub='p') Then RAAMATTU
-600$4 | <C60$4 | Table ('Tekijanfunktiot.tbl')
+600$4 | <C60$e | If Not (Exists(@600$e)) Then Table ('Tekijanfunktiot.tbl')
 600$? | <C60$? | S
 
 C60 | 600 | S
@@ -667,7 +660,7 @@ C60 | 600 | S
 
 610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 610$p | <D61$p | If (Not NextSub='p') Then RAAMATTU
-610$4 | <C61$4 | Table ('Tekijanfunktiot.tbl')
+610$4 | <C61$e | If Not (Exists(@610$e)) Then Table ('Tekijanfunktiot.tbl')
 610$? | <D61$? | S
 
 D61 | 610 | S
@@ -675,7 +668,7 @@ D61 | 610 | S
 611I1 | 611I1  | S
 611I2 | 611I2  | S
 611$j | 611$j  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
-611$4 | 611$4  | Table ('Tekijanfunktiot.tbl')
+611$4 | 611$j  | If Not (Exists(@611$j)) Then Table ('Tekijanfunktiot.tbl')
 611$? | 611$?  | S
 
 630I1 | 630I1  | S
@@ -699,29 +692,29 @@ D61 | 610 | S
 
 630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 630$p | <E63$p | If (Not NextSub='p') Then RAAMATTU
-630$4 | <E63$4 | Table ('Tekijanfunktiot.tbl')
+630$4 | <E63$e | If Not (Exists(@630$e)) Then Table ('Tekijanfunktiot.tbl')
 630$? | <E63$? | S
 
 E63 | 630 | S
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
-650$4 | 650$4  | Table ('Tekijanfunktiot.tbl')
+650$4 | 650$e  | If Not (Exists(@650$e)) Then Table ('Tekijanfunktiot.tbl')
 650$? | 650$?  | S
 
 651I1 | 651I1  | S
 651I2 | 651I2  | S
-651$4 | 651$4  | Table ('Tekijanfunktiot.tbl')
+651$4 | 651$e  | If Not (Exists(@651$e)) Then Table ('Tekijanfunktiot.tbl')
 651$? | 651$?  | S
 
 654I1 | 654I1  | S
 654I2 | 654I2  | S
-654$4 | 654$4  | Table ('Tekijanfunktiot.tbl')
+654$4 | 654$e  | If Not (Exists(@654$e)) Then Table ('Tekijanfunktiot.tbl')
 654$? | 654$?  | S
 
 662I1 | 662I1  | S
 662I2 | 662I2  | S
-662$4 | 662$4  | Table ('Tekijanfunktiot.tbl')
+662$4 | 662$e  | If Not (Exists(@662$e)) Then Table ('Tekijanfunktiot.tbl')
 662$? | 662$?  | S
 
 700I1 | 700I1  | S
@@ -748,7 +741,7 @@ E63 | 630 | S
 
 700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 700$p | <G70$p | If (Not NextSub='p') Then RAAMATTU
-700$4 | <G70$4 | Table ('Tekijanfunktiot.tbl')
+700$4 | <G70$e | If Not (Exists(@700$e)) Then Table ('Tekijanfunktiot.tbl')
 700$? | <G70$? | S
 
 G70 | 700 | S
@@ -854,7 +847,7 @@ J73 | 730 | S
 
 800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
 800$p | <K80$p | If (Not NextSub='p') Then RAAMATTU
-800$4 | <K80$4 | Table ('Tekijanfunktiot.tbl')
+800$4 | <K80$e | If Not (Exists(@800$e)) Then Table ('Tekijanfunktiot.tbl')
 800$? | <K80$? | S
 
 K80 | 800 | S
@@ -880,14 +873,14 @@ K80 | 800 | S
 
 810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
 810$p | <L81$p | If (Not NextSub='p') Then RAAMATTU
-810$4 | <L81$4 | Table ('Tekijanfunktiot.tbl')
+810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Tekijanfunktiot.tbl')
 810$? | <L81$? | S
 
 L81 | 810 | S
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
-811$4 | 811$4  | Table ('Tekijanfunktiot.tbl')
+811$4 | 811$j  | If Not (Exists(@811$j)) Then Table ('Tekijanfunktiot.tbl')
 811$? | 811$?  | S
 
 830I1 | 830I1  | S
