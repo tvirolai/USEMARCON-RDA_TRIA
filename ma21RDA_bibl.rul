@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 10.2.2016 / Kansalliskirjasto (TV)
+versio 16.2.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -328,15 +328,14 @@ X64$? | 264$?  | S
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
-#if (Exists(@336))
 336I1 | 336I1 | S
 336I2 | 336I2 | S
-336$a | 336$a | Table ('336_a.tbl')
-#endif
+336(ns)$a | 336(n)$a | Delete('.', At Ending); Table ('336_a.tbl')
 
 #if Not (Exists(@336$b))
-336$a | 336$b | If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
-336$a | 336$2 | If (Exists(%336$b)) Then 'rdacontent'
+336(ns)$a | 336(no)$b | Delete('.', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
+336$a | 336(no)$2 | 'rdacontent'
+336   | 336   | Sort('8ab2')
 #endif
 
 #if (Exists(@336$b))
@@ -344,7 +343,7 @@ X64$? | 264$?  | S
 336$2 | 336$2 | 'rdacontent'
 #endif
 
-//336$8 | 336$8 | S
+336$8 | 336$8 | S
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
