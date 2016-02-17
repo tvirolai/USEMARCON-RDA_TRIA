@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 16.2.2016 / Kansalliskirjasto (TV)
+versio 17.2.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -110,8 +110,8 @@ versio 16.2.2016 / Kansalliskirjasto (TV)
                            RegReplace('hbk\\.', 'hardback'); \
                            RegReplace('alk paper', 'alkaline paper'); \
                            RegReplace('electronic bk\\.', 'electronic book'); \
-                           RegReplace('(verkkojulk)([^A-Za-z])', 'verkkojulkaisu\\2'); \
-                           RegReplace('verkkojulk\$', 'verkkojulkaisu')
+                           RegReplace('(verkkojulk)([^A-Za-z])', 'verkkoaineisto\\2'); \
+                           RegReplace('verkkojulk\$', 'verkkoaineisto')
 
 000/1-18/ | 000/1-18/ | S
 000/19/ | 000/19/ | 'i'
@@ -144,6 +144,8 @@ versio 16.2.2016 / Kansalliskirjasto (TV)
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
+
+#if (RegFind(@100$e, 'esittäjä') < 0)
 100I1 | 100I1  | S
 100I2 | 100I2  | S
 100$a | 100$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
@@ -153,13 +155,37 @@ versio 16.2.2016 / Kansalliskirjasto (TV)
 100$e | 100$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
 100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Tekijanfunktiot.tbl')
 100$? | 100$?  | S
+#endif
 
+#if (RegFind(@110$e, 'esittäjä') >= 0)
+100I1 | 700I1  | S
+100I2 | 700I2  | S
+100$a | 700$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
+100$b | 700$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
+100$c | 700$c  | FIKTIIVINENHAHMO
+100$d | 700$d  | AIKAMAAREET
+100$e | 700$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
+100$4 | 700$e  | If Not (Exists(@100$e)) Then Table ('Tekijanfunktiot.tbl')
+100$? | 700$?  | S
+#endif
+
+#if (RegFind(110$e, 'esittäjä') < 0)
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
 110$e | 110$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
 110$4 | 110$e  | If Not (Exists(@110$e)) Then Table ('Tekijanfunktiot.tbl')
 110$? | 110$?  | S
+#endif
+
+#if (RegFind(110$e, 'esittäjä') >= 0)
+110I1 | 710I1  | S
+110I2 | 710I2  | S
+110$c | 710$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
+110$e | 710$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
+110$4 | 710$e  | If Not (Exists(@110$e)) Then Table ('Tekijanfunktiot.tbl')
+110$? | 710$?  | S
+#endif
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
@@ -247,8 +273,16 @@ F40   | 240    | S
 
 B43 | 243 | S
 
+#if (Not Exists(%100)) And (Not Exists(%110))
+245I1 | 245I1  | '0'
+#endif
+
+#if Not (Exists(%245I1))
 245I1 | 245I1  | S
+#endif
+
 245I2 | 245I2  | S
+
 245$a | <F45$a | S
 245$b | <F45$b | S
 245$c | <F45$c | S; RegReplace('\\[et al\\.\\]', '[ja muita]')
@@ -581,7 +615,9 @@ X64$? | 264$?  | S
 
 502I1 | 502I1 | S
 502I2 | 502I2 | S
-502   | 502   | S; RegReplace('Diss\\.', 'Väitöskirja')
+502   | 502   | S; RegReplace('Diss\\.', 'Väitöskirja'); \
+                   RegReplace('Väitösk\\.', 'Väitöskirja'); \
+                   RegReplace('Akad\\. avh.', 'Akademisk avhandling')
 
 510I1 | 510I1 | S
 510I2 | 510I2 | S
@@ -720,7 +756,7 @@ E63 | 630 | S
 700I2 | 700I2  | S
 700$c | <G70$c | FIKTIIVINENHAHMO
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending); 
+700$e | <G70$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
