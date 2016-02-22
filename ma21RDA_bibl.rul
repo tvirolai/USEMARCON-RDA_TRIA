@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 17.2.2016 / Kansalliskirjasto (TV)
+versio 22.2.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -113,9 +113,13 @@ versio 17.2.2016 / Kansalliskirjasto (TV)
                            RegReplace('(verkkojulk)([^A-Za-z])', 'verkkoaineisto\\2'); \
                            RegReplace('verkkojulk\$', 'verkkoaineisto')
 
-000/1-18/ | 000/1-18/ | S
+000/1-9/ | 000/1-9/ | S
+000/10/ | 000/10/ | 'a'
+000/11-12/ | 000/11-12/ | '22'
+000/13-18/ | 000/13-18/ | S
 000/19/ | 000/19/ | 'i'
-000/20-24/ | 000/20-24/ | S
+000/20/ | 000/20/ | S
+000/21-24/ | 000/21-24/ | '4500'
 
 001   | <DEL  | S
 
@@ -144,6 +148,9 @@ versio 17.2.2016 / Kansalliskirjasto (TV)
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
+028(n)I1 | 028(no)I1 | If (S = 'c') Then '8' Else '9'
+028I2 | 028I2  | S
+028   | 028    | S
 
 #if (RegFind(@100$e, 'esittäjä') < 0)
 100I1 | 100I1  | S
@@ -213,10 +220,9 @@ versio 17.2.2016 / Kansalliskirjasto (TV)
 #endif
 
 130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-130$p | <A30$p | If (Not NextSub='p') Then RAAMATTU
 130$? | <A30$? | S
 
-A30 | 130 | S
+A30 | 130 | S; RAAMATTU
 
 222I1 | 222I1 | S
 222I2 | 222I2 | S
@@ -243,10 +249,9 @@ A30 | 130 | S
 #endif
                  
 240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-240$p | <F40$p | If (Not NextSub='p') Then RAAMATTU
 240$? | <F40$? | S
 
-F40   | 240    | S
+F40   | 240    | S; RAAMATTU
 
 243I1 | 243I1  | S
 243I2 | 243I2  | S
@@ -268,10 +273,9 @@ F40   | 240    | S
 #endif
 
 243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-243$p | <B43$p | If (Not NextSub='p') Then RAAMATTU
 243$? | <B43$? | S
 
-B43 | 243 | S
+B43 | 243 | S; RAAMATTU
 
 #if (Not Exists(%100)) And (Not Exists(%110))
 245I1 | 245I1  | '0'
@@ -364,20 +368,19 @@ X64$? | 264$?  | S
 
 336I1 | 336I1 | S
 336I2 | 336I2 | S
-336(ns)$a | 336(n)$a | Delete('.', At Ending); Table ('336_a.tbl')
+336(ns)$a | 336(n)$a | Delete('.', At Ending); Delete(';', At Ending); Table ('336_a.tbl')
+336$8 | 336$8 | S
 
 #if Not (Exists(@336$b))
-336(ns)$a | 336(no)$b | Delete('.', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
+336(ns)$a | 336(no)$b | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
 336$a | 336(no)$2 | 'rdacontent'
 336   | 336   | Sort('8ab2')
 #endif
 
 #if (Exists(@336$b))
 336$b | 336$b | S
-336$2 | 336$2 | 'rdacontent'
+336$a | 336(no)$2 | 'rdacontent'
 #endif
-
-336$8 | 336$8 | S
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
@@ -605,7 +608,8 @@ X64$? | 264$?  | S
 338I1 | 338I1 | S
 338I2 | 338I2 | S
 338$a | 338$a | Table ('338_a.tbl')
-338$a | 338$b | Table ('338_b.tbl')
+338$a | 338$b | If (InTable(S, '338_b.tbl')) Then Table ('338_b.tbl')
+338$b | 338$b | If (Not Exists(%338$b)) Then S
 338$2 | 338$2 | 'rdacarrier'
 #endif
 
@@ -666,11 +670,10 @@ X64$? | 264$?  | S
 #endif
 
 600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-600$p | <C60$p | If (Not NextSub='p') Then RAAMATTU
 600$4 | <C60$e | If Not (Exists(@600$e)) Then Table ('Tekijanfunktiot.tbl')
 600$? | <C60$? | S
 
-C60 | 600 | S
+C60 | 600 | S; RAAMATTU
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -694,11 +697,10 @@ C60 | 600 | S
 #endif
 
 610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-610$p | <D61$p | If (Not NextSub='p') Then RAAMATTU
 610$4 | <C61$e | If Not (Exists(@610$e)) Then Table ('Tekijanfunktiot.tbl')
 610$? | <D61$? | S
 
-D61 | 610 | S
+D61 | 610 | S; RAAMATTU
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
@@ -726,11 +728,10 @@ D61 | 610 | S
 #endif
 
 630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-630$p | <E63$p | If (Not NextSub='p') Then RAAMATTU
 630$4 | <E63$e | If Not (Exists(@630$e)) Then Table ('Tekijanfunktiot.tbl')
 630$? | <E63$? | S
 
-E63 | 630 | S
+E63 | 630 | S; RAAMATTU
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
@@ -775,11 +776,10 @@ E63 | 630 | S
 #endif
 
 700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-700$p | <G70$p | If (Not NextSub='p') Then RAAMATTU
 700$4 | <G70$e | If Not (Exists(@700$e)) Then Table ('Tekijanfunktiot.tbl')
 700$? | <G70$? | S
 
-G70 | 700 | S
+G70 | 700 | S; RAAMATTU
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
@@ -803,11 +803,10 @@ G70 | 700 | S
 #endif
 
 710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-710$p | <H71$p | If (Not NextSub='p') Then RAAMATTU
 710$4 | <H71$4 | Table ('Tekijanfunktiot.tbl')
 710$? | <H71$? | S
 
-H71 | 710 | S
+H71 | 710 | S; RAAMATTU
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
@@ -839,10 +838,9 @@ H71 | 710 | S
 #endif
 
 730$o | <J73$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-730$p | <J73$p | If (Not NextSub='p') Then RAAMATTU
 730$? | <J73$? | S
 
-J73 | 730 | S
+J73 | 730 | S; RAAMATTU
 
 76?I1 | 76?I1 | S
 76?I2 | 76?I2 | S
@@ -876,16 +874,15 @@ J73 | 730 | S
 800$m | <K80$m | KVINTETOT; ESITYSKOKOONPANO
 #endif
 
-#if Not Exists(@800$t) Or ((RegFind(@800$t, 'Triot') >= 0) And (RegFind(@800$t, 'Kvartetot') >= 0) And (RegFind(@800$t, 'Kvintetot') >= 0))
+#if ((RegFind(@800$t, 'Triot') < 0) And (RegFind(@800$t, 'Kvartetot') < 0) And (RegFind(@800$t, 'Kvintetot') < 0))
 800$m | <K80$m | ESITYSKOKOONPANO
 #endif
 
 800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-800$p | <K80$p | If (Not NextSub='p') Then RAAMATTU
 800$4 | <K80$e | If Not (Exists(@800$e)) Then Table ('Tekijanfunktiot.tbl')
 800$? | <K80$? | S
 
-K80 | 800 | S
+K80 | 800 | S; RAAMATTU
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
@@ -907,11 +904,10 @@ K80 | 800 | S
 #endif
 
 810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-810$p | <L81$p | If (Not NextSub='p') Then RAAMATTU
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Tekijanfunktiot.tbl')
 810$? | <L81$? | S
 
-L81 | 810 | S
+L81 | 810 | S; RAAMATTU
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
@@ -938,10 +934,9 @@ L81 | 810 | S
 #endif
 
 830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-830$p | <M83$p | If (Not NextSub='p') Then RAAMATTU
 830$? | <M83$? | S
 
-M83 | 830 | S
+M83 | 830 | S; RAAMATTU
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S
