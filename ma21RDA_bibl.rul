@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 22.2.2016 / Kansalliskirjasto (TV)
+versio 23.2.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -23,6 +23,7 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
                       RegReplace('incl\\.', 'includes'); \
                       RegReplace('tab\\.', 'tables'); \
                       RegReplace('fold\\. maps', 'folded maps'); \
+                      RegReplace('(^|[^A-Za-z])s(\$|[^A-Za-z])', '\\1sivua'); \
                       RegReplace('(\\d*) (S\\.)', '\\1 sivua'); \
                       RegReplace('(\\d*) irtol\\.', '\\1 irtolehteä'); \
                       RegReplace('(\\d*) kuvas\\.', '\\1 kuvasivua'); \
@@ -43,9 +44,10 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
 #define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('jousiork.', 'jousiorkesteri'); \
-                                 RegReplace('kamariork.', 'orkesteri'); \
-                                 RegReplace('puhallinork.', 'puhallinorkesteri'); \
+                                 RegReplace('jousiork\\.', 'jousiorkesteri'); \
+                                 RegReplace('kamariork\\.', 'orkesteri'); \
+                                 RegReplace('puhallinork\\.', 'puhallinorkesteri'); \
+                                 RegReplace('(^|[^A-Za-z])ork(\$|[^A-Za-z])', '\\1orkesteri'); \
                                  RegReplace('(S) (\\(\\d+)', 'sopraanot \\2'); \
                                  RegReplace('(S)([^A-Za-zÄÖÅäöå]|\$|,)', 'sopraano\\2', 'g'); \
                                  RegReplace('(Mz) (\\(\\d+)', 'mezzosopraanot \\2'); \
@@ -61,7 +63,6 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
                                  RegReplace('(B) (\\(\\d+)', 'bassot \\2'); \
                                  RegReplace('(B)([^A-Za-zÄÖÅäöå]|\$|,)', 'basso\\2', 'g'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
-                                 RegReplace('ork\\.', 'orkesteri'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
@@ -69,11 +70,11 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
                                  If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') <0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
                                  If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
-#define macro PAINOSMERKINTO   | RegReplace('rev\\.', 'revised'); \
-                                 RegReplace('ed\\.', 'edition'); \
-                                 RegReplace('Aufl\\.', 'Auflage'); \
+#define macro PAINOSMERKINTO   | RegReplace('(^|[^A-Za-z])rev(\$|[^A-Za-z])', '\\1revised'); \
+                                 RegReplace('(^|[^A-Za-z])ed(\$|[^A-Za-z])', '\\1edition'); \
+                                 RegReplace('(^|[^A-Za-z])Aufl(\$|[^A-Za-z])', '\\1Auflage'); \
                                  RegReplace('neubearb\\.', 'neubearbeite'); \
-                                 RegReplace('uppl\\.', 'upplaga')
+                                 RegReplace('(^|[^A-Za-z])uppl(\$|[^A-Za-z])', '\\1upplaga')
                                 
 #define macro TRIOT            | RegReplace('^piano, jouset', 'piano, viulu, sello'); \
                                  RegReplace('^jouset', 'viulu, alttoviulu, sello')
@@ -101,17 +102,17 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
                             RegReplace('^n\\.', 'noin'); \
                             RegReplace('vs\\.', 'vuosisata')
 
-#define macro SIDOSASUT |  RegReplace('sid\\.', 'sidottu'); \
-                           RegReplace('nid\\.', 'nidottu'); \
-                           RegReplace('virh\\.', 'virheellinen'); \
-                           RegReplace('inb\\.', 'inbunden'); \
-                           RegReplace('hft\\.', 'häftad'); \
-                           RegReplace('pbk\\.', 'paperback'); \
-                           RegReplace('hbk\\.', 'hardback'); \
+#define macro SIDOSASUT |  RegReplace('(^|[^A-Za-z])sid(\$|[^A-Za-z])', 'sidottu'); \
+                           RegReplace('(^|[^A-Za-z])nid(\$|[^A-Za-z])', 'nidottu'); \
+                           RegReplace('(^|[^A-Za-z])virh(\$|[^A-Za-z])', 'virheellinen'); \
+                           RegReplace('(^|[^A-Za-z])inb(\$|[^A-Za-z])', 'inbunden'); \
+                           RegReplace('(^|[^A-Za-z])hft(\$|[^A-Za-z])', 'häftad'); \
+                           RegReplace('(^|[^A-Za-z])pbk(\$|[^A-Za-z])', 'paperback'); \
+                           RegReplace('(^|[^A-Za-z])hbk(\$|[^A-Za-z])', 'hardback'); \
                            RegReplace('alk paper', 'alkaline paper'); \
+                           RegReplace('alk\\. paper', 'alkaline paper'); \
                            RegReplace('electronic bk\\.', 'electronic book'); \
-                           RegReplace('(verkkojulk)([^A-Za-z])', 'verkkoaineisto\\2'); \
-                           RegReplace('verkkojulk\$', 'verkkoaineisto')
+                           RegReplace('(^|[^A-Za-z])verkkojulk(\$|[^A-Za-z])', 'verkkoaineisto')
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
@@ -140,6 +141,8 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
 020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
                 Delete('('); \
                 Delete(')'); \
+                Delete(';'); \
+                Delete(':'); \
                 SIDOSASUT
 
 024I1 | 024I1 | S
@@ -148,7 +151,7 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
-028(n)I1 | 028(no)I1 | If (S = 'c') Then '8' Else '9'
+028I1 | 028I1  | S
 028I2 | 028I2  | S
 028   | 028    | S
 
@@ -159,7 +162,7 @@ versio 22.2.2016 / Kansalliskirjasto (TV)
 100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
-100$e | 100$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
+100$e | 100$e  | Table ('Funktiotermit.tbl')
 100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Tekijanfunktiot.tbl')
 100$? | 100$?  | S
 #endif
