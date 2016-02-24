@@ -38,6 +38,7 @@ versio 24.2.2016 / Kansalliskirjasto (TV)
                       RegReplace('liitel\\.', 'liiteluettelo'); \
                       RegReplace('(\\d*) taul\\.', '\\1 taulukkoa'); \
                       RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
+                      RegReplace('\\] kuvas\\.', ' kuvasivua'); \
                       RegReplace('1 liites\\.', '1 liitesivu'); \
                       RegReplace('liites\\.', 'liitesivua')
 
@@ -292,9 +293,10 @@ F45 | 245 | S
 #if (Not Exists(@773))
 260I1 | 260I1 | S
 260I2 | 260I2 | S
-260$a | 260$a | S; RegReplace('\\[S\\.l\\.\\]', '[Kustannuspaikka tuntematon]'); \
+260$a | 260$a | S; RegReplace('S\\.l\\.', 'Kustannuspaikka tuntematon'); \
                    RegReplace('\\[s\\.l\\.\\]', '[kustannuspaikka tuntematon]'); \
-                   RegReplace('\\[[Ss]\\. l\\.\\]', '[kustannuspaikka tuntematon]')
+                   RegReplace('\\[[Ss]\\. l\\.\\]', '[kustannuspaikka tuntematon]'); \
+                   RegReplace('s\\.n\\.', 'kustantaja tuntematon')
 260$b | 260$b | S; RegReplace('\\[s\\.n\\.\\]', '[kustantaja tuntematon]')
 260$c | 260$c | RegReplace('\\[s\\.a\\.\\]', '[julkaisuaika tuntematon]'); \
                 If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0) '[' + RegMatch(0) + ']' \
