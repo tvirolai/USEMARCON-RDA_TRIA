@@ -21,7 +21,7 @@ versio 24.2.2016 / Kansalliskirjasto (TV)
                       RegReplace('nuott\\.', 'nuotteja'); \
                       RegReplace('^ill\\.', 'illustrated'); \
                       RegReplace('illus\\.', 'illustrated'); \
-                      RegReplace('kuval\\.', 'kuvalehtiä'); \
+                      RegReplace('kuval\\.', 'kuvalehteä'); \
                       RegReplace('diagrs\\.', 'diagrams'); \
                       RegReplace('incl\\.', 'includes'); \
                       RegReplace('tab\\.', 'tables'); \
