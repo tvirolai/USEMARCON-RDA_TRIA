@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 23.2.2016 / Kansalliskirjasto (TV)
+versio 24.2.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -65,16 +65,33 @@ versio 23.2.2016 / Kansalliskirjasto (TV)
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
-                                 If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') <0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
-                                 If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') <0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
-                                 If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') <0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
-                                 If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') <0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
+                                 If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') < 0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
+                                 If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') < 0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
+                                 If (RegFind(S, 'sovitettu, puupuhallinkvartetti') >= 0) Or (RegFind(S, ', puupuhallinkvartetti') < 0) RegReplace('puupuhallinkvartetti', 'huilu, oboe, klarinetti, fagotti'); \
+                                 If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') < 0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
-#define macro PAINOSMERKINTO   | RegReplace('(^|[^A-Za-z])rev(\$|[^A-Za-z])', '\\1revised'); \
+#define macro PAINOSMERKINTO   | RegReplace('lis\\. p\\.', 'lisätty painos'); \
+                                 RegReplace('[Nn]äköisp\\.', 'näköispainos'); \
+                                 RegReplace('[Rr]epr\\.', 'reprint'); \
+                                 RegReplace('förb\\.', 'förbättrade'); \
+                                 RegReplace('erw\\.', 'erweiterte'); \
+                                 RegReplace('rev\\. a\\. corr\\.', 'revised and corrected'); \
+                                 RegReplace('(^|[^A-Za-z])rev(\$|[^A-Za-z])', '\\1revised'); \
                                  RegReplace('(^|[^A-Za-z])ed(\$|[^A-Za-z])', '\\1edition'); \
                                  RegReplace('(^|[^A-Za-z])Aufl(\$|[^A-Za-z])', '\\1Auflage'); \
                                  RegReplace('neubearb\\.', 'neubearbeite'); \
-                                 RegReplace('(^|[^A-Za-z])uppl(\$|[^A-Za-z])', '\\1upplaga')
+                                 RegReplace('parann\\.', 'parannettu'); \
+                                 RegReplace('laaj\\.', 'laajennettu'); \
+                                 RegReplace('utök\\.', 'utökade'); \
+                                 RegReplace('(^|[^A-Za-z])uppl(\$|[^A-Za-z])', '\\1upplaga'); \
+                                 RegReplace('(^|[^A-Za-z])täyd\\.(\$|[^A-Za-z])', '\\1täydennetty\\2'); \
+                                 RegReplace('(^|[^A-Za-z])tark\\.(\$|[^A-Za-z])', '\\1tarkistettu\\2'); \
+                                 RegReplace('(^|[^A-Za-z])[Üü]berarb\\.(\$|[^A-Za-z])', '\\1überarbeitete\\2'); \
+                                 RegReplace('(^|[^A-Za-z])oförandr\\.(\$|[^A-Za-z])', '\\1oförandrade\\2'); \
+                                 RegReplace('(^|[^A-Za-z])uud\\.(\$|[^A-Za-z])', '\\1uudistettu\\2'); \
+                                 RegReplace('(^|[^A-Za-z])korj\\.(\$|[^A-Za-z])', '\\1korjattu\\2'); \
+                                 RegReplace('(^|[^A-Za-z])p\\.(\$|[^A-Za-z])', '\\1painos')
+
                                 
 #define macro TRIOT            | RegReplace('^piano, jouset', 'piano, viulu, sello'); \
                                  RegReplace('^jouset', 'viulu, alttoviulu, sello')
@@ -155,7 +172,6 @@ versio 23.2.2016 / Kansalliskirjasto (TV)
 028I2 | 028I2  | S
 028   | 028    | S
 
-#if (RegFind(@100$e, 'esittäjä') < 0)
 100I1 | 100I1  | S
 100I2 | 100I2  | S
 100$a | 100$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
@@ -165,37 +181,13 @@ versio 23.2.2016 / Kansalliskirjasto (TV)
 100$e | 100$e  | Table ('Funktiotermit.tbl')
 100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Tekijanfunktiot.tbl')
 100$? | 100$?  | S
-#endif
 
-#if (RegFind(@110$e, 'esittäjä') >= 0)
-100I1 | 700I1  | S
-100I2 | 700I2  | S
-100$a | 700$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$b | 700$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$c | 700$c  | FIKTIIVINENHAHMO
-100$d | 700$d  | AIKAMAAREET
-100$e | 700$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
-100$4 | 700$e  | If Not (Exists(@100$e)) Then Table ('Tekijanfunktiot.tbl')
-100$? | 700$?  | S
-#endif
-
-#if (RegFind(110$e, 'esittäjä') < 0)
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
 110$e | 110$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
 110$4 | 110$e  | If Not (Exists(@110$e)) Then Table ('Tekijanfunktiot.tbl')
 110$? | 110$?  | S
-#endif
-
-#if (RegFind(110$e, 'esittäjä') >= 0)
-110I1 | 710I1  | S
-110I2 | 710I2  | S
-110$c | 710$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
-110$e | 710$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
-110$4 | 710$e  | If Not (Exists(@110$e)) Then Table ('Tekijanfunktiot.tbl')
-110$? | 710$?  | S
-#endif
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
@@ -229,7 +221,7 @@ A30 | 130 | S; RAAMATTU
 
 222I1 | 222I1 | S
 222I2 | 222I2 | S
-222   | 222   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+222   | 222   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
 
 240I1 | 240I1  | S
 240I2 | 240I2  | S
@@ -847,17 +839,17 @@ J73 | 730 | S; RAAMATTU
 
 76?I1 | 76?I1 | S
 76?I2 | 76?I2 | S
-76?$c | 76?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+76?$c | 76?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
 76?   | 76?   | S
 
 77?I1 | 77?I1 | S
 77?I2 | 77?I2 | S
-77?$c | 77?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+77?$c | 77?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
 77?   | 77?   | S
 
 78?I1 | 78?I1 | S
 78?I2 | 78?I2 | S
-78?$c | 78?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto')
+78?$c | 78?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
 78?   | 78?   | S
 
 800I1 | 800I1  | S
