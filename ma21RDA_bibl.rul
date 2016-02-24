@@ -3,13 +3,15 @@ versio 24.2.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
-#define macro 300AE | RegReplace('^n\\.', 'noin'); \
+#define macro 300AE | RegReplace('(^|[^A-Za-z])n\\.(\$|[^A-Za-z])', '\\1noin\\2'); \
                       RegReplace('ss\\.', 'sivut'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
+                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
                       RegReplace('1 vol\\.', '1 nide'); \
-                      RegReplace('(\\d*) (min\\.)([^A-Za-z])', '\\1 minuuttia\\3', 'g'); \
-                      Delete('.', At Ending)
+                      RegReplace('(^|[^\\d])1 h\\.(\\s+\\d*\\s+)min\\.', '\\11 hour\\2minutes'); \
+                      RegReplace('(\\d*\\s+)h\\.(\\s+\\d*\\s+)min\\.', '\\1hours\\2minutes'); \
+                      RegReplace('(\\d*\\s+)min\\.(\\s+\\d*\\s+)s', '\\1minuuttia\\2sekuntia')
                       
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
@@ -19,14 +21,15 @@ versio 24.2.2016 / Kansalliskirjasto (TV)
                       RegReplace('nuott\\.', 'nuotteja'); \
                       RegReplace('^ill\\.', 'illustrated'); \
                       RegReplace('illus\\.', 'illustrated'); \
+                      RegReplace('kuval\\.', 'kuvalehtiä'); \
                       RegReplace('diagrs\\.', 'diagrams'); \
                       RegReplace('incl\\.', 'includes'); \
                       RegReplace('tab\\.', 'tables'); \
                       RegReplace('fold\\. maps', 'folded maps'); \
-                      RegReplace('(^|[^A-Za-z])s(\$|[^A-Za-z])', '\\1sivua'); \
+                      RegReplace('(^|[^A-Za-z])s\\.(\$|[^A-Za-z])', '\\1sivua\\2'); \
                       RegReplace('(\\d*) (S\\.)', '\\1 sivua'); \
                       RegReplace('(\\d*) irtol\\.', '\\1 irtolehteä'); \
-                      RegReplace('(\\d*) kuvas\\.', '\\1 kuvasivua'); \
+                      RegReplace('(^|[^A-Za-z])kuvas\\.(\$|[^A-Za-z])', '\\1kuvasivua\\2'); \
                       RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja'); \
                       RegReplace('^taul\\.', 'taulukkoja'); \
                       RegReplace('hakem\\.', 'hakemisto'); \
@@ -36,8 +39,7 @@ versio 24.2.2016 / Kansalliskirjasto (TV)
                       RegReplace('(\\d*) taul\\.', '\\1 taulukkoa'); \
                       RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
                       RegReplace('1 liites\\.', '1 liitesivu'); \
-                      RegReplace('liites\\.', 'liitesivua'); \
-                      Delete('.', At Ending)
+                      RegReplace('liites\\.', 'liitesivua')
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
 
@@ -48,20 +50,6 @@ versio 24.2.2016 / Kansalliskirjasto (TV)
                                  RegReplace('kamariork\\.', 'orkesteri'); \
                                  RegReplace('puhallinork\\.', 'puhallinorkesteri'); \
                                  RegReplace('(^|[^A-Za-z])ork(\$|[^A-Za-z])', '\\1orkesteri'); \
-                                 RegReplace('(S) (\\(\\d+)', 'sopraanot \\2'); \
-                                 RegReplace('(S)([^A-Za-zÄÖÅäöå]|\$|,)', 'sopraano\\2', 'g'); \
-                                 RegReplace('(Mz) (\\(\\d+)', 'mezzosopraanot \\2'); \
-                                 RegReplace('(Mz)([^A-Za-zÄÖÅäöå]|\$|,)', 'mezzosopraano\\2', 'g'); \
-                                 RegReplace('(A) (\\(\\d+)', 'altot \\2'); \
-                                 RegReplace('(A)([^A-Za-zÄÖÅäöå]|\$|,)', 'altto\\2', 'g'); \
-                                 RegReplace('(Kt) (\\(\\d+)', 'kontratenorit \\2'); \
-                                 RegReplace('(Kt)([^A-Za-zÄÖÅäöå]|\$|,)', 'kontratenori\\2', 'g'); \
-                                 RegReplace('(T) (\\(\\d+)', 'tenorit \\2'); \
-                                 RegReplace('(T)([^A-Za-zÄÖÅäöå]|\$|,)', 'tenori\\2', 'g'); \
-                                 RegReplace('(Bar) (\\(\\d+)', 'baritonit \\2'); \
-                                 RegReplace('(Bar)([^A-Za-zÄÖÅäöå]|\$|,)', 'baritoni\\2', 'g'); \
-                                 RegReplace('(B) (\\(\\d+)', 'bassot \\2'); \
-                                 RegReplace('(B)([^A-Za-zÄÖÅäöå]|\$|,)', 'basso\\2', 'g'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
@@ -71,6 +59,8 @@ versio 24.2.2016 / Kansalliskirjasto (TV)
                                  If (RegFind(S, 'sovitettu, puhallinkvintetti') >= 0) Or (RegFind(S, ', puhallinkvintetti') < 0) RegReplace('puhallinkvintetti', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
 #define macro PAINOSMERKINTO   | RegReplace('lis\\. p\\.', 'lisätty painos'); \
+                                 RegReplace('lisäp\\.', 'lisäpainos'); \
+                                 RegReplace('lis\\. laitos\\.', 'lisätty laitos'); \
                                  RegReplace('[Nn]äköisp\\.', 'näköispainos'); \
                                  RegReplace('[Rr]epr\\.', 'reprint'); \
                                  RegReplace('förb\\.', 'förbättrade'); \
