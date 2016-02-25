@@ -404,62 +404,14 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-#if Not (Exists(%338)) \
-  And Not (Exists(@773)) \
+#if (Not Exists(%338)) \
+  And (Not Exists(@773)) \
   And (RegFind(%336$a, 'Teksti') >= 0) \
   And (RegFind(%337$a, 'laitetta') >= 0)
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'nide'
 000 | 338(newest)$b | 'nc'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// ÄÄNILEVY
-
-#if (Not Exists(@338)) \
-  And ( (RegFind(@300, '[Cc][Dd]-levy|äänilevy|[Cc][Dd]-skiv') >= 0) ) \
-  And (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'äänilevy'
-000 | 338(newest)$b | 'sd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// ÄÄNIKASETTI
-
-#if (Not Exists(@338)) \
-  And If ( \
-  (RegFind(@300$a, '[Cc]-kas') >= 0) \
-  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
-  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
-  ) \
-  And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'äänikasetti'
-000 | 338(newest)$b | 'ss'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// TIETOLEVY
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'tietolevy'
-000 | 338(newest)$b | 'cd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// VIDEOLEVY
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy'') >= 0) And If (Not Exists(@773))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'videolevy'
-000 | 338(newest)$b | 'vd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
@@ -586,6 +538,54 @@ X64$? | 264$?  | S
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'verkkoaineisto'
 000 | 338(newest)$b | 'cr'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// ÄÄNILEVY
+
+#if (Not Exists(@338)) \
+  And ( (RegFind(@300, '[Cc][Dd]-levy|äänilevy|[Cc][Dd]-skiv') >= 0) ) \
+  And (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'äänilevy'
+000 | 338(newest)$b | 'sd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// ÄÄNIKASETTI
+
+#if (Not Exists(@338)) \
+  And If ( \
+  (RegFind(@300$a, '[Cc]-kas') >= 0) \
+  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
+  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
+  ) \
+  And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'äänikasetti'
+000 | 338(newest)$b | 'ss'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// TIETOLEVY
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'tietolevy'
+000 | 338(newest)$b | 'cd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// VIDEOLEVY
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy'') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'videolevy'
+000 | 338(newest)$b | 'vd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
