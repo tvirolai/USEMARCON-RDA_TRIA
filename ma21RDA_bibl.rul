@@ -40,7 +40,8 @@ versio 25.2.2016 / Kansalliskirjasto (TV)
                       RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
                       RegReplace('\\] kuvas\\.', ' kuvasivua'); \
                       RegReplace('1 liites\\.', '1 liitesivu'); \
-                      RegReplace('liites\\.', 'liitesivua')
+                      RegReplace('liites\\.', 'liitesivua'); \
+                      RegReplace('(^|[^A-Za-z])verkkokirja(\$|[^A-Za-z])', '\\1verkkoaineisto\\2')
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
 
@@ -121,6 +122,12 @@ versio 25.2.2016 / Kansalliskirjasto (TV)
                            RegReplace('alk\\. paper', 'alkaline paper'); \
                            RegReplace('electronic bk\\.', 'electronic book'); \
                            RegReplace('(^|[^A-Za-z])verkkojulk(\$|[^A-Za-z])', 'verkkoaineisto')
+
+#define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna'); \
+                               RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
+                               RegReplace('verkkojulkaisuna', 'verkkoaineistona'); \
+                               RegReplace('[Ii]nternet-julkaisu', 'verkkoaineisto'); \
+                               RegReplace('paperisena', 'painettuna')
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
@@ -212,7 +219,7 @@ A30 | 130 | S; RAAMATTU
 
 222I1 | 222I1 | S
 222I2 | 222I2 | S
-222   | 222   | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
+222   | 222   | VERKKOAINEISTO
 
 240I1 | 240I1  | S
 240I2 | 240I2  | S
@@ -469,7 +476,10 @@ X64$? | 264$?  | S
 
 // ARKKI
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Aa]rkki') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) \
+  And (Not Exists(@773)) \
+  And ( (RegFind(@300$a, '[Aa]rkki') >= 0) Or \
+        ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'laitetta') >= 0) ) )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'arkki'
@@ -534,6 +544,7 @@ X64$? | 264$?  | S
     Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) ) \
   And If (Not Exists(@773)) \
   And If (RegFind(@337, 'elektroninen') >= 0) \
+  And If (RegFind(@300$a, 'ROM') < 0)
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'verkkoaineisto'
@@ -626,9 +637,7 @@ X64$? | 264$?  | S
 
 530I1 | 530I1 | S
 530I2 | 530I2 | S
-530   | 530   | S; RegReplace('paperimuodossa', 'painettuna'); \
-                   RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
-                   RegReplace('verkkojulkaisuna', 'verkkoaineistona')
+530   | 530   | S; VERKKOAINEISTO
 
 538I1 | 538I1 | S
 538I1 | 538I2 | S
@@ -832,16 +841,19 @@ J73 | 730 | S; RAAMATTU
 76?I1 | 76?I1 | S
 76?I2 | 76?I2 | S
 76?$c | 76?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
+76?$i | 76?$i | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
 76?   | 76?   | S
 
 77?I1 | 77?I1 | S
 77?I2 | 77?I2 | S
 77?$c | 77?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
+77?$i | 77?$i | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
 77?   | 77?   | S
 
 78?I1 | 78?I1 | S
 78?I2 | 78?I2 | S
 78?$c | 78?$c | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
+78?$i | 78?$i | S; RegReplace('verkkojulkaisu', 'verkkoaineisto'); RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
 78?   | 78?   | S
 
 800I1 | 800I1  | S
