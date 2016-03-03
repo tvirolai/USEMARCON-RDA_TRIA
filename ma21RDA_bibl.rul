@@ -1,11 +1,11 @@
 RDA-konversio - bibliografiset tietueet
-versio 25.2.2016 / Kansalliskirjasto (TV)
+versio 3.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
-#define macro 300AE | RegReplace('(^|[^A-Za-z])n\\.(\$|[^A-Za-z])', '\\1noin\\2'); \
+#define macro 300AE | RegReplace('\\bn\\b', 'noin'); \
                       RegReplace('ss\\.', 'sivut'); \
-                      RegReplace('kuv\\.', 'kuvitettu'); \
+                      RegReplace('\\bkuv\\.', 'kuvitettu'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
                       RegReplace('1 vol\\.', '1 nide'); \
@@ -51,7 +51,7 @@ versio 25.2.2016 / Kansalliskirjasto (TV)
                                  RegReplace('jousiork\\.', 'jousiorkesteri'); \
                                  RegReplace('kamariork\\.', 'orkesteri'); \
                                  RegReplace('puhallinork\\.', 'puhallinorkesteri'); \
-                                 RegReplace('(^|[^A-Za-z])ork(\$|[^A-Za-z])', '\\1orkesteri'); \
+                                 RegReplace('\\bork\\b', 'orkesteri'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
@@ -68,21 +68,21 @@ versio 25.2.2016 / Kansalliskirjasto (TV)
                                  RegReplace('förb\\.', 'förbättrade'); \
                                  RegReplace('erw\\.', 'erweiterte'); \
                                  RegReplace('rev\\. a\\. corr\\.', 'revised and corrected'); \
-                                 RegReplace('(^|[^A-Za-z])rev(\$|[^A-Za-z])', '\\1revised'); \
-                                 RegReplace('(^|[^A-Za-z])ed(\$|[^A-Za-z])', '\\1edition'); \
-                                 RegReplace('(^|[^A-Za-z])Aufl(\$|[^A-Za-z])', '\\1Auflage'); \
+                                 RegReplace('\\brev\\b', '\\1revised'); \
+                                 RegReplace('\\bed\\b', '\\1edition'); \
+                                 RegReplace('\\bAufl\\b', '\\1Auflage'); \
                                  RegReplace('neubearb\\.', 'neubearbeite'); \
                                  RegReplace('parann\\.', 'parannettu'); \
-                                 RegReplace('laaj\\.', 'laajennettu'); \
-                                 RegReplace('utök\\.', 'utökade'); \
-                                 RegReplace('(^|[^A-Za-z])uppl(\$|[^A-Za-z])', '\\1upplaga'); \
-                                 RegReplace('(^|[^A-Za-z])täyd\\.(\$|[^A-Za-z])', '\\1täydennetty\\2'); \
-                                 RegReplace('(^|[^A-Za-z])tark\\.(\$|[^A-Za-z])', '\\1tarkistettu\\2'); \
-                                 RegReplace('(^|[^A-Za-z])[Üü]berarb\\.(\$|[^A-Za-z])', '\\1überarbeitete\\2'); \
-                                 RegReplace('(^|[^A-Za-z])oförandr\\.(\$|[^A-Za-z])', '\\1oförandrade\\2'); \
-                                 RegReplace('(^|[^A-Za-z])uud\\.(\$|[^A-Za-z])', '\\1uudistettu\\2'); \
-                                 RegReplace('(^|[^A-Za-z])korj\\.(\$|[^A-Za-z])', '\\1korjattu\\2'); \
-                                 RegReplace('(^|[^A-Za-z])p\\.(\$|[^A-Za-z])', '\\1painos')
+                                 RegReplace('\\blaaj\\b', 'laajennettu'); \
+                                 RegReplace('\\butök\\b', 'utökade'); \
+                                 RegReplace('\\buppl\\b', 'upplaga'); \
+                                 RegReplace('\\btäyd\\b', '\\1täydennetty\\2'); \
+                                 RegReplace('\\btark\\b', '\\1tarkistettu\\2'); \
+                                 RegReplace('\\b[Üü]berarb\\b', '\\1überarbeitete\\2'); \
+                                 RegReplace('\\boförandr\\b', '\\1oförandrade\\2'); \
+                                 RegReplace('\\buud\\b', '\\1uudistettu\\2'); \
+                                 RegReplace('\\bkorj\\b', '\\1korjattu\\2'); \
+                                 RegReplace('\\bp\\b', '\\1painos')
 
                                 
 #define macro TRIOT            | RegReplace('^piano, jouset', 'piano, viulu, sello'); \
@@ -98,30 +98,29 @@ versio 25.2.2016 / Kansalliskirjasto (TV)
 
 #define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu')
 
-#define macro RAAMATTU | RegReplace('UT', 'Uusi testamentti'); \
-                         RegReplace('VT', 'Vanha testamentti')
+#define macro RAAMATTU | RegReplace('\\bUT\\b', 'Uusi testamentti'); \
+                         RegReplace('\\bVT\\b', 'Vanha testamentti')
 
-#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
+#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\b', '(fiktiivinen hahmo)'); \
                                  RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
 
 #define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
 
-#define macro AIKAMAAREET | RegReplace('^s\\.', 'syntynyt'); \
-                            RegReplace('^k\\.', 'kuollut'); \
-                            RegReplace('^n\\.', 'noin'); \
-                            RegReplace('vs\\.', 'vuosisata')
+#define macro AIKAMAAREET | RegReplace('\\bs\\b', 'syntynyt'); \
+                            RegReplace('\\bk\\b', 'kuollut'); \
+                            RegReplace('\\bn\\b', 'noin'); \
+                            RegReplace('\\bvs\\b', 'vuosisata')
 
-#define macro SIDOSASUT |  RegReplace('(^|[^A-Za-z])sid(\$|[^A-Za-z])', 'sidottu'); \
-                           RegReplace('(^|[^A-Za-z])nid(\$|[^A-Za-z])', 'nidottu'); \
-                           RegReplace('(^|[^A-Za-z])virh(\$|[^A-Za-z])', 'virheellinen'); \
-                           RegReplace('(^|[^A-Za-z])inb(\$|[^A-Za-z])', 'inbunden'); \
-                           RegReplace('(^|[^A-Za-z])hft(\$|[^A-Za-z])', 'häftad'); \
-                           RegReplace('(^|[^A-Za-z])pbk(\$|[^A-Za-z])', 'paperback'); \
-                           RegReplace('(^|[^A-Za-z])hbk(\$|[^A-Za-z])', 'hardback'); \
-                           RegReplace('alk paper', 'alkaline paper'); \
-                           RegReplace('alk\\. paper', 'alkaline paper'); \
-                           RegReplace('electronic bk\\.', 'electronic book'); \
-                           RegReplace('(^|[^A-Za-z])verkkojulk(\$|[^A-Za-z])', 'verkkoaineisto')
+#define macro SIDOSASUT |  RegReplace('\\bsid\\b', 'sidottu'); \
+                           RegReplace('\\bnid\\b', 'nidottu'); \
+                           RegReplace('\\bvirh\\b', 'virheellinen'); \
+                           RegReplace('\\binb\\b', 'inbunden'); \
+                           RegReplace('\\bhft\\b', 'häftad'); \
+                           RegReplace('\\bpbk\\b', 'paperback'); \
+                           RegReplace('\\bhbk\\b', 'hardback'); \
+                           RegReplace('\\balk\\.', 'alkaline'); \
+                           RegReplace('\\bbk\\b', 'book'); \
+                           RegReplace('\\bverkkojulk\\b', 'verkkoaineisto')
 
 #define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna'); \
                                RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
@@ -158,7 +157,8 @@ versio 25.2.2016 / Kansalliskirjasto (TV)
                 Delete(')'); \
                 Delete(';'); \
                 Delete(':'); \
-                SIDOSASUT
+                SIDOSASUT; \
+                Delete('.')
 
 024I1 | 024I1 | S
 024I2 | 024I2 | S
@@ -183,13 +183,13 @@ versio 25.2.2016 / Kansalliskirjasto (TV)
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
-110$e | 110$e  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
+110$e | 110$e  | Table ('Funktiotermit.tbl')
 110$4 | 110$e  | If Not (Exists(@110$e)) Then Table ('Tekijanfunktiot.tbl')
 110$? | 110$?  | S
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
-111$j | 111$j  | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
+111$j | 111$j  | Table ('Funktiotermit.tbl')
 111$4 | 111$j  | If Not (Exists(@111$j)) Then Table ('Tekijanfunktiot.tbl')
 111$? | 111$?  | S
 
@@ -270,7 +270,7 @@ F40   | 240    | S; RAAMATTU
 
 B43 | 243 | S; RAAMATTU
 
-#if (Not Exists(%100)) And (Not Exists(%110))
+#if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111))
 245I1 | 245I1  | '0'
 #endif
 
@@ -647,7 +647,7 @@ X64$? | 264$?  | S
 600I2 | 600I2  | S
 600$c | <C60$c | FIKTIIVINENHAHMO
 600$d | <C60$d | AIKAMAAREET
-600$e | <C60$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+600$e | <C60$e | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@600$t, 'Triot') >= 0)
 600$m | <C60$m | TRIOT; ESITYSKOKOONPANO
@@ -674,7 +674,7 @@ C60 | 600 | S; RAAMATTU
 610I1 | 610I1  | S
 610I2 | 610I2  | S
 610$c | <D61$c | FIKTIIVINENYHTEISO
-610$e | <D61$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+610$e | <D61$e | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@610$t, 'Triot') >= 0)
 610$m | <D61$m | TRIOT; ESITYSKOKOONPANO
@@ -700,7 +700,7 @@ D61 | 610 | S; RAAMATTU
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
-611$j | 611$j  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+611$j | 611$j  | Table ('Funktiotermit.tbl')
 611$4 | 611$j  | If Not (Exists(@611$j)) Then Table ('Tekijanfunktiot.tbl')
 611$? | 611$?  | S
 
@@ -753,7 +753,7 @@ E63 | 630 | S; RAAMATTU
 700I2 | 700I2  | S
 700$c | <G70$c | FIKTIIVINENHAHMO
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Table ('Funktiotermit.tbl'); Delete('.', At Ending)
+700$e | <G70$e | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
@@ -780,7 +780,7 @@ G70 | 700 | S; RAAMATTU
 710I1 | 710I1  | S
 710I2 | 710I2  | S
 710$c | <H71$c | FIKTIIVINENYHTEISO
-710$e | <H71$e | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+710$e | <H71$e | Table ('Funktiotermit.tbl')
 
 #if (RegFind(@710$t, 'Triot') >= 0)
 710$m | <H71$m | TRIOT; ESITYSKOKOONPANO
@@ -806,12 +806,13 @@ H71 | 710 | S; RAAMATTU
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
-711$j | 711$j  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+711$j | 711$j  | Table ('Funktiotermit.tbl')
 711$? | 711$?  | S
 
 720I1 | 720I1  | S
 720I2 | 720I2  | S
-720$4 | 720$4  | Delete('.', At Ending); Table ('Funktiotermit.tbl')
+720$e | 720$e  | Table ('Funktiotermit.tbl')
+720$4 | 720$e  | If (Not Exists(%720$e)) Then Table ('Tekijanfunktiot.tbl')
 720$? | 720$?  | S
 
 730I1 | 730I1  | S
