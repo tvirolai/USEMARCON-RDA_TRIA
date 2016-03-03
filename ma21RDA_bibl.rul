@@ -362,7 +362,11 @@ X64$? | 264$?  | S
 
 336I1 | 336I1 | S
 336I2 | 336I2 | S
-336(ns)$a | 336(n)$a | Delete('.', At Ending); Delete(';', At Ending); Table ('336_a.tbl')
+336(ns)$a | 336(n)$a | Delete('.', At Ending); \
+                       Delete(';', At Ending); \
+                       If (InTable(S, '336_a_svenska.tbl')) Then Table ('336_a_svenska.tbl');\
+                       Else Table ('336_a.tbl')
+
 336$8 | 336$8 | S
 
 #if Not (Exists(@336$b))
@@ -378,7 +382,8 @@ X64$? | 264$?  | S
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
-337$a | 337$a | Table ('337_a.tbl')
+337$a | 337$a | If (InTable(S, '337_a_svenska.tbl')) Then Table ('337_a_svenska.tbl');\
+                Else Table ('337_a.tbl')
 
 #if Not (Exists(@337$b))
 337$a | 337$b | If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
@@ -422,12 +427,47 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : VOLYM
+
+#if (Not Exists(@338)) \
+  And If ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or \
+        (RegFind(@300$a, '[Bb]ok|artbok|atlas') >= 0) Or (RegFind(%336$a, 'artografisk') >=0) ) \
+  And If (Not Exists(@773)) \
+  And If (RegFind(@337, 'ingen medietyp|oförmedlad') >= 0)
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'volym'
+000 | 338(newest)$b | 'nc'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(%338)) \
+  And (Not Exists(@773)) \
+  And (RegFind(%336$a, 'ext') >= 0) \
+  And (RegFind(%337$a, 'oförmedlad') >= 0)
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'volym'
+000 | 338(newest)$b | 'nc'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // VIDEOKASETTI
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokase') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videokasetti'
+000 | 338(newest)$b | 'vf'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// SAMMA PÅ SVENSKA : VIDEOKASSETT
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokass') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'videokassett'
 000 | 338(newest)$b | 'vf'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -442,12 +482,32 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : TRANSPARANG
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Tt]ranspara') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'transparang'
+000 | 338(newest)$b | 'gt'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // DIA
 
 #if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]uultokuv|[Dd]iaa') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'dia'
+000 | 338(newest)$b | 'gs'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// SAMMA PÅ SVENSKA : DIABILD
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd]iabild') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'diabild'
 000 | 338(newest)$b | 'gs'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -464,12 +524,34 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : MIKROKORT
+
+#if (Not Exists(@338)) \
+    And If ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmkort\\b') >= 0) ) \
+    And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'mikrokort'
+000 | 338(newest)$b | 'he'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // KORTTI
 
 #if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ortti') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'kortti'
+000 | 338(newest)$b | 'no'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// SAMMA PÅ SVENSKA : BILDKORT
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ort\\b') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'bildkort'
 000 | 338(newest)$b | 'no'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -487,12 +569,35 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : ARK
+
+#if (Not Exists(@338)) \
+  And (Not Exists(@773)) \
+  And ( (RegFind(@300$a, '[Aa]rk\\b') >= 0) Or \
+        ( (RegFind(@336$a, 'kartograf') >= 0) And (RegFind(@337$a, 'ingen medietyp') >= 0) ) )
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'ark'
+000 | 338(newest)$b | 'nb'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // MIKROFILMIRULLA
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilm') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'mikrofilmirulla'
+000 | 338(newest)$b | 'hj'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// SAMMA PÅ SVENSKA : MIKROFILMSRULLE
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'mikrofilmsrulle'
 000 | 338(newest)$b | 'hj'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -507,6 +612,16 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : LJUDSPOLE
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Ll]judsp') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'ljudspole'
+000 | 338(newest)$b | 'st'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // MUU
 
 #if (Not Exists(@338)) \
@@ -515,6 +630,18 @@ X64$? | 264$?  | S
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'muu'
+000 | 338(newest)$b | 'nz'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// SAMMA PÅ SVENSKA : ÖVRIG
+
+#if (Not Exists(@338)) \
+  And If (RegFind(@300$a, '[Tt]avla|[Uu][Ss][Bb]-minne|[Oo]ptisk|[Dd]iskett\\b') >= 0) \
+  And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'övrig'
 000 | 338(newest)$b | 'nz'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -552,10 +679,43 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : WEBBMATERIAL  - tässä pitää katsoa kieliversion tunnistaminen vielä
+
+#if (Not Exists(@338) And If (RegFind(%338, 'webbmaterial') < 0)) \
+  And If ( \
+  (RegFind(@300$a, '[Ww]ebb|[Ff]il\\b') >= 0) \
+  Or (RegFind(@516$a, '[Ww]ebb|WWW') >= 0) \
+  Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
+  Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
+  Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
+  Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+  ) \
+  And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'webbmaterial'
+000 | 338(newest)$b | 'cr'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+#if (Not Exists(@338) And If (RegFind(%338, 'webbmaterial') < 0)) \
+  And If ( (RegFind(000/8/, 's') >= 0) \
+    Or (RegFind(@256, '[Ww]ebb') >= 0) \
+    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) ) \
+  And If (Not Exists(@773)) \
+  And If (RegFind(@337, 'elektroninen') >= 0) \
+  And If (RegFind(@300$a, 'ROM') < 0)
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'webbmaterial'
+000 | 338(newest)$b | 'cr'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // ÄÄNILEVY
 
 #if (Not Exists(@338)) \
-  And ( (RegFind(@300, '[Cc][Dd]-levy|äänilevy|[Cc][Dd]-skiv') >= 0) ) \
+  And ( (RegFind(@300, '[Cc][Dd]-levy|äänilevy') >= 0) ) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -564,18 +724,46 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : LJUDSKIVA
+
+#if (Not Exists(@338)) \
+  And ( (RegFind(@300, '[Cc][Dd]-skiva|ljudskiva') >= 0) ) \
+  And (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'ljudskiva'
+000 | 338(newest)$b | 'sd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // ÄÄNIKASETTI
 
 #if (Not Exists(@338)) \
   And If ( \
-  (RegFind(@300$a, '[Cc]-kas') >= 0) \
-  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
-  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kas|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
+  (RegFind(@300$a, '[Cc]-kase') >= 0) \
+  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kase|[Ää]nikas|kasettia') >= 0) \
+  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kase|[Ää]nikas|kasettia') >= 0) \
   ) \
   And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'äänikasetti'
+000 | 338(newest)$b | 'ss'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// SAMMA PÅ SVENSKA : LJUDKASSETT
+
+#if (Not Exists(@338)) \
+  And If ( \
+  (RegFind(@300$a, '[Cc]-kass') >= 0) \
+  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kass|[Dd][Cc][Cc]-kass|[Ll]judkas|kassetter') >= 0) \
+  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kass|[Dd][Cc][Cc]-kass|[Ll]judkas|kassetter') >= 0) \
+  ) \
+  And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'ljudkassett'
 000 | 338(newest)$b | 'ss'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
@@ -590,12 +778,32 @@ X64$? | 264$?  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
+// SAMMA PÅ SVENSKA : DATORSKIVA - TODO! kieliversion tunnistaminen
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'datorskiva'
+000 | 338(newest)$b | 'cd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
 // VIDEOLEVY
 
 #if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy'') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videolevy'
+000 | 338(newest)$b | 'vd'
+000 | 338(newest)$2 | 'rdacarrier'
+#endif
+
+// SAMMA PÅ SVENSKA : VIDEOSKIVA
+
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-skiv|[Vv]ideoskiv'') >= 0) And If (Not Exists(@773))
+000 | 338(new)I1 | ' '
+000 | 338(newest)I2 | ' '
+000 | 338(newest)$a | 'videoskiva'
 000 | 338(newest)$b | 'vd'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
