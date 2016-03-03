@@ -111,16 +111,16 @@ versio 3.3.2016 / Kansalliskirjasto (TV)
                             RegReplace('\\bn\\b', 'noin'); \
                             RegReplace('\\bvs\\b', 'vuosisata')
 
-#define macro SIDOSASUT |  RegReplace('\\bsid\\b', 'sidottu'); \
-                           RegReplace('\\bnid\\b', 'nidottu'); \
-                           RegReplace('\\bvirh\\b', 'virheellinen'); \
-                           RegReplace('\\binb\\b', 'inbunden'); \
-                           RegReplace('\\bhft\\b', 'häftad'); \
-                           RegReplace('\\bpbk\\b', 'paperback'); \
-                           RegReplace('\\bhbk\\b', 'hardback'); \
+#define macro SIDOSASUT |  RegReplace('\\bsid\\.', 'sidottu'); \
+                           RegReplace('\\bnid\\.', 'nidottu'); \
+                           RegReplace('\\bvirh\\.', 'virheellinen'); \
+                           RegReplace('\\binb\\.', 'inbunden'); \
+                           RegReplace('\\bhft\\.', 'häftad'); \
+                           RegReplace('\\bpbk\\.', 'paperback'); \
+                           RegReplace('\\bhbk\\.', 'hardback'); \
                            RegReplace('\\balk\\.', 'alkaline'); \
-                           RegReplace('\\bbk\\b', 'book'); \
-                           RegReplace('\\bverkkojulk\\b', 'verkkoaineisto')
+                           RegReplace('\\bbk\\.', 'book'); \
+                           RegReplace('\\bverkkojulk\\.', 'verkkoaineisto')
 
 #define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna'); \
                                RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
