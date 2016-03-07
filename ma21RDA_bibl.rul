@@ -48,9 +48,9 @@ versio 7.3.2016 / Kansalliskirjasto (TV)
 #define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('jousiork\\.', 'jousiorkesteri'); \
-                                 RegReplace('kamariork\\.', 'orkesteri'); \
-                                 RegReplace('puhallinork\\.', 'puhallinorkesteri'); \
+                                 RegReplace('jousiork\\.|jousiork\\b', 'jousiorkesteri'); \
+                                 RegReplace('kamariork\\.|kamariork\\b', 'orkesteri'); \
+                                 RegReplace('puhallinork\\.|puhallinork\\b', 'puhallinorkesteri'); \
                                  RegReplace('\\bork\\b', 'orkesteri'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
@@ -70,11 +70,11 @@ versio 7.3.2016 / Kansalliskirjasto (TV)
                                  RegReplace('rev\\. a\\. corr\\.', 'revised and corrected'); \
                                  RegReplace('\\brev\\b', '\\1revised'); \
                                  RegReplace('\\bed\\b', '\\1edition'); \
-                                 RegReplace('\\bAufl\\b', '\\1Auflage'); \
+                                 RegReplace('\\bAufl\\.', 'Auflage'); \
                                  RegReplace('neubearb\\.', 'neubearbeite'); \
                                  RegReplace('parann\\.', 'parannettu'); \
-                                 RegReplace('\\blaaj\\b', 'laajennettu'); \
-                                 RegReplace('\\butök\\b', 'utökade'); \
+                                 RegReplace('\\blaaj\\.', 'laajennettu'); \
+                                 RegReplace('\\butök\\.', 'utökade'); \
                                  RegReplace('\\buppl\\b', 'upplaga'); \
                                  RegReplace('\\btäyd\\b', '\\1täydennetty\\2'); \
                                  RegReplace('\\btark\\b', '\\1tarkistettu\\2'); \
@@ -176,8 +176,8 @@ versio 7.3.2016 / Kansalliskirjasto (TV)
 100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
-100$e | 100$e  | Table ('Funktiotermit.tbl')
-100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Funktiokoodit.tbl')
+100$e | 100$e  | Table ('Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.'
+100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Funktiokoodit.tbl'); If (NextSub($e) = '') Then S + '.'
 100$? | 100$?  | S
 
 110I1 | 110I1  | S
