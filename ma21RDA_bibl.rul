@@ -650,8 +650,10 @@ F45 | 245 | S
 // VERKKOAINEISTO
 
 #if (Not Exists(@338)) \
-  And If (RegFind(@337, 'elektroninen') >= 0) \
-  And If ( \
+  And (RegFind(@300$a, 'ROM') < 0) \
+  And If (Not Exists(@773)) \
+  And (RegFind(@337, 'elektroninen') >= 0) \
+  And ( \
   (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
   Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
   Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
@@ -661,9 +663,7 @@ F45 | 245 | S
   ) \
   Or ( (RegFind(000/8/, 's') >= 0) \
     Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
-    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) ) \
-  And If (Not Exists(@773)) \
-  And If (RegFind(@300$a, 'ROM') < 0)
+    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'verkkoaineisto'
@@ -750,7 +750,7 @@ F45 | 245 | S
 
 // TIETOLEVY
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773)) And (InTable(@336$a, '336_a.tbl'))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'tietolevy'
@@ -758,9 +758,9 @@ F45 | 245 | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// SAMMA PÅ SVENSKA : DATORSKIVA - TODO! kieliversion tunnistaminen
+// SAMMA PÅ SVENSKA : DATORSKIVA
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773)) And (InTable(@336$a, '336_a_svenska.tbl'))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'datorskiva'
