@@ -373,13 +373,14 @@ F45 | 245 | S
 #if Not (Exists(@336$b))
 336(ns)$a | 336(no)$b | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
 336$a | 336(no)$2 | 'rdacontent'
-336   | 336   | Sort('8ab2')
 #endif
 
 #if (Exists(@336$b))
 336$b | 336$b | S
 336$a | 336(no)$2 | 'rdacontent'
 #endif
+
+336   | 336   | Sort('8ab2')
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
