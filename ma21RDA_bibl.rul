@@ -627,6 +627,7 @@ F45 | 245 | S
 
 #if (Not Exists(@338)) \
   And If (RegFind(@300$a, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
+  And Not (Exists(%338)) \
   And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -639,6 +640,7 @@ F45 | 245 | S
 
 #if (Not Exists(@338)) \
   And If (RegFind(@300$a, '[Tt]avla|[Uu][Ss][Bb]-minne|[Oo]ptisk|[Dd]iskett\\b') >= 0) \
+  And Not (Exists(%338)) \
   And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
