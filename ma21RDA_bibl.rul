@@ -516,8 +516,8 @@ F45 | 245 | S
 // MIKROKORTTI
 
 #if (Not Exists(@338)) \
-    And If ( (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) ) \
-    And If (Not Exists(@773))
+    And ( (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) Or (007/2/ = 'g') Or (007/2/ = 'e') ) \
+    And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'mikrokortti'
@@ -528,7 +528,7 @@ F45 | 245 | S
 // SAMMA PÅ SVENSKA : MIKROKORT
 
 #if (Not Exists(@338)) \
-    And If ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmkort\\b') >= 0) ) \
+    And If ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmkort\\b') >= 0) Or (007/2/ = 'g') Or (007/2/ = 'e') ) \
     And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -585,7 +585,9 @@ F45 | 245 | S
 
 // MIKROFILMIRULLA
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) \
+  And ( (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) Or (007/2/ = 'j') ) \
+  And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'mikrofilmirulla'
@@ -595,7 +597,9 @@ F45 | 245 | S
 
 // SAMMA PÅ SVENSKA : MIKROFILMSRULLE
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) \
+  And ( (RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0) Or (007/2/ = 'j') ) \
+  And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'mikrofilmsrulle'
