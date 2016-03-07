@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 3.3.2016 / Kansalliskirjasto (TV)
+versio 7.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -364,8 +364,7 @@ X64$? | 264$?  | S
 336I2 | 336I2 | S
 336(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        Delete(';', At Ending); \
-                       If (InTable(S, '336_a_svenska.tbl')) Then Table ('336_a_svenska.tbl');\
-                       Else Table ('336_a.tbl')
+                       If (InTable(S, '336_a_svenska.tbl')) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
 
 336$8 | 336$8 | S
 
@@ -382,8 +381,7 @@ X64$? | 264$?  | S
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
-337$a | 337$a | If (InTable(S, '337_a_svenska.tbl')) Then Table ('337_a_svenska.tbl');\
-                Else Table ('337_a.tbl')
+337$a | 337$a | If (InTable(S, '337_a_svenska.tbl')) Then Table ('337_a_svenska.tbl') Else Table ('337_a.tbl')
 
 #if Not (Exists(@337$b))
 337$a | 337$b | If (InTable(S, '337_b.tbl')) Then Table ('337_b.tbl')
