@@ -177,20 +177,20 @@ versio 7.3.2016 / Kansalliskirjasto (TV)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
 100$e | 100$e  | Table ('Funktiotermit.tbl')
-100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Tekijanfunktiot.tbl')
+100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('Funktiokoodit.tbl')
 100$? | 100$?  | S
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
 110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
 110$e | 110$e  | Table ('Funktiotermit.tbl')
-110$4 | 110$e  | If Not (Exists(@110$e)) Then Table ('Tekijanfunktiot.tbl')
+110$4 | 110$e  | If Not (Exists(@110$e)) Then Table ('Funktiokoodit.tbl')
 110$? | 110$?  | S
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
 111$j | 111$j  | Table ('Funktiotermit.tbl')
-111$4 | 111$j  | If Not (Exists(@111$j)) Then Table ('Tekijanfunktiot.tbl')
+111$4 | 111$j  | If Not (Exists(@111$j)) Then Table ('Funktiokoodit.tbl')
 111$? | 111$?  | S
 
 130I1 | 130I1  | S
@@ -798,6 +798,10 @@ F45 | 245 | S
 338$2 | 338$2 | 'rdacarrier'
 #endif
 
+490I1 | 490I1 | S
+490I2 | 490I2 | S
+490   | 490   | S; RegReplace('\\b;$v| ; $v', ' ;$v')
+
 500I1 | 500I1 | S
 500I2 | 500I2 | S
 500   | 500   | S; RegReplace('et al\\.', 'ja muita')
@@ -853,7 +857,7 @@ F45 | 245 | S
 #endif
 
 600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-600$4 | <C60$e | If Not (Exists(@600$e)) Then Table ('Tekijanfunktiot.tbl')
+600$4 | <C60$e | If Not (Exists(@600$e)) Then Table ('Funktiokoodit.tbl')
 600$? | <C60$? | S
 
 C60 | 600 | S; RAAMATTU
@@ -880,7 +884,7 @@ C60 | 600 | S; RAAMATTU
 #endif
 
 610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-610$4 | <C61$e | If Not (Exists(@610$e)) Then Table ('Tekijanfunktiot.tbl')
+610$4 | <C61$e | If Not (Exists(@610$e)) Then Table ('Funktiokoodit.tbl')
 610$? | <D61$? | S
 
 D61 | 610 | S; RAAMATTU
@@ -888,7 +892,7 @@ D61 | 610 | S; RAAMATTU
 611I1 | 611I1  | S
 611I2 | 611I2  | S
 611$j | 611$j  | Table ('Funktiotermit.tbl')
-611$4 | 611$j  | If Not (Exists(@611$j)) Then Table ('Tekijanfunktiot.tbl')
+611$4 | 611$j  | If Not (Exists(@611$j)) Then Table ('Funktiokoodit.tbl')
 611$? | 611$?  | S
 
 630I1 | 630I1  | S
@@ -911,29 +915,29 @@ D61 | 610 | S; RAAMATTU
 #endif
 
 630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-630$4 | <E63$e | If Not (Exists(@630$e)) Then Table ('Tekijanfunktiot.tbl')
+630$4 | <E63$e | If Not (Exists(@630$e)) Then Table ('Funktiokoodit.tbl')
 630$? | <E63$? | S
 
 E63 | 630 | S; RAAMATTU
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
-650$4 | 650$e  | If Not (Exists(@650$e)) Then Table ('Tekijanfunktiot.tbl')
+650$4 | 650$e  | If Not (Exists(@650$e)) Then Table ('Funktiokoodit.tbl')
 650$? | 650$?  | S
 
 651I1 | 651I1  | S
 651I2 | 651I2  | S
-651$4 | 651$e  | If Not (Exists(@651$e)) Then Table ('Tekijanfunktiot.tbl')
+651$4 | 651$e  | If Not (Exists(@651$e)) Then Table ('Funktiokoodit.tbl')
 651$? | 651$?  | S
 
 654I1 | 654I1  | S
 654I2 | 654I2  | S
-654$4 | 654$e  | If Not (Exists(@654$e)) Then Table ('Tekijanfunktiot.tbl')
+654$4 | 654$e  | If Not (Exists(@654$e)) Then Table ('Funktiokoodit.tbl')
 654$? | 654$?  | S
 
 662I1 | 662I1  | S
 662I2 | 662I2  | S
-662$4 | 662$e  | If Not (Exists(@662$e)) Then Table ('Tekijanfunktiot.tbl')
+662$4 | 662$e  | If Not (Exists(@662$e)) Then Table ('Funktiokoodit.tbl')
 662$? | 662$?  | S
 
 700I1 | 700I1  | S
@@ -959,7 +963,7 @@ E63 | 630 | S; RAAMATTU
 #endif
 
 700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
-700$4 | <G70$e | If Not (Exists(@700$e)) Then Table ('Tekijanfunktiot.tbl')
+700$4 | <G70$e | If Not (Exists(@700$e)) Then Table ('Funktiokoodit.tbl')
 700$? | <G70$? | S
 
 G70 | 700 | S; RAAMATTU
@@ -986,7 +990,7 @@ G70 | 700 | S; RAAMATTU
 #endif
 
 710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-710$4 | <H71$4 | Table ('Tekijanfunktiot.tbl')
+710$4 | <H71$4 | Table ('Funktiokoodit.tbl')
 710$? | <H71$? | S
 
 H71 | 710 | S; RAAMATTU
@@ -999,7 +1003,7 @@ H71 | 710 | S; RAAMATTU
 720I1 | 720I1  | S
 720I2 | 720I2  | S
 720$e | 720$e  | Table ('Funktiotermit.tbl')
-720$4 | 720$e  | If (Not Exists(%720$e)) Then Table ('Tekijanfunktiot.tbl')
+720$4 | 720$e  | If (Not Exists(%720$e)) Then Table ('Funktiokoodit.tbl')
 720$? | 720$?  | S
 
 730I1 | 730I1  | S
@@ -1066,7 +1070,7 @@ J73 | 730 | S; RAAMATTU
 #endif
 
 800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-800$4 | <K80$e | If Not (Exists(@800$e)) Then Table ('Tekijanfunktiot.tbl')
+800$4 | <K80$e | If Not (Exists(@800$e)) Then Table ('Funktiokoodit.tbl')
 800$? | <K80$? | S
 
 K80 | 800 | S; RAAMATTU
@@ -1091,14 +1095,14 @@ K80 | 800 | S; RAAMATTU
 #endif
 
 810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Tekijanfunktiot.tbl')
+810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl')
 810$? | <L81$? | S
 
 L81 | 810 | S; RAAMATTU
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
-811$4 | 811$j  | If Not (Exists(@811$j)) Then Table ('Tekijanfunktiot.tbl')
+811$4 | 811$j  | If Not (Exists(@811$j)) Then Table ('Funktiokoodit.tbl')
 811$? | 811$?  | S
 
 830I1 | 830I1  | S
@@ -1123,7 +1127,9 @@ L81 | 810 | S; RAAMATTU
 830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
 830$? | <M83$? | S
 
-M83 | 830 | S; RAAMATTU
+M83 | 830 | RAAMATTU; \
+            RegReplace('\\b;$v| ; $v', ' ;$v'); \
+            If (NextSubIn(S, $v) = '') Then S + '.' Else S
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S

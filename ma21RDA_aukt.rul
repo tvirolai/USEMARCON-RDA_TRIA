@@ -100,7 +100,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 100$o | 100$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-100$4 | 100$4  | Table ('Tekijanfunktiot.tbl')
+100$4 | 100$4  | Table ('Funktiokoodit.tbl')
 100$? | 100$?  | S
 
 110I1 | 110I1  | S
@@ -128,7 +128,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 110$o | 110$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-110$4 | 110$4  | Table ('Tekijanfunktiot.tbl')
+110$4 | 110$4  | Table ('Funktiokoodit.tbl')
 110$? | 110$?  | S
 
 130I1 | 130I1  | S
@@ -156,7 +156,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 130$o | 130$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-130$4 | 130$4  | Table ('Tekijanfunktiot.tbl')
+130$4 | 130$4  | Table ('Funktiokoodit.tbl')
 130$? | 130$?  | S
 
 400I1 | 400I1  | S
@@ -185,7 +185,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 400$o | 400$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-400$4 | 400$4  | Table ('Tekijanfunktiot.tbl')
+400$4 | 400$4  | Table ('Funktiokoodit.tbl')
 400$? | 400$?  | S
 
 410I1 | 410I1  | S
@@ -213,7 +213,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 410$o | 410$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-410$4 | 410$4  | Table ('Tekijanfunktiot.tbl')
+410$4 | 410$4  | Table ('Funktiokoodit.tbl')
 410$? | 410$?  | S
 
 430I1 | 430I1  | S
@@ -241,7 +241,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 430$o | 430$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-430$4 | 430$4  | Table ('Tekijanfunktiot.tbl')
+430$4 | 430$4  | Table ('Funktiokoodit.tbl')
 430$? | 430$?  | S
 
 500I1 | 500I1  | S
@@ -270,7 +270,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 500$o | 500$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-500$4 | 500$4  | Table ('Tekijanfunktiot.tbl')
+500$4 | 500$4  | Table ('Funktiokoodit.tbl')
 500$? | 500$?  | S
 
 510I1 | 510I1  | S
@@ -298,7 +298,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 510$o | 510$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-510$4 | 510$4  | Table ('Tekijanfunktiot.tbl')
+510$4 | 510$4  | Table ('Funktiokoodit.tbl')
 510$? | 510$?  | S
 
 530I1 | 530I1  | S
@@ -326,7 +326,7 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 
 530$o | 530$o  | SOVITUSMERKINTO; ESITYSKOKOONPANO
 
-530$4 | 530$4  | Table ('Tekijanfunktiot.tbl')
+530$4 | 530$4  | Table ('Funktiokoodit.tbl')
 530$? | 530$?  | S
 
 #if (TAG != 'DEL')
