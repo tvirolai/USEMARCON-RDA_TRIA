@@ -1,14 +1,16 @@
 RDA-konversio - auktoriteettitietueet
-versio 1.12.2015 / Kansalliskirjasto (TV)
+versio 8.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
+
+//TODO äänialalyhenteiden muunnoksen tarkistus
 
 #define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('jousiork.', 'jousiorkesteri'); \
-                                 RegReplace('kamariork.', 'orkesteri'); \
-                                 RegReplace('puhallinork.', 'puhallinorkesteri'); \
+                                 RegReplace('jousiork\\.', 'jousiorkesteri'); \
+                                 RegReplace('kamariork\\.', 'orkesteri'); \
+                                 RegReplace('puhallinork\\.', 'puhallinorkesteri'); \
                                  RegReplace('(S) (\\(\\d+)', 'sopraanot \\2'); \
                                  RegReplace('(S)([^A-Za-zÄÖÅäöå]|\$|,)', 'sopraano\\2', 'g'); \
                                  RegReplace('(Mz) (\\(\\d+)', 'mezzosopraanot \\2'); \
@@ -48,10 +50,10 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 #define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
                                  RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
 
-#define macro AIKAMAAREET | RegReplace('^s\\.', 'syntynyt'); \
-                            RegReplace('^k\\.', 'kuollut'); \
-                            RegReplace('n\\.', 'noin'); \
-                            RegReplace('vs\\.', 'vuosisata')
+#define macro AIKAMAAREET | RegReplace('\\bs\\b', 'syntynyt'); \
+                            RegReplace('\\bk\\b', 'kuollut'); \
+                            RegReplace('\\bn\\b', 'noin'); \
+                            RegReplace('\\bvs\\b', 'vuosisata')
 
 000     | 000     | S
 
@@ -60,13 +62,13 @@ versio 1.12.2015 / Kansalliskirjasto (TV)
 #if (RegFind(@1??$s, 'Libretto') < 0) And (RegFind(@1??$s, 'Sanat') < 0)
 008/1-10/ | 008/1-10/ | S
 008/11/ | 008/11/ | 'z'
-008/12-25/ | 008/12-25/ | S
+008/12-40/ | 008/12-40/ | S
 
 040I1   | 040I1   | ' '
 040I2   | 040I2   | ' '
 040$?   | 040$?   | S
 000     | 040$e   | 'rda'
-040     | 040     | Sort ('abcdef68')
+040     | 040     | Sort ('abcedf')
 #endif
 
 #if (RegFind(@1??$s, 'Libretto') >= 0) Or (RegFind(@1??$s, 'Sanat') >= 0)
