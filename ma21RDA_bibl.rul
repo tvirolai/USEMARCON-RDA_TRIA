@@ -16,7 +16,6 @@ versio 8.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('vär\\.', 'värillinen'); \
                       RegReplace('värikuv\\.', 'värikuvitus'); \
                       RegReplace('nuott\\.', 'nuotteja'); \
-                      RegReplace('illus\\.', 'illustrated'); \
                       RegReplace('kuval\\.', 'kuvalehteä'); \
                       RegReplace('diagrs\\.', 'diagrams'); \
                       RegReplace('incl\\.', 'includes'); \
@@ -37,8 +36,7 @@ versio 8.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('\\] kuvas\\.', ' kuvasivua'); \
                       RegReplace('1 liites\\.', '1 liitesivu'); \
                       RegReplace('liites\\.', 'liitesivua'); \
-                      RegReplace('[Vv]erkkokirja', 'verkkoaineisto'); \
-                      If (InTable(@336$a, '336_a_svenska.tbl')) Then RegReplace('ill\\.', 'illustrerad') Else RegReplace('ill\\.', 'illustrated')
+                      RegReplace('[Vv]erkkokirja', 'verkkoaineisto')
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
 
