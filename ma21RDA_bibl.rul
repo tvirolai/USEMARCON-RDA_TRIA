@@ -3,8 +3,8 @@ versio 8.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
-#define macro 300AE | RegReplace('\\bn\\.', 'noin'); \
-                      RegReplace('ss\\.', 'sivut'); \
+#define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+                      RegReplace('ss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
@@ -23,10 +23,10 @@ versio 8.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('incl\\.', 'includes'); \
                       RegReplace('tab\\.', 'tables'); \
                       RegReplace('fold\\. maps', 'folded maps'); \
-                      RegReplace('(^|[^A-Za-z])s\\.(\$|[^A-Za-z])', '\\1sivua\\2'); \
-                      RegReplace('(\\d*) (S\\.)', '\\1 sivua'); \
+                      RegReplace('(\\d+)\\s*\\b[Ss]\\.', '\\1 sivua', 'g'); \
+                      RegReplace('\\b[Ss]\\.\\s*(\\d+)', 'sivut \\1', 'g'); \
                       RegReplace('(\\d*) irtol\\.', '\\1 irtolehteä'); \
-                      RegReplace('(^|[^A-Za-z])kuvas\\.(\$|[^A-Za-z])', '\\1kuvasivua\\2'); \
+                      Replace('kuvas\\.' By 'kuvasivua'); \
                       RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja'); \
                       RegReplace('\\btaul\\.', 'taulukkoja'); \
                       RegReplace('hakem\\.', 'hakemisto'); \
@@ -668,7 +668,7 @@ F45 | 245 | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// SAMMA PÅ SVENSKA : WEBBMATERIAL  - tässä pitää katsoa kieliversion tunnistaminen vielä
+// SAMMA PÅ SVENSKA : WEBBMATERIAL
 
 #if ((Not Exists(@338)) And (RegFind(%338$a, '[Vv]erkkoaineisto|[Ww]ebbmaterial') < 0)) \
    And If ( \
@@ -680,7 +680,7 @@ F45 | 245 | S
    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
    ) \
    And (Not Exists(@773)) \
-   And (RegFind(@337, 'elektroninen') >= 0) \
+   And (RegFind(@337, 'elektronisk') >= 0) \
    And (RegFind(@300$a, 'ROM') < 0)
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
