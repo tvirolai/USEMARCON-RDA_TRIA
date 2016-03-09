@@ -7,8 +7,7 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('ss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
-                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
-                      RegReplace('1 vol\\.', '1 nide')
+                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
                       
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja'); \
                       RegReplace('kuv\\.', 'kuvitettu'); \
@@ -19,10 +18,7 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('kuval\\.', 'kuvalehteä'); \
                       RegReplace('diagrs\\.', 'diagrams'); \
                       RegReplace('incl\\.', 'includes'); \
-                      RegReplace('tab\\.', 'tables'); \
                       RegReplace('fold\\. maps', 'folded maps'); \
-                      RegReplace('(\\d+)\\s*\\b[Ss]\\.', '\\1 sivua', 'g'); \
-                      RegReplace('\\b[Ss]\\.\\s*(\\d+)', 'sivut \\1', 'g'); \
                       RegReplace('(\\d*) irtol\\.', '\\1 irtolehteä'); \
                       Replace('kuvas\\.' By 'kuvasivua'); \
                       RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja'); \
@@ -46,7 +42,6 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
                                  RegReplace('jousiork\\.|jousiork\\b', 'jousiorkesteri'); \
                                  RegReplace('kamariork\\.|kamariork\\b', 'orkesteri'); \
                                  RegReplace('puhallinork\\.|puhallinork\\b', 'puhallinorkesteri'); \
-                                 RegReplace('\\bork\\.', 'orkesteri'); \
                                  RegReplace('kät\\.', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
@@ -68,10 +63,8 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
 
 #define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu')
 
-#define macro RAAMATTU | RegReplace('\\bUT\\b', 'Uusi testamentti'); \
-                         RegReplace('\\bVT\\b', 'Vanha testamentti'); \
-                         RegReplace('\\bUT\\.', 'Uusi testamentti'); \
-                         RegReplace('\\bVT\\.', 'Vanha testamentti')
+#define macro RAAMATTU | RegReplace('\\bUT[\\b|\\.]', 'Uusi testamentti'); \
+                         RegReplace('\\bVT[\\b|\\.]', 'Vanha testamentti')
 
 
 #define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
