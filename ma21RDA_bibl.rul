@@ -33,7 +33,7 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('liitel\\.', 'liiteluettelo'); \
                       RegReplace('(\\d*) taul\\.', '\\1 taulukkoa'); \
                       RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
-                      RegReplace('\\] kuvas\\.', ' kuvasivua'); \
+                      RegReplace('\\] kuvas\\.', '] kuvasivua'); \
                       RegReplace('1 liites\\.', '1 liitesivu'); \
                       RegReplace('liites\\.', 'liitesivua'); \
                       RegReplace('[Vv]erkkokirja', 'verkkoaineisto')
@@ -69,7 +69,10 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
 #define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu')
 
 #define macro RAAMATTU | RegReplace('\\bUT\\b', 'Uusi testamentti'); \
-                         RegReplace('\\bVT\\b', 'Vanha testamentti')
+                         RegReplace('\\bVT\\b', 'Vanha testamentti'); \
+                         RegReplace('\\bUT\\.', 'Uusi testamentti'); \
+                         RegReplace('\\bVT\\.', 'Vanha testamentti')
+
 
 #define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
                                  RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
@@ -459,7 +462,7 @@ F45 | 245 | S
 // MIKROKORTTI
 
 #if (Not Exists(@338)) \
-    And ( (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) Or (007/2/ = 'g') Or (007/2/ = 'e') ) \
+    And ( (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
     And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -471,7 +474,7 @@ F45 | 245 | S
 // SAMMA PÅ SVENSKA : MIKROKORT
 
 #if (Not Exists(@338)) \
-    And If ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmkort\\b') >= 0) Or (007/2/ = 'g') Or (007/2/ = 'e') ) \
+    And ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmikort\\b') >= 0) Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
     And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -529,7 +532,7 @@ F45 | 245 | S
 // MIKROFILMIRULLA
 
 #if (Not Exists(@338)) \
-  And ( (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) Or (007/2/ = 'j') ) \
+  And ( (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) Or (007/1-2/ = 'hj') ) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -603,16 +606,16 @@ F45 | 245 | S
   And (Not Exists(@773)) \
   And (RegFind(@337, 'elektroninen') >= 0) \
   And ( \
-  (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
-  Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
-  Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
-  Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
-  Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
-  Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
-  ) \
-  Or ( (RegFind(000/8/, 's') >= 0) \
+    (RegFind(@300$a, '[Vv]erkkojulkaisu|[Tt]iedosto') >= 0) \
+    Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
+    Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
+    Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
+    Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
+    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+    Or (RegFind(000/8/, 's') >= 0) \
     Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
-    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) )
+    Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) \
+  )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'verkkoaineisto'
@@ -624,12 +627,12 @@ F45 | 245 | S
 
 #if ((Not Exists(@338)) And (RegFind(%338$a, '[Vv]erkkoaineisto|[Ww]ebbmaterial') < 0)) \
    And If ( \
-   (RegFind(@300$a, '[Ww]ebb|[Ff]il\\b') >= 0) \
-   Or (RegFind(@516$a, '[Ww]ebb|WWW') >= 0) \
-   Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
-   Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
-   Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
-   Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+     (RegFind(@300$a, '[Ww]ebb|[Ff]il\\b') >= 0) \
+     Or (RegFind(@516$a, '[Ww]ebb|WWW') >= 0) \
+     Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
+     Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
+     Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
+     Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
    ) \
    And (Not Exists(@773)) \
    And (RegFind(@337, 'elektronisk') >= 0) \
@@ -717,7 +720,7 @@ F45 | 245 | S
 
 // VIDEOLEVY
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy'') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-levy|[Vv]ideolevy') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videolevy'
@@ -727,7 +730,7 @@ F45 | 245 | S
 
 // SAMMA PÅ SVENSKA : VIDEOSKIVA
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-skiv|[Vv]ideoskiv'') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Dd][Vv][Dd]-skiv|[Vv]ideoskiv') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videoskiva'
