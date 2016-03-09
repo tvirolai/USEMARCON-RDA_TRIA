@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 8.3.2016 / Kansalliskirjasto (TV)
+versio 9.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -301,6 +301,7 @@ F45 | 245 | S
 300$b | 300$b | 300BE
 300$c | 300$c | S; Delete('.', At Ending)
 300$e | 300$e | 300BE
+300$? | 300$? | S
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
@@ -571,12 +572,10 @@ F45 | 245 | S
 
 // MUU
 
-#if (Not Exists(@338))
-  And ( \
+#if (Not Exists(@338)) And (Not Exists(@773)) And ( \
     (RegFind(@300$a, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
-    Or (RegFind(@337$a, 'useita v') >=0) \
-    ) \
-  And (Not Exists(@773))
+    Or (RegFind(@337$a, 'useita v') >= 0) \
+   )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'muu'
@@ -586,12 +585,10 @@ F45 | 245 | S
 
 // SAMMA PÅ SVENSKA : ÖVRIG
 
-#if (Not Exists(@338)) \
-  And ( \
-    (RegFind(@300$a, '[Tt]avla|[Uu][Ss][Bb]-minne|[Oo]ptisk|[Dd]iskett\\b') >= 0) \
-    Or (RegFind(@337$a, 'ospecifierad') >= 0) \
-    ) \
-  And (Not Exists(@773))
+#if (Not Exists(@338)) And (Not Exists(@773)) And ( \
+      (RegFind(@300$a, '[Tt]avla|[Uu][Ss][Bb]-minne|[Oo]ptisk|[Dd]iskett\\b') >= 0) \
+      Or (RegFind(@337$a, 'ospecifierad') >= 0) \
+    ) 
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'övrig'
@@ -623,7 +620,7 @@ F45 | 245 | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// SAMMA PÅ SVENSKA : WEBBMATERIAL
+// SAMMA PÅ SVENSKA : ONLINERESURS
 
 #if ((Not Exists(@338)) And (RegFind(%338$a, '[Vv]erkkoaineisto|[Ww]ebbmaterial') < 0)) \
    And If ( \
@@ -637,7 +634,7 @@ F45 | 245 | S
    And (Not Exists(@773)) \
    And (RegFind(@337, 'elektronisk') >= 0) \
    And (RegFind(@300$a, 'ROM') < 0)
-000 | 338(newest)$a | 'webbmaterial'
+000 | 338(newest)$a | 'onlineresurs'
 000 | 338(newest)$b | 'cr'
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
