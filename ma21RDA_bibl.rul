@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 9.3.2016 / Kansalliskirjasto (TV)
+versio 10.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -9,30 +9,30 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
                       
-#define macro 300BE | RegReplace('kartt[\\b|\\.]', 'karttoja'); \
-                      RegReplace('kuv[\\b|\\.]', 'kuvitettu'); \
-                      RegReplace('mv[\\b|\\.]', 'mustavalkoinen'); \
-                      RegReplace('vär[\\b|\\.]', 'värillinen'); \
-                      RegReplace('värikuv[\\b|\\.]', 'värikuvitus'); \
-                      RegReplace('nuott[\\b|\\.]', 'nuotteja'); \
-                      RegReplace('kuval[\\.|\\b]', 'kuvalehteä'); \
-                      RegReplace('diagrs[\\.|\\b]', 'diagrams'); \
-                      RegReplace('incl[\\.|\\b]', 'includes'); \
-                      RegReplace('fold[\\.|\\b] maps', 'folded maps'); \
+#define macro 300BE | RegReplace('kartt[\\b|\\.]', 'karttoja', 'g'); \
+                      RegReplace('kuv[\\b|\\.]', 'kuvitettu', 'g'); \
+                      RegReplace('mv[\\b|\\.]', 'mustavalkoinen', 'g'); \
+                      RegReplace('vär[\\b|\\.]', 'värillinen', 'g'); \
+                      RegReplace('värikuv[\\b|\\.]', 'värikuvitus', 'g'); \
+                      RegReplace('nuott[\\b|\\.]', 'nuotteja', 'g'); \
+                      RegReplace('kuval[\\.|\\b]', 'kuvalehteä', 'g'); \
+                      RegReplace('diagrs[\\.|\\b]', 'diagrams', 'g'); \
+                      RegReplace('incl[\\.|\\b]', 'includes', 'g'); \
+                      RegReplace('fold[\\.|\\b] maps', 'folded maps', 'g'); \
                       RegReplace('([\\.|\\b]*) irtol\\.', '\\1 irtolehteä'); \
                       Replace('kuvas[\\.|\\b]' By 'kuvasivua'); \
-                      RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja'); \
-                      RegReplace('[\\.|\\b]taul\\.', 'taulukkoja'); \
-                      RegReplace('hakem[\\.|\\b]', 'hakemisto'); \
-                      RegReplace('lyh[\\.|\\b] luett\\.', 'lyhenneluettelo'); \
-                      RegReplace('lähdel[\\.|\\b]', 'lähdeluettelo'); \
-                      RegReplace('liitel[\\.|\\b]', 'liiteluettelo'); \
-                      RegReplace('(\\d*) taul\\.', '\\1 taulukkoa'); \
-                      RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä'); \
-                      RegReplace('\\] kuvas[\\b|\\.]', '] kuvasivua'); \
-                      RegReplace('1 liites[\\.|\\b]', '1 liitesivu'); \
-                      RegReplace('liites[\\.|\\b]', 'liitesivua'); \
-                      RegReplace('[Vv]erkkokirja', 'verkkoaineisto')
+                      RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja', 'g'); \
+                      RegReplace('[\\.|\\b]taul\\.', 'taulukkoja', 'g'); \
+                      RegReplace('hakem[\\.|\\b]', 'hakemisto', 'g'); \
+                      RegReplace('lyh[\\.|\\b] luett\\.', 'lyhenneluettelo', 'g'); \
+                      RegReplace('lähdel[\\.|\\b]', 'lähdeluettelo', 'g'); \
+                      RegReplace('liitel[\\.|\\b]', 'liiteluettelo', 'g'); \
+                      RegReplace('(\\d*) taul\\.', '\\1 taulukkoa', 'g'); \
+                      RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä', 'g'); \
+                      RegReplace('\\] kuvas[\\b|\\.]', '] kuvasivua', 'g'); \
+                      RegReplace('1 liites[\\.|\\b]', '1 liitesivu', 'g'); \
+                      RegReplace('liites[\\.|\\b]', 'liitesivua', 'g'); \
+                      RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
 
@@ -61,38 +61,38 @@ versio 9.3.2016 / Kansalliskirjasto (TV)
                                  RegReplace('^piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
                                  RegReplace('^puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
-#define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu')
+#define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu', 'g')
 
-#define macro RAAMATTU | RegReplace('\\bUT[\\b|\\.]', 'Uusi testamentti'); \
-                         RegReplace('\\bVT[\\b|\\.]', 'Vanha testamentti')
+#define macro RAAMATTU | RegReplace('\\bUT[\\b|\\.]', 'Uusi testamentti', 'g'); \
+                         RegReplace('\\bVT[\\b|\\.]', 'Vanha testamentti', 'g')
 
 
-#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
-                                 RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
+#define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)', 'g'); \
+                                 RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)', 'g')
 
 #define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
 
-#define macro AIKAMAAREET | RegReplace('\\bs[\\b|\\.]', 'syntynyt'); \
-                            RegReplace('\\bk[\\b|\\.]', 'kuollut'); \
-                            RegReplace('\\bn[\\b|\\.]', 'noin'); \
-                            RegReplace('\\bvs[\\b|\\.]', 'vuosisata')
+#define macro AIKAMAAREET | RegReplace('\\bs[\\b|\\.]', 'syntynyt', 'g'); \
+                            RegReplace('\\bk[\\b|\\.]', 'kuollut', 'g'); \
+                            RegReplace('\\bn[\\b|\\.]', 'noin', 'g'); \
+                            RegReplace('\\bvs[\\b|\\.]', 'vuosisata', 'g')
 
-#define macro SIDOSASUT |  RegReplace('\\bsid[\\.|\\b]', 'sidottu'); \
-                           RegReplace('\\bnid[\\.|\\b]', 'nidottu'); \
-                           RegReplace('\\bvirh[\\.|\\b]', 'virheellinen'); \
-                           RegReplace('\\binb[\\.|\\b]', 'inbunden'); \
-                           RegReplace('\\bhft[\\.|\\b]', 'häftad'); \
-                           RegReplace('\\bpbk[\\.|\\b]', 'paperback'); \
-                           RegReplace('\\bhbk[\\.|\\b]', 'hardback'); \
-                           RegReplace('\\balk[\\.|\\b]', 'alkaline'); \
-                           RegReplace('\\bbk[\\.|\\b]', 'book'); \
-                           RegReplace('\\bverkkojulk[\\.|\\b]', 'verkkoaineisto')
+#define macro SIDOSASUT |  RegReplace('\\bsid[\\.|\\b]', 'sidottu', 'g'); \
+                           RegReplace('\\bnid[\\.|\\b]', 'nidottu', 'g'); \
+                           RegReplace('\\bvirh[\\.|\\b]', 'virheellinen', 'g'); \
+                           RegReplace('\\binb[\\.|\\b]', 'inbunden', 'g'); \
+                           RegReplace('\\bhft[\\.|\\b]', 'häftad', 'g'); \
+                           RegReplace('\\bpbk[\\.|\\b]', 'paperback', 'g'); \
+                           RegReplace('\\bhbk[\\.|\\b]', 'hardback', 'g'); \
+                           RegReplace('\\balk[\\.|\\b]', 'alkaline', 'g'); \
+                           RegReplace('\\bbk[\\.|\\b]', 'book', 'g'); \
+                           RegReplace('\\bverkkojulk[\\.|\\b]', 'verkkoaineisto', 'g')
 
-#define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna'); \
-                               RegReplace('Verkkojulkaisu', 'Verkkoaineisto'); \
-                               RegReplace('verkkojulkaisuna', 'verkkoaineistona'); \
-                               RegReplace('[Ii]nternet-julkaisu', 'verkkoaineisto'); \
-                               RegReplace('paperisena', 'painettuna')
+#define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna', 'g'); \
+                               RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g'); \
+                               RegReplace('verkkojulkaisuna', 'verkkoaineistona', 'g'); \
+                               RegReplace('[Ii]nternet-julkaisu', 'verkkoaineisto', 'g'); \
+                               RegReplace('paperisena', 'painettuna', 'g')
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
@@ -346,7 +346,7 @@ F45 | 245 | S
 
 #if (Not Exists(@338)) \
   And If ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or \
-        (RegFind(@300$a, '[Kk]irja|[Kk]artasto') >= 0) Or (RegFind(%336$a, 'Kartografinen') >=0) ) \
+        (RegFind(@300$a, '[Tt]ekstivihko|[Kk]irja|[Kk]artasto') >= 0) Or (RegFind(%336$a, 'Kartografinen') >=0) ) \
   And If (Not Exists(@773)) \
   And If (RegFind(@337, 'laitetta') >= 0)
 000 | 338(new)I1 | ' '
@@ -478,7 +478,7 @@ F45 | 245 | S
 
 // KORTTI
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]ortti') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '\\b[Kk]ortti') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'kortti'
