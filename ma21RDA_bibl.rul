@@ -77,16 +77,16 @@ versio 10.3.2016 / Kansalliskirjasto (TV)
                             RegReplace('\\bn[\\b|\\.]', 'noin', 'g'); \
                             RegReplace('\\bvs[\\b|\\.]', 'vuosisata', 'g')
 
-#define macro SIDOSASUT |  RegReplace('\\bsid[\\.|\\b]', 'sidottu', 'g'); \
-                           RegReplace('\\bnid[\\.|\\b]', 'nidottu', 'g'); \
-                           RegReplace('\\bvirh[\\.|\\b]', 'virheellinen', 'g'); \
-                           RegReplace('\\binb[\\.|\\b]', 'inbunden', 'g'); \
-                           RegReplace('\\bhft[\\.|\\b]', 'häftad', 'g'); \
-                           RegReplace('\\bpbk[\\.|\\b]', 'paperback', 'g'); \
-                           RegReplace('\\bhbk[\\.|\\b]', 'hardback', 'g'); \
-                           RegReplace('\\balk[\\.|\\b]', 'alkaline', 'g'); \
-                           RegReplace('\\bbk[\\.|\\b]', 'book', 'g'); \
-                           RegReplace('\\bverkkojulk[\\.|\\b]', 'verkkoaineisto', 'g')
+#define macro SIDOSASUT |  RegReplace('\\bsid\\b', 'sidottu', 'g'); \
+                           RegReplace('\\bnid\\b', 'nidottu', 'g'); \
+                           RegReplace('\\bvirh\\b', 'virheellinen', 'g'); \
+                           RegReplace('\\binb\\b', 'inbunden', 'g'); \
+                           RegReplace('\\bhft\\b', 'häftad', 'g'); \
+                           RegReplace('\\bpbk\\b', 'paperback', 'g'); \
+                           RegReplace('\\bhbk\\b', 'hardback', 'g'); \
+                           RegReplace('\\balk\\b', 'alkaline', 'g'); \
+                           RegReplace('\\bbk\\b', 'book', 'g'); \
+                           RegReplace('\\bverkkojulk\\b', 'verkkoaineisto', 'g')
 
 #define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna', 'g'); \
                                RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g'); \
@@ -116,14 +116,14 @@ versio 10.3.2016 / Kansalliskirjasto (TV)
 020I1 | 020I1 | S
 020I2 | 020I2 | S
 020$a | 020$a | S; RegReplace('[\\s](.*)', '')
-020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT
+020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT; Delete(':', At Ending);
 020$c | <DEL  | S
 020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
+                SIDOSASUT; \
                 Delete('('); \
                 Delete(')'); \
                 Delete(';'); \
-                Delete(':'); \
-                SIDOSASUT; \
+                Delete(':', At Ending); \
                 Delete('.')
 
 024I1 | 024I1 | S
