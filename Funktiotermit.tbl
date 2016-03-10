@@ -148,7 +148,7 @@ s u r v e y o r   | m a a n m i t t a r i
 t e a c h e r   | o p e t t a j a 
 t e l e v i s i o n 0x20 d i r e c t o r  | t e l e v i s i o - o h j a a j a 
 t e l e v i s i o n 0x20 p r o d u c e r  | t e l e v i s i o t u o t t a j a 
-t r a n s c r i b e r   | s i i r t o k i r j o i t t a j a 
+t r a n s c r i b e r   | t r a n s k r i b o i j a 
 t r a n s l a t o r   | k 0xc3 0xa4 0xc3 0xa4 n t 0xc3 0xa4 j 0xc3 0xa4 
 v o i c e 0x20 a c t o r  | 0xc3 0xa4 0xc3 0xa4 n i n 0xc3 0xa4 y t t e l i j 0xc3 0xa4
 w r i t e r 0x20 o f 0x20 a d d e d 0x20 c o m m e n t a r y  | k o m m e n t a a r i n 0x20 k i r j o i t t a j a 
