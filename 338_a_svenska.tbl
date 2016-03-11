@@ -24,26 +24,25 @@ f i l m s l i p 	| f i l m r e m s a
 f i l m s t r i p 	| b i l d b a n d 
 f i l m s t r i p 0x20 c a r t r i d g e 	| b i l d b a n d s m a g a s i n 
 f l i p c h a r t 	| b l 0xc3 0xa4 d d e r b l o c k 
-m i c r o f i c h e 	| m i k r o f i c h e 
-m i c r o f i c h e 0x20 c a s s e t t e 	| m i k r o f i c h e k a s s e t t 
+m i c r o f i c h e 	| m i k r o k o r t
 m i c r o f i l m 0x20 c a r t r i d g e 	| m i k r o f i l m s m a g a s i n 
 m i c r o f i l m 0x20 c a s s e t t e 	| m i k r o f i l m s k a s s e t t 
 m i c r o f i l m 0x20 r e e l 	| m i k r o f i l m s k a s s e t t 
 m i c r o f i l m 0x20 r o l l 	| m i k r o f i l m s r u l l e 
 m i c r o f i l m 0x20 s l i p 	| m i k r o f i l m s r e m s a 
-m i c r o o p a q u e 	| m i k r o k o r t 
+m i c r o o p a q u e 	| m i k r o k o r t 0x20 (o g e n o m s k i n l i g t)
 m i c r o s c o p e 0x20 s l i d e 	| m i k r o s k o p e r i n g s p r e p a r a t 
 o b j e c t 	| f 0xc3 0xb6 r e m 0xc3 0xa5 l 
 o n l i n e 0x20 r e s o u r c e 	| o n l i n e r e s u r s 
-o t h e r 	| a n n a n 0x20 v i d e o b 0xc3 0xa4 r a r e 
-o v e r h e a d 0x20 t r a n s p a r e n c y 	| O H - b i l d 
+o t h e r 	| 0xc3 0xb6 v r i g
+o v e r h e a d 0x20 t r a n s p a r e n c y 	| t r a n s p a r a n g
 r o l l 	| r u l l e 
 s h e e t 	| a r k 
 s l i d e 	| d i a b i l d 
 s o u n d 0x20 t r a c k 0x20 r e e l 	| f i l m l j u d s p o l e 
 s t e r e o g r a p h 0x20 c a r d 	| s t e r e o g r a f i s k t 0x20 k o r t 
 s t e r e o g r a p h 0x20 d i s c 	| s t e r e o g r a f i s k 0x20 s k i v a 
-u n s p e c i f i e d 	| o s p e c i f i c e r a d 0x20 b 0xc3 0xa4 r a r t y p 
+u n s p e c i f i e d 	| o s p e c i f i c e r a d 
 v i d e o 0x20 c a r t r i d g e 	| v i d e o m a g a s i n 
 v i d e o c a s s e t t e 	| v i d e o k a s s e t t 
 v i d e o d i s c 	| v i d e o s k i v a 
