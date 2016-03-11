@@ -5,9 +5,9 @@ versio 10.3.2016 / Kansalliskirjasto (TV)
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
                       RegReplace('ss\\.', 'sivut', 'g'); \
-                      RegReplace('\\bkuv[\\b|\\.]', 'kuvitettu'); \
-                      RegReplace('verkkojulkaisu', 'verkkoaineisto'); \
-                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto')
+                      RegReplace('\\bkuv[\\b|\\.]', 'kuvitettu', 'g'); \
+                      RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
+                      RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
                       
 #define macro 300BE | RegReplace('kartt[\\b|\\.]', 'karttoja', 'g'); \
                       RegReplace('kuv[\\b|\\.]', 'kuvitettu', 'g'); \
@@ -101,10 +101,6 @@ versio 10.3.2016 / Kansalliskirjasto (TV)
 000/19/ | 000/19/ | 'i'
 000/20/ | 000/20/ | S
 000/21-24/ | 000/21-24/ | '4500'
-
-001   | <DEL  | S
-
-003   | <DEL  | S
 
 015I1 | 015I1 | S
 015I2 | 015I2 | S
