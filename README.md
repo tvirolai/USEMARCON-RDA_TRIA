@@ -10,7 +10,7 @@ Konversiosääntö on testausvaiheessa. Se ei ole vielä valmis tuotantokantojen
 
 Viimeisimmät muutokset
 -------
-Auktoriteettitietueiden konversiosäännön ensimmäinen versio on lisätty.
+Ruotsinkielinen konversioversio on lisätty. Konversio tuottaa tai kääntää kaikki 336-338-kentät RDA:n mukaisiksi ruotsinkielisiksi termeiksi sekä kääntää tai avaa englannin- ja ruotsinkieliset funktiotermit tai niiden lyhenteet ruotsiksi. Ruotsinkielisen konversion voi valita muuttamalla ma21RDA_bibliografiset.ini-tiedostossa kohdan "RuleFile=ma21RDA_bibl.rul" muotoon "RuleFile=sv_ma21RDA_bibl.rul".
 
 Käyttö
 --------
