@@ -77,16 +77,16 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
                             RegReplace('\\bn[\\b|\\.]', 'noin', 'g'); \
                             RegReplace('\\bvs[\\b|\\.]', 'vuosisata', 'g')
 
-#define macro SIDOSASUT |  RegReplace('\\bsid\\b', 'sidottu', 'g'); \
-                           RegReplace('\\bnid\\b', 'nidottu', 'g'); \
-                           RegReplace('\\bvirh\\b', 'virheellinen', 'g'); \
-                           RegReplace('\\binb\\b', 'inbunden', 'g'); \
-                           RegReplace('\\bhft\\b', 'häftad', 'g'); \
-                           RegReplace('\\bpbk\\b', 'paperback', 'g'); \
-                           RegReplace('\\bhbk\\b', 'hardback', 'g'); \
-                           RegReplace('\\balk\\b', 'alkaline', 'g'); \
-                           RegReplace('\\bbk\\b', 'book', 'g'); \
-                           RegReplace('\\bverkkojulk\\b', 'verkkoaineisto', 'g')
+#define macro SIDOSASUT |  RegReplace('\\bsid\\.|\\bsid\\b', 'sidottu', 'g'); \
+                           RegReplace('\\bnid\\.|\\bnid\\b', 'nidottu', 'g'); \
+                           RegReplace('\\bvirh\\b|\\bvirh\\.', 'virheellinen', 'g'); \
+                           RegReplace('\\binb\\b|\\binb\\.', 'inbunden', 'g'); \
+                           RegReplace('\\bhft\\b|\\bhft\\.', 'häftad', 'g'); \
+                           RegReplace('\\bpbk\\b|\\bpbk\\.', 'paperback', 'g'); \
+                           RegReplace('\\bhbk\\b|\\bhbk\\.', 'hardback', 'g'); \
+                           RegReplace('\\balk\\b|\\balk\\.', 'alkaline', 'g'); \
+                           RegReplace('\\bbk\\b|\\bbk\\.', 'book', 'g'); \
+                           RegReplace('\\bverkkojulk\\b|\\bverkkojulk\\.', 'verkkoaineisto', 'g')
 
 #define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna', 'g'); \
                                RegReplace('[Pp]aperisena', 'painettuna', 'g'); \
@@ -133,7 +133,7 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
                 SIDOSASUT
 
 028I1 | 028I1  | S
-028I2 | 028I2  | S
+028I2 | 028I2  | If (@000/7/ = 'c') Then '3' 
 028   | 028    | S
 
 100I1 | 100I1  | S
