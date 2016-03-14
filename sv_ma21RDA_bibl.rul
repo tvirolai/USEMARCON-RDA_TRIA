@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet, ruotsi
-versio 11.3.2016 / Kansalliskirjasto (TV)
+versio 14.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -138,7 +138,7 @@ versio 11.3.2016 / Kansalliskirjasto (TV)
 100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | 100$c  | FIKTIIVINENHAHMO
 100$d | 100$d  | AIKAMAAREET
-100$e | 100$e  | Table ('sv_Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.'
+100$e | 100$e  | Delete('.', At Ending); Table ('sv_Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
 100$4 | 100$e  | If Not (Exists(@100$e)) Then Table ('sv_Funktiokoodit.tbl'); If (NextSub($e) = '') Then S + '.'
 100$? | 100$?  | S
 
