@@ -1,13 +1,13 @@
 Tekijanfunktiot.tbl -- tekijän funktiotermien lyhenteiden avaus, ruotsi
 
-a b r   | f 0xc3 0xb6 r k o r t a r e
+a b r 	| f 0xc3 0xb6 r k o r t a d 0x20 u t g 0xc3 0xa5 v a 
 a c t   | s k 0xc3 0xa5 d e s p e l a r e
 a n m   | a n i m a t 0xc3 0xb6 r
 a n n    | f  0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 a n n o t a t i o n
 a q t   | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 f 0xc3 0xb6 r o r d , i n t r o d u c e r a n d e 0x20 m a t e r i a l , 0x20 e t c .
 a r c   | a r k i t e k t
 a r d   | s c e n o g r a f
-a r r   | a r r a n g 0xc3 0xb6 r
+a r r 	| a r r a n g 0xc3 0xb6 r 
 a r t   | k o n s t n 0xc3 0xa4 r
 a t o  | s i g n a t u r
 a t t   | f 0xc3 0xb6 r f a t t a r e
@@ -21,17 +21,17 @@ c a s   | g j u t a r e
 c h r   | k o r e o g r a f
 c l t   | f r a m s t 0xc3 0xa4 l l a r e 0x20 a v 0x20 l j u s t r y c k
 c m m   | k o m m e n t a t o r
-c m p   | t o n s 0xc3 0xa4 t t a r e
+c m p 	| k o m p o s i t 0xc3 0xb6 r 
 c n d   | d i r i g e n t
 c n g   | f i l m f o t o g r a f
 c o l   | s a m l a r e
 c o m   | s a m m a n s t 0xc3 0xa4 l l a r e
 c o r   | s a m l i n g s r e g i s t r a t o r
-c o u   | i 0x20 k r a f t 0x20 i 0x20 d o m s t o l
+c o u 	| d o m s t o l s 0x20 r e g e l v e r k 
 c r t   | d o m s t o l s s e k r e t e r a r e
 c s l   | e x p e r t
 c s t   | k o s t y m 0xc3 0xb6 r
-c t g   | k a r t m a k a r e
+c t g 	| k a r t o g r a f 
 c u r   | k u r a t o r
 c w t   | k o m m e n t a t o r
 d f d   | s v a r a n d e 0x20 p a r t 0x20 i 0x20 r 0xc3 0xa4 t t e g 0xc3 0xa5 n g
@@ -46,19 +46,19 @@ d s r   | f o r m g i v a r e
 d s t   | d i s t r i b u t 0xc3 0xb6 r
 d t e   | v e r k 0x20 t i l l 0xc3 0xa4 g n a t 
 d t o   | v e r k 0x20 t i l l 0xc3 0xa4 g n a t 0x20 a v 
-d u b  | f 0xc3 0xb6 r f a t t a r e
+d u b   | f 0xc3 0xb6 r f a t t a r e
 e d c   | r e d a k t 0xc3 0xb6 r 0x20 f 0xc3 0xb6 r 0x20 s a m l i n g s v e r k
-e d m  | f i l m k l i p p a r e
+e d m   | r e d i g e r a r e 
 e d t   | r e d a k t 0xc3 0xb6 r
 e g r   |  g r a v 0xc3 0xb6 r
 e t r   | e t s a r e
-f d s   | u t g i v a r e 0x20 a v 0x20 f i l m
-f l m   | f i l m k l i p p a r e
+f d s 	| f i l m d i s t r i b u t 0xc3 0xb6 r 
+f l m 	| r e d i g e r a r e 
 f m d   | f i l m r e g i s s 0xc3 0xb6 r
 f m k   | f i l m s k a p a r e
 f m o   | t i d i g a r e 0x20 0xc3 0xa4 g a r e
 f m p   | f i l m p r o d u c e n t
-h i s   | v 0xc3 0xa4 r d i n s t i t u t i o n
+h i s 	| v 0xc3 0xa4 r d o r g a n i s a t i o n 
 h n r   | f e s t s k r i f t s f 0xc3 0xb6 r e m 0xc3 0xa5 l
 h s t   | p r o g r a m l e d a r e
 i l l   | i l l u s t r a t 0xc3 0xb6 r
@@ -74,7 +74,7 @@ l b t   | l i b r e t t i s t
 l t g   | l i t o g r a f
 l y r   | s 0xc3 0xa5 n g t e x t f 0xc3 0xb6 r f a t t a r e
 m s d   | m u s i k a l i s k 0x20 l e d a r e
-m u s   | a r t i s t
+m u s   | e x e k u t 0xc3 0xb6 r 
 n r t   | b e r 0xc3 0xa4 t t a r e
 o t h   | 0xc3 0xb6 v r i g
 o w n   | n u v a r a n d e 0x20 0xc3 0xa4 g a r e
@@ -86,15 +86,15 @@ p l t   | t r y c k p l 0xc3 0xa5 t s t i l l v e r k a r e
 p p t   | m a r i o n e t t s p e l a r e
 p r a   | p r e s e s
 p r d   | p r o d u c e n t
-p r e   |  p r e s e n t a t 0xc3 0xb6 r
-p r f   | a r t i s t
+p r e 	| f i l m p r e s e n t a t 0xc3 0xb6 r 
+p r f 	| e x e k u t 0xc3 0xb6 r 
 p r g   | p r o g r a m m e r a r e
 p r m   | k l i c h e t i l l v e r k a r e
 p r n   | p r o d u k t i o n s b o l a g
 p r o   | p r o d u c e n t
 p r s   | p r o d u k t i o n s d e s i g n e r
 p r t   | b o k t r y c k a r e
-p t f   |  k 0xc3 0xa4 r a n d e 0x20 i 0x20 r 0xc3 0xa4 t t e g 0xc3 0xa5 n g
+p t f 	| k 0xc3 0xa4 r a n d e 
 r c e   | l j u d t e k n i k e r
 r c p   | m o t t a g a r e
 r d d   | r a d i o r e g i s s 0xc3 0xb6 r
