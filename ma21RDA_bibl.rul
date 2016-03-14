@@ -115,7 +115,7 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
 
 020I1 | 020I1 | S
 020I2 | 020I2 | S
-020$a | 020$a | S; RegReplace('[\\s](.*)', '')
+020$a | 020$a | If (RegFind(S, '\\d+') >= 0) Then RegReplace('[\\s](.*)', '')
 020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT; Delete(':', At Ending);
 020$c | <DEL  | S
 020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
@@ -259,6 +259,10 @@ B43 | 243 | S; RAAMATTU
 
 F45 | 245 | S
 
+256I1 | 300I1 | S
+256I2 | 300I2 | S
+256   | 300   | VERKKOAINEISTO
+
 #if (Not Exists(@773))
 260I1 | 260I1 | S
 260I2 | 260I2 | S
@@ -283,21 +287,21 @@ F45 | 245 | S
 270$4 | 270$4  | S
 270$? | 270$?  | S
 
-300I1 | 300I1 | S
-300I2 | 300I2 | S
+300I1 | 300(new)I1 | S
+300I2 | 300(newest)I2 | S
 
 #if (RegFind(@041, 'eng') >= 0)
-300$a | 300$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
+300$a | 300(newest)$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
 #endif
 
 #if (RegFind(@041, 'eng') < 0)
-300$a | 300$a | 300AE; 300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
+300$a | 300(newest)$a | 300AE; 300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
 #endif
 
-300$b | 300$b | 300BE
-300$c | 300$c | S; Delete('.', At Ending)
-300$e | 300$e | 300BE
-300$? | 300$? | S
+300$b | 300(newest)$b | 300BE
+300$c | 300(newest)$c | S; Delete('.', At Ending)
+300$e | 300(newest)$e | 300BE
+300$? | 300(newest)$? | S
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
@@ -306,7 +310,6 @@ F45 | 245 | S
 336(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        Delete(';', At Ending); \
                        If (InTable(S, '336_a_svenska.tbl')) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
-
 336$8 | 336$8 | S
 
 #if Not (Exists(@336$b))
@@ -467,8 +470,9 @@ F45 | 245 | S
 // SAMMA PÅ SVENSKA : MIKROKORT
 
 #if (Not Exists(@338)) \
-    And ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmikort\\b') >= 0) Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
-    And If (Not Exists(@773))
+    And ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmikort\\b') >= 0) ) \
+    And ( (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
+    And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'mikrokort'
@@ -568,7 +572,8 @@ F45 | 245 | S
 
 // MUU
 
-#if (Not Exists(@338)) And (Not Exists(@773)) And ( \
+#if (Not Exists(@338)) And (Not Exists(@773)) And (Not Exists(%338)) \
+  And ( \
     (RegFind(@300$a, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
     Or (RegFind(@337$a, 'useita v') >= 0) \
    )
