@@ -4,6 +4,7 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
 #define version 317
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+                      RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
                       RegReplace('ss\\.', 'sivut', 'g'); \
                       RegReplace('\\bkuv[\\b|\\.]', 'kuvitettu', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
@@ -132,8 +133,8 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
                 Delete('.', At Ending); \ // Poistetaan piste lyhenteen perästä ennen avaamista
                 SIDOSASUT
 
-028I1 | 028I1  | S
-028I2 | 028I2  | If (@000/7/ = 'c') Then '3' Else S
+028I1 | 028I1  | If (Not Exists(@028(2))) And (S = '0') And (@000/7/ = 'c') Then '3' Else S
+028I2 | 028I2  | S
 028   | 028    | S
 
 100I1 | 100I1  | S
@@ -822,7 +823,7 @@ F45 | 245 | S
 600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
 
-C60 | 600 | S; RAAMATTU
+C60 | 600 | If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S; RAAMATTU
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -849,13 +850,13 @@ C60 | 600 | S; RAAMATTU
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | S; RAAMATTU
+D61 | 610 | If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S; RAAMATTU
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
 611$j | 611$j  | Table ('Funktiotermit.tbl')
 611$4 | 611$j  | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-611$? | 611$?  | S
+611   | 611    | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 630I1 | 630I1  | S
 630I2 | 630I2  | S
@@ -880,22 +881,27 @@ D61 | 610 | S; RAAMATTU
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | S; RAAMATTU
+E63 | 630 | If (@630I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S; RAAMATTU
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
 650$4 | 650$e  | If (Not (Exists(@650$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-650$? | 650$?  | S
+650   | 650    | If (@650I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 651I1 | 651I1  | S
 651I2 | 651I2  | S
 651$4 | 651$e  | If (Not (Exists(@651$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-651$? | 651$?  | S
+651   | 651    | If (@651I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 654I1 | 654I1  | S
 654I2 | 654I2  | S
 654$4 | 654$e  | If (Not (Exists(@654$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 654$? | 654$?  | S
+
+655I1 | 655I1  | S
+655I2 | 655I2  | S
+655$5 | 655$e  | If (Not (Exists(@655$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+655   | 655    | If (@655I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 662I1 | 662I1  | S
 662I2 | 662I2  | S
