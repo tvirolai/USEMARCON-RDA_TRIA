@@ -271,7 +271,9 @@ F45 | 245 | S
                    RegReplace('[Ss]\\.\\s*[Nn]\\.', 'kustantaja tuntematon')
 260$b | 260$b | S; RegReplace('[Ss]\\.\\s*[Nn]\\.', 'kustantaja tuntematon')
 260$c | 260$c | RegReplace('[Ss]\\.\\s*[Aa]\\.*', 'julkaisuaika tuntematon'); \
-                If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) And (RegFind(S, '\\d{4}') >= 0) '[' + RegMatch(0) + ']' \
+                If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) \
+                  And ( (RegFind(S, '\\d{4}') >= 0) Or (RegFind(S, '\\d{4}-\\d{4}') >= 0) ) \
+                  Then '[' + RegMatch(0) + ']' \
                 Else S
 260$? | 260$? | S
 #endif
