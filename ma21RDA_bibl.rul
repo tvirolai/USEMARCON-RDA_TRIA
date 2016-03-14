@@ -466,7 +466,8 @@ F45 | 245 | S
     And ( \
       (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) \
         Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') \
-        Or (008/24/ = 'a') \
+        Or (008/24/ = 'b') \
+        Or (008/24/ = 'c') \
         ) \
     And (Not Exists(@773))
 000 | 338(new)I1 | ' '
@@ -538,7 +539,7 @@ F45 | 245 | S
 // MIKROFILMIRULLA
 
 #if (Not Exists(@338)) \
-  And ( (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) Or (007/1-2/ = 'hj') ) \
+  And ( (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a')) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
