@@ -133,7 +133,7 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
                 SIDOSASUT
 
 028I1 | 028I1  | S
-028I2 | 028I2  | If (@000/7/ = 'c') Then '3' 
+028I2 | 028I2  | If (@000/7/ = 'c') Then '3' Else S
 028   | 028    | S
 
 100I1 | 100I1  | S
@@ -261,7 +261,7 @@ F45 | 245 | S
 
 256I1 | 300I1 | S
 256I2 | 300I2 | S
-256   | 300   | VERKKOAINEISTO
+256   | 300   | VERKKOAINEISTO; Delete ('.', At Ending)
 
 #if (Not Exists(@773))
 260I1 | 260I1 | S
@@ -296,7 +296,7 @@ F45 | 245 | S
 300I2 | 300(newest)I2 | S
 
 #if (RegFind(@041, 'eng') >= 0)
-300$a | 300(newest)$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages')
+300$a | 300(newest)$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages'); Delete ('.', At Ending)
 #endif
 
 #if (RegFind(@041, 'eng') < 0)
@@ -463,7 +463,11 @@ F45 | 245 | S
 // MIKROKORTTI
 
 #if (Not Exists(@338)) \
-    And ( (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
+    And ( \
+      (RegFind(@300$a, '[Mm]ikrokortti') >= 0) Or (RegFind(@500$a, 'filmikortt') >= 0) \
+        Or (007/1-2/ = 'hg') Or (007/1-2/ = 'he') \
+        Or (008/24/ = 'a') \
+        ) \
     And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
