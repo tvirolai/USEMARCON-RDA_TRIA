@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 14.3.2016 / Kansalliskirjasto (TV)
+versio 15.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -99,9 +99,14 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
                                RegReplace('verkkojulkaisuun', 'verkkoaineistoon'); \
                                RegReplace('Elektroninen julkaisu|Verkkojulkaisuun', 'Linkki verkkoaineistoon')
 
-#define macro FUNKTIOVALIMERKIT | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$e)', '\\1,\\2'); \
-                                  RegReplace('\\.($4|$e)', ',\\1')
+#define macro FUNKTIOVALIMERKIT | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$e)', '\\1,\\2', 'g'); \
+                                  RegReplace('\\.($[e|4])', ',\\1', 'g'); \
+                                  RegReplace(',,', ',')
+                                  
 
+#define macro FUNKTIOT2 | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$j)', '\\1,\\2', 'g'); \
+                          RegReplace('\\.($[j|4])', ',\\1', 'g'); \
+                          RegReplace(',,', ',')
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
@@ -143,26 +148,32 @@ versio 14.3.2016 / Kansalliskirjasto (TV)
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
-100$a | 100$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$b | 100$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$c | 100$c  | FIKTIIVINENHAHMO
-100$d | 100$d  | AIKAMAAREET
-100$e | 100$e  | Delete('.', At Ending); Table ('Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
-100$4 | 100$e  | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-100$? | 100$?  | S
+100$a | <A10$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
+100$b | <A10$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
+100$c | <A10$c  | FIKTIIVINENHAHMO
+100$d | <A10$d  | AIKAMAAREET
+100$e | <A10$e  | Delete('.', At Ending); Table ('Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
+100$4 | <A10$e  | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+100$? | <A10$?  | S
+
+A10   | 100    | FUNKTIOVALIMERKIT
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
-110$c | 110$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
-110$e | 110$e  | Table ('Funktiotermit.tbl')
-110$4 | 110$e  | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-110$? | 110$?  | S
+110$c | <B11$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
+110$e | <B11$e  | Table ('Funktiotermit.tbl')
+110$4 | <B11$e  | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+110$? | <B11$?  | S
+
+B11   | 110    | FUNKTIOVALIMERKIT
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
-111$j | 111$j  | Table ('Funktiotermit.tbl')
-111$4 | 111$j  | If (Not (Exists(@111$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-111$? | 111$?  | S
+111$j | <C11$j  | Table ('Funktiotermit.tbl')
+111$4 | <C11$j  | Table ('Funktiokoodit.tbl') + '.'
+111$? | <C11$?  | S
+
+C11   | 111    | FUNKTIOT2
 
 130I1 | 130I1  | S
 130I2 | 130I2  | S
@@ -827,7 +838,7 @@ F45 | 245 | S
 600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
 
-C60 | 600 | If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S; RAAMATTU
+C60 | 600 | FUNKTIOVALIMERKIT; RAAMATTU; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -854,13 +865,14 @@ C60 | 600 | If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S; RAAMATTU
+D61 | 610 | FUNKTIOVALIMERKIT; RAAMATTU; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
-611I1 | 611I1  | S
-611I2 | 611I2  | S
-611$j | 611$j  | Table ('Funktiotermit.tbl')
-611$4 | 611$j  | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-611   | 611    | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+611I1 | <K61I1  | S
+611I2 | <K61I2  | S
+611$j | <K61$j  | Table ('Funktiotermit.tbl')
+611$4 | <K61$j  | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+611   | <K61    | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+K61   | 611     | FUNKTIOT2
 
 630I1 | 630I1  | S
 630I2 | 630I2  | S
@@ -885,32 +897,42 @@ D61 | 610 | If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | If (@630I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S; RAAMATTU
+E63 | 630 | FUNKTIOVALIMERKIT; RAAMATTU; If (@630I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
-650$4 | 650$e  | If (Not (Exists(@650$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-650   | 650    | If (@650I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+650$4 | <O65$e | If (Not (Exists(@650$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+650$? | <O65$? | If (@650I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+
+O65   | 650    | FUNKTIOVALIMERKIT
 
 651I1 | 651I1  | S
 651I2 | 651I2  | S
-651$4 | 651$e  | If (Not (Exists(@651$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-651   | 651    | If (@651I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+651$4 | <U65$e | If (Not (Exists(@651$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+651   | <U65   | If (@651I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+
+U65   | 651    | FUNKTIOVALIMERKIT
 
 654I1 | 654I1  | S
 654I2 | 654I2  | S
-654$4 | 654$e  | If (Not (Exists(@654$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-654$? | 654$?  | S
+654$4 | <R54$e | If (Not (Exists(@654$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+654$? | <R54$? | S
+
+R54   | 654    | FUNKTIOVALIMERKIT
 
 655I1 | 655I1  | S
 655I2 | 655I2  | S
-655$5 | 655$e  | If (Not (Exists(@655$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-655   | 655    | If (@655I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+655$5 | <T55$e | If (Not (Exists(@655$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+655   | <T55   | If (@655I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+
+T55   | 655    | FUNKTIOVALIMERKIT
 
 662I1 | 662I1  | S
 662I2 | 662I2  | S
-662$4 | 662$e  | If (Not (Exists(@662$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-662$? | 662$?  | S
+662$4 | <Z62$e  | If (Not (Exists(@662$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+662$? | <Z62$?  | S
+
+Z65   | 662    | FUNKTIOVALIMERKIT
 
 700I1 | 700I1  | S
 700I2 | 700I2  | S
@@ -971,8 +993,8 @@ H71 | 710 | FUNKTIOVALIMERKIT; RAAMATTU
 711I1 | 711I1  | S
 711I2 | 711I2  | S
 711$j | 711$j  | Table ('Funktiotermit.tbl')
-711$4 | 711$e  | If (Not (Exists(%711$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-711   | 711    | FUNKTIOVALIMERKIT 
+711$4 | 711$j  | If (Not (Exists(%711$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+711   | 711    | FUNKTIOT2
 
 720I1 | 720I1  | S
 720I2 | 720I2  | S
@@ -1047,7 +1069,7 @@ J73 | 730 | S; RAAMATTU
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
 
-K80 | 800 | S; RAAMATTU
+K80 | 800 | FUNKTIOVALIMERKIT; RAAMATTU
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
@@ -1072,13 +1094,14 @@ K80 | 800 | S; RAAMATTU
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
 
-L81 | 810 | S; RAAMATTU
+L81 | 810 | FUNKTIOVALIMERKIT; RAAMATTU
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
-811$4 | 811$j  | If (Not (Exists(@811$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-811$? | 811$?  | S
+811$4 | <W81$j  | If (Not (Exists(@811$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+811$? | <W81$?  | S
 
+W81   | 811    | FUNKTIOT2
 
 830I1 | 830I1  | S
 830I2 | 830I2  | S
