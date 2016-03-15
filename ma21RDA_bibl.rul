@@ -46,21 +46,20 @@ versio 15.3.2016 / Kansalliskirjasto (TV)
                                  RegReplace('puhallinork[\\.|\\b]', 'puhallinorkesteri'); \
                                  RegReplace('kät[\\.|\\b]', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
-                                 RegReplace('(^|[^A-Za-z])ork(\$|[^A-Za-z])', '\\1orkesteri'); \
-                                 RegReplace('(S) (\\(\\d+)', 'sopraanot \\2'); \
-                                 RegReplace('(S)([^A-Za-zÄÖÅäöå]|\$|,)', 'sopraano\\2', 'g'); \
-                                 RegReplace('(Mz) (\\(\\d+)', 'mezzosopraanot \\2'); \
-                                 RegReplace('(Mz)([^A-Za-zÄÖÅäöå]|\$|,)', 'mezzosopraano\\2', 'g'); \
-                                 RegReplace('(A) (\\(\\d+)', 'altot \\2'); \
-                                 RegReplace('(A)([^A-Za-zÄÖÅäöå]|\$|,)', 'altto\\2', 'g'); \
-                                 RegReplace('(Kt) (\\(\\d+)', 'kontratenorit \\2'); \
-                                 RegReplace('(Kt)([^A-Za-zÄÖÅäöå]|\$|,)', 'kontratenori\\2', 'g'); \
-                                 RegReplace('(T) (\\(\\d+)', 'tenorit \\2'); \
-                                 RegReplace('(T)([^A-Za-zÄÖÅäöå]|\$|,)', 'tenori\\2', 'g'); \
-                                 RegReplace('(Bar) (\\(\\d+)', 'baritonit \\2'); \
-                                 RegReplace('(Bar)([^A-Za-zÄÖÅäöå]|\$|,)', 'baritoni\\2', 'g'); \
-                                 RegReplace('(B) (\\(\\d+)', 'bassot \\2'); \
-                                 RegReplace('(B)([^A-Za-zÄÖÅäöå]|\$|,)', 'basso\\2', 'g'); \
+                                 RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
+                                 RegReplace('\\bS\\b', 'sopraano', 'g'); \
+                                 RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraanot \\1', 'g'); \
+                                 RegReplace('\\bMz\\b', 'mezzosopraano', 'g'); \
+                                 RegReplace('\\bA\\s*(\\(\\d+)', 'altot \\1', 'g'); \
+                                 RegReplace('\\bA\\b', 'altto', 'g'); \
+                                 RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorit \\1', 'g'); \
+                                 RegReplace('\\bKt\\b', 'kontratenori', 'g'); \
+                                 RegReplace('\\bT\\s*(\\(\\d+)', 'tenorit \\1', 'g'); \
+                                 RegReplace('\\bT\\b', 'tenori', 'g'); \
+                                 RegReplace('\\bBar\\b', 'baritoni', 'g'); \
+                                 RegReplace('\\bBar\\s*(\\(\\d+)', 'baritonit \\1', 'g'); \
+                                 RegReplace('\\bB\\s*(\\(\\d+)', 'bassot \\1', 'g'); \
+                                 RegReplace('\\bB\\b', 'basso', 'g'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') < 0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') < 0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
