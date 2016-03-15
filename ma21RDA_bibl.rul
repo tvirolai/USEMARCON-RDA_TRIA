@@ -10,29 +10,29 @@ versio 15.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
                       
-#define macro 300BE | RegReplace('kartt[\\b|\\.]', 'karttoja', 'g'); \
-                      RegReplace('kuv[\\b|\\.]', 'kuvitettu', 'g'); \
-                      RegReplace('mv[\\b|\\.]', 'mustavalkoinen', 'g'); \
-                      RegReplace('vär[\\b|\\.]', 'värillinen', 'g'); \
-                      RegReplace('värikuv[\\b|\\.]', 'värikuvitus', 'g'); \
-                      RegReplace('nuott[\\b|\\.]', 'nuotteja', 'g'); \
-                      RegReplace('kuval[\\.|\\b]', 'kuvalehteä', 'g'); \
-                      RegReplace('diagrs[\\.|\\b]', 'diagrams', 'g'); \
-                      RegReplace('incl[\\.|\\b]', 'includes', 'g'); \
-                      RegReplace('fold[\\.|\\b] maps', 'folded maps', 'g'); \
-                      RegReplace('([\\.|\\b]*) irtol\\.', '\\1 irtolehteä'); \
-                      Replace('kuvas[\\.|\\b]' By 'kuvasivua'); \
+#define macro 300BE | RegReplace('kartt[\\b|.]', 'karttoja', 'g'); \
+                      RegReplace('kuv[\\b|.]', 'kuvitettu', 'g'); \
+                      RegReplace('mv[\\b|.]', 'mustavalkoinen', 'g'); \
+                      RegReplace('vär[\\b|.]', 'värillinen', 'g'); \
+                      RegReplace('värikuv[\\b|.]', 'värikuvitus', 'g'); \
+                      RegReplace('nuott[\\b|.]', 'nuotteja', 'g'); \
+                      RegReplace('kuval[.|\\b]', 'kuvalehteä', 'g'); \
+                      RegReplace('diagrs[.|\\b]', 'diagrams', 'g'); \
+                      RegReplace('incl[.|\\b]', 'includes', 'g'); \
+                      RegReplace('fold[.|\\b] maps', 'folded maps', 'g'); \
+                      RegReplace('([.|\\b]*) irtol\\.', '\\1 irtolehteä'); \
+                      Replace('kuvas[.|\\b]' By 'kuvasivua'); \
                       RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja', 'g'); \
-                      RegReplace('[\\.|\\b]taul\\.', 'taulukkoja', 'g'); \
-                      RegReplace('hakem[\\.|\\b]', 'hakemisto', 'g'); \
-                      RegReplace('lyh[\\.|\\b] luett\\.', 'lyhenneluettelo', 'g'); \
-                      RegReplace('lähdel[\\.|\\b]', 'lähdeluettelo', 'g'); \
-                      RegReplace('liitel[\\.|\\b]', 'liiteluettelo', 'g'); \
+                      RegReplace('[.|\\b]taul\\.', 'taulukkoja', 'g'); \
+                      RegReplace('hakem[.|\\b]', 'hakemisto', 'g'); \
+                      RegReplace('lyh[.|\\b] luett\\.', 'lyhenneluettelo', 'g'); \
+                      RegReplace('lähdel[.|\\b]', 'lähdeluettelo', 'g'); \
+                      RegReplace('liitel[.|\\b]', 'liiteluettelo', 'g'); \
                       RegReplace('(\\d*) taul\\.', '\\1 taulukkoa', 'g'); \
                       RegReplace('(\\d*) karttal\\.', '\\1 karttaliitettä', 'g'); \
-                      RegReplace('\\] kuvas[\\b|\\.]', '] kuvasivua', 'g'); \
-                      RegReplace('1 liites[\\.|\\b]', '1 liitesivu', 'g'); \
-                      RegReplace('liites[\\.|\\b]', 'liitesivua', 'g'); \
+                      RegReplace('\\] kuvas[\\b|.]', '] kuvasivua', 'g'); \
+                      RegReplace('1 liites[.|\\b]', '1 liitesivu', 'g'); \
+                      RegReplace('liites[.|\\b]', 'liitesivua', 'g'); \
                       RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
@@ -40,11 +40,11 @@ versio 15.3.2016 / Kansalliskirjasto (TV)
 #define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('\\bork\\.', 'orkesteri', 'g'); \
-                                 RegReplace('jousiork[\\.|\\b]', 'jousiorkesteri'); \
-                                 RegReplace('kamariork[\\.|\\b]', 'orkesteri'); \
-                                 RegReplace('puhallinork[\\.|\\b]', 'puhallinorkesteri'); \
-                                 RegReplace('kät[\\.|\\b]', 'kätisesti'); \
+                                 RegReplace('\\bork[\\b|.]', 'orkesteri', 'g'); \
+                                 RegReplace('jousiork[.|\\b]', 'jousiorkesteri'); \
+                                 RegReplace('kamariork[.|\\b]', 'orkesteri'); \
+                                 RegReplace('puhallinork[.|\\b]', 'puhallinorkesteri'); \
+                                 RegReplace('kät[.|\\b]', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
                                  RegReplace('\\bS\\b', 'sopraano', 'g'); \
@@ -613,10 +613,10 @@ F45 | 245 | S
 
 // MUU
 
-#if (Not Exists(@338)) And (Not Exists(@773)) And (Not Exists(%338)) \
+#if (Not Exists(@338)) And (Not Exists(@773)) \
   And ( \
-    (RegFind(@300$a, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
-    Or (RegFind(@337$a, 'useita v') >= 0) \
+    (RegFind(@300, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
+    Or ( (RegFind(@337$a, 'useita v') >= 0) And (RegFind(@336$a, 'useita')) ) \
    )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
