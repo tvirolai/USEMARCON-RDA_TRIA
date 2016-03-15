@@ -1,13 +1,16 @@
 sv_Funktiotermit.tbl -- RDA-funktiotermien avaus, englanninkielisten kääntäminen, ruotsi (X00, X10, X11 $e, $j)
 
 a r r.   | a r r a n g 0xc3 0xb6 r
+a r t i s t  | e x e k u t 0xc3 0xb6 r
+e x e k .  | e x e k u t 0xc3 0xb6 r
 i l l .    | i l l u s t r a t 0xc3 0xb6 r
+k o m p .  | k o m p o s i t 0xc3 0xb6 r
 r e d .   | r e d a k t 0xc3 0xb6 r
 r e g .   | r e g i s s 0xc3 0xb6 r
 t o n s .   | k o m p o s i t 0xc3 0xb6 r 
 0xc3 0xb6 v e r s .  | 0xc3 0xb6 v e r s 0xc3 0xa4 t t a r e
 
-a b r i d g e r   |  f 0xc3 0xb6 r k o r t a r e
+a b r i d g e r   |  f 0xc3 0xb6 r k o r t a d 0x20 u t g 0xc3 0xa5 v a
 a c t o r   |  s k 0xc3 0xa5 d e s p e l a r e
 a d d r e s s e e   |  m o t t a g a r e
 a n i m a t o r   |  a n i m a t 0xc3 0xb6 r
@@ -17,14 +20,14 @@ a p p e l l e e   | k l a g a n d e s 0x20 m o t p a r t 0x20 i 0x20 a p p e l l
 a r c h i t e c t   | a r k i t e k t
 a r r a n g e r   | a r r a n g 0xc3 0xb6 r
 a r t 0x20 d i r e c t o r   |  s c e n o g r a f
-a r t i s t   | k o n s t n 0xc3 0xa4 r
+/ / a r t i s t   | k o n s t n 0xc3 0xa4 r
 a u t h o r   | f 0xc3 0xb6 r f a t t a r e
 a u t o g r a p h e r   | s i g n a t u r
 b i n d e r   | b o k b i n d a r e
 b o o k 0x20 d e s i g n e r   | g r a f i s k 0x20 f o r m g i v a r e
 b r a i l l e 0x20 e m b o s s e r   | p u n k t s k r i f t s p r 0xc3 0xa4 g l a r e
 b r o a d c a s t e r   | s 0xc3 0xa4 n d n i n g s a n s v a r i g
-c a r t o g r a p h e r   | k a r t m a k a r e
+c a r t o g r a p h e r   | k a r t o g r a f
 c a s t e r   | g j u t a r e
 c h o r e o g r a p h e r   | k o r e o g r a f
 c o l l e c t i o n 0x20 r e g i s t r a r   |  s a m l i n g s r e g i s t r a t o r
@@ -34,9 +37,9 @@ c o m m e n t a t o r   | k o m m e n t a t o r
 c o m p i l e r   |  s a m m a n s t 0xc3 0xa4 l l a r e
 c o m p o s e r  |   k o m p o s i t 0xc3 0xb6 r 
 c o n d u c t o r   | d i r i g e n t
-c on s u l t a n t   | e x p e r t
+c o n s u l t a n t   | e x p e r t
 c o s t u m e 0x20 d e s i g n e r   | k o s t y m 0xc3 0xb6 r
-c o u r t 0x20 g o v e r n e d    | i 0x20 k r a f t 0x20 i 0x20 d o m s t o l
+c o u r t 0x20 g o v e r n e d    | d o m s t o l s 0x20 r e g e l v e r k
 c o u r t 0x20 r e p o r t e r   | d o m s t o l s s e k r e t e r a r e
 c u r a t o r   | k u r a t o r
 c u r r e n t 0x20 o w n e r   |   n u v a r a n d e 0x20 0xc3 0xa4 g a r e
@@ -54,19 +57,19 @@ d o n o r   | d o n a t o r
 d r a f t s m a n   | r i t a r e
 e d i t o r   |   r e d a k t 0xc3 0xb6 r
 e d i t o r 0x20 o f 0x20 c o m p i l a t i o n   | | r e d a k t 0xc3 0xb6 r 0x20 f 0xc3 0xb6 r 0x20 s a m l i n g s v e r k
-e d i t o r 0x20 o f 0x20 m o v i n g 0x20 i m a g e   | f i l m k l i p p a r e
+e d i t o r 0x20 o f 0x20 m o v i n g 0x20 i m a g e   | r e d i g e r a r e
 e n a c t i n g 0x20 j u r i s d i c t i o n   | v e r k s t 0xc3 0xa4 ä l l a n d e 0x20 j u r i s d i k t i o n
 e n g r a v e r   | g r a v 0xc3 0xb6 r
 e t c h e r   | e t s a r e
 f i l m 0x20 d i r e c t o r   | f i l m r e g i s s 0xc3 0xb6 r   
-f i l m 0x20 d i s t r i b u t o r   | u t g i v a r e 0x20 a v 0x20 f i l m
+f i l m 0x20 d i s t r i b u t o r   | f i l m d i s t r i b u t 0xc3 0xb6 r
 f i l m 0x20 p r o d u c e r   | f i l m p r o d u c e n t
 f i l m m a k e r   | f i l m s k a p a r e
 f o r m e r 0x20 o w n e r   | t i d i g a r e 0x20 0xc3 0xa4 g a r e
 h o n o u r e e    | f e s t s k r i f t s f 0xc3 0xb6 r e m 0xc3 0xa5 l
 h o n o u r e e 0x20 o f 0x20 i t e m   | f e s t s k r i f t s f 0xc3 0xb6 r e m 0xc3 0xa5 l
 h o s t  | p r o g r a m l e d a r e
-h o s t 0x20 i n s t i t u t i o n   | v 0xc3 0xa4 r d i n s t i t u t i o n
+h o s t 0x20 i n s t i t u t i o n   | v 0xc3 0xa4 r d o r g a n i s a t i o n
 i l l u m i n a t o r   | i l l u m i n a t o r
 i l l u s t r a t o r    | i l l u s t r a t 0xc3 0xb6 r
 i n s c r i b e r    | f 0xc3 0xb6 r f a t t a r e 0x20 t i l l 0x20 d e d i k a t i o n
@@ -87,7 +90,7 @@ n a r r a t o r  | b e r 0xc3 0xa4 t t a r e
 p a n e l i s t     | d e l t a g a r e 0x20 i 0x20 p a n e l d i s k u s s i o n
 p e r f o r m e r   | e x e k u t 0xc3 0xb6 r
 p h o t o g r a p h e r   | f o t o g r a f
-p l a i n t i f f    |  k 0xc3 0xa4 r a n d e 0x20 i 0x20 r 0xc3 0xa4 t t e g 0xc3 0xa5 n g
+p l a i n t i f f    |  k 0xc3 0xa4 r a n d e 
 p l a t e m a k e r    | t r y c k p l 0xc3 0xa5 t s t i l l v e r k a r e
 p r a e s e s   | p r e s e s
 p r e s e n t e r    |  p r e s e n t a t 0xc3 0xb6 r
