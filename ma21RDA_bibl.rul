@@ -21,7 +21,7 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('incl[.|\\b]', 'includes', 'g'); \
                       RegReplace('fold[.|\\b] maps', 'folded maps', 'g'); \
                       RegReplace('([.|\\b]*) irtol\\.', '\\1 irtolehteä'); \
-                      Replace('kuvas[.|\\b]' By 'kuvasivua'); \
+                      Replace('kuvas.' By 'kuvasivua'); \
                       RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja', 'g'); \
                       RegReplace('\\btaul\\.', 'taulukkoja', 'g'); \
                       RegReplace('hakem[.|\\b]', 'hakemisto', 'g'); \
@@ -163,30 +163,30 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
 
 100I1 | 100I1  | S
 100I2 | 100I2  | S
-100$a | <A10$a  | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$b | <A10$b  | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
-100$c | <A10$c  | FIKTIIVINENHAHMO
-100$d | <A10$d  | AIKAMAAREET
-100$e | <A10$e  | Delete('.', At Ending); Table ('Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
-100$4 | <A10$e  | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-100$? | <A10$?  | S
+100$a | <A10$a | S; If ((100$c Follows 100$a) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
+100$b | <A10$b | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
+100$c | <A10$c | FIKTIIVINENHAHMO
+100$d | <A10$d | AIKAMAAREET
+100$e | <A10$e | Delete('.', At Ending); Table ('Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
+100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+100$? | <A10$? | S
 
 A10   | 100    | FUNKTIOVALIMERKIT
 
 110I1 | 110I1  | S
 110I2 | 110I2  | S
-110$c | <B11$c  | FIKTIIVINENYHTEISO; AIKAMAAREET
-110$e | <B11$e  | Table ('Funktiotermit.tbl')
-110$4 | <B11$e  | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-110$? | <B11$?  | S
+110$c | <B11$c | FIKTIIVINENYHTEISO; AIKAMAAREET
+110$e | <B11$e | Table ('Funktiotermit.tbl')
+110$4 | <B11$e | If (Not (Exists(@110$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+110$? | <B11$? | S
 
 B11   | 110    | FUNKTIOVALIMERKIT
 
 111I1 | 111I1  | S
 111I2 | 111I2  | S
-111$j | <C11$j  | Table ('Funktiotermit.tbl')
-111$4 | <C11$j  | Table ('Funktiokoodit.tbl') + '.'
-111$? | <C11$?  | S
+111$j | <C11$j | Table ('Funktiotermit.tbl')
+111$4 | <C11$j | Table ('Funktiokoodit.tbl') + '.'
+111$? | <C11$? | S
 
 C11   | 111    | FUNKTIOT2
 
@@ -392,7 +392,7 @@ T36(ns)$a | 336(n)$8 | T36$8
 
 #if (Not Exists(@338)) \
   And (Not Exists(@773)) \
-  And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e') Or \
+  And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e') And \
           ( \
             ( (RegFind(@336(1)$a, 'eksti') >= 0) Or \
               (RegFind(@336(2)$a, 'eksti') >= 0) Or \
@@ -506,6 +506,7 @@ T36(ns)$a | 336(n)$8 | T36$8
         Or (008/24/ = 'b') \
         Or (008/24/ = 'c') \
         ) \
+    And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
     And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -519,6 +520,7 @@ T36(ns)$a | 336(n)$8 | T36$8
 #if (Not Exists(@338)) \
     And ( (RegFind(@300$a, '[Mm]ikrokort\\b') >= 0) Or (RegFind(@500$a, 'filmikort\\b') >= 0) ) \
     And ( (007/1-2/ = 'hg') Or (007/1-2/ = 'he') ) \
+    And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
     And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -577,6 +579,7 @@ T36(ns)$a | 336(n)$8 | T36$8
 
 #if (Not Exists(@338)) \
   And ( (RegFind(@300$a, '[Mm]ikrofilmi') >= 0) Or (007/1-2/ = 'hj') Or (008/24/ = 'a')) \
+  And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -1158,7 +1161,7 @@ W81   | 811    | FUNKTIOT2
 #endif
 
 830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-830$p | <M83$p | RAAMATTU
+830$p | <M83$p | If (Not Exists(@830$p(2))) Then RAAMATTU Else S
 830$v | <M83$v | S; Delete ('.', At Ending)
 830$? | <M83$? | S
 
