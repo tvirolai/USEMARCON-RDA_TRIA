@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 15.3.2016 / Kansalliskirjasto (TV)
+versio 16.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -616,7 +616,7 @@ F45 | 245 | S
 #if (Not Exists(@338)) And (Not Exists(@773)) \
   And ( \
     (RegFind(@300, '[Tt]aulu|[Uu][Ss][Bb]-muisti|[Oo]ptinen levy|[Ll]evyke|[Dd]isketti|[Oo]petuskuva') >= 0) \
-    Or ( (RegFind(@337$a, 'useita v') >= 0) And (RegFind(@336$a, 'useita')) ) \
+    Or ( (RegFind(@337$a, 'useita v') >= 0) And (RegFind(@336$a, 'useita') >= 0) ) \
    )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -853,6 +853,7 @@ F45 | 245 | S
 600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
 
+// LCSH:n loppupisteen asettaminen
 C60 | 600 | FUNKTIOVALIMERKIT; RAAMATTU; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 610I1 | 610I1  | S
@@ -886,7 +887,8 @@ D61 | 610 | FUNKTIOVALIMERKIT; RAAMATTU; If (@610I2 = '0') And (RegFind('[^A-Za-
 611I2 | <K61I2  | S
 611$j | <K61$j  | Table ('Funktiotermit.tbl')
 611$4 | <K61$j  | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-611   | <K61    | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+611$? | <K61$?  | If (@612I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+
 K61   | 611     | FUNKTIOT2
 
 630I1 | 630I1  | S
@@ -924,7 +926,7 @@ O65   | 650    | FUNKTIOVALIMERKIT
 651I1 | 651I1  | S
 651I2 | 651I2  | S
 651$4 | <U65$e | If (Not (Exists(@651$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-651   | <U65   | If (@651I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+651$? | <U65$? | If (@651I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 U65   | 651    | FUNKTIOVALIMERKIT
 
@@ -937,7 +939,7 @@ R54   | 654    | FUNKTIOVALIMERKIT
 
 655I1 | 655I1  | S
 655I2 | 655I2  | S
-655$5 | <T55$e | If (Not (Exists(@655$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+655$4 | <T55$e | If (Not (Exists(@655$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 655   | <T55   | If (@655I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 T55   | 655    | FUNKTIOVALIMERKIT
@@ -1007,15 +1009,19 @@ H71 | 710 | FUNKTIOVALIMERKIT; RAAMATTU
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
-711$j | 711$j  | Table ('Funktiotermit.tbl')
-711$4 | 711$j  | If (Not (Exists(%711$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-711   | 711    | FUNKTIOT2
+711$j | <U71$j | Table ('Funktiotermit.tbl')
+711$4 | <U71$j | If (Not (Exists(%711$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+711$? | <U71$? | S
+
+U71   | 711    | FUNKTIOT2
 
 720I1 | 720I1  | S
 720I2 | 720I2  | S
-720$e | 720$e  | Table ('Funktiotermit.tbl')
-720$4 | 720$e  | If (Not (Exists(%720$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-720   | 720    | FUNKTIOVALIMERKIT 
+720$e | <Y72$e | Table ('Funktiotermit.tbl')
+720$4 | <Y72$e | If (Not (Exists(%720$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+720$? | <Y72$? | FUNKTIOVALIMERKIT 
+
+Y72   | 720    | S
 
 730I1 | 730I1  | S
 730I2 | 730I2  | S
@@ -1147,7 +1153,6 @@ M83 | 830 | RAAMATTU; \
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S
-856$z | 856$y | S; VERKKOAINEISTO
 856$? | 856$? | S; VERKKOAINEISTO
 
 #if (TAG != 'DEL')
