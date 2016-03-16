@@ -23,7 +23,7 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('([.|\\b]*) irtol\\.', '\\1 irtolehteä'); \
                       Replace('kuvas[.|\\b]' By 'kuvasivua'); \
                       RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja', 'g'); \
-                      RegReplace('[.|\\b]taul\\.', 'taulukkoja', 'g'); \
+                      RegReplace('\\btaul\\.', 'taulukkoja', 'g'); \
                       RegReplace('hakem[.|\\b]', 'hakemisto', 'g'); \
                       RegReplace('lyh[.|\\b] luett\\.', 'lyhenneluettelo', 'g'); \
                       RegReplace('lähdel[.|\\b]', 'lähdeluettelo', 'g'); \
@@ -210,9 +210,10 @@ C11   | 111    | FUNKTIOT2
 #endif
 
 130$o | <A30$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+130$p | <A30$p | RAAMATTU
 130$? | <A30$? | S
 
-A30 | 130 | S; RAAMATTU
+A30 | 130 | S
 
 222I1 | 222I1 | S
 222I2 | 222I2 | S
@@ -239,9 +240,10 @@ A30 | 130 | S; RAAMATTU
 #endif
                  
 240$o | <F40$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+240$p | <F40$p | RAAMATTU
 240$? | <F40$? | S
 
-F40   | 240    | S; RAAMATTU
+F40   | 240    | S
 
 243I1 | 243I1  | S
 243I2 | 243I2  | S
@@ -265,7 +267,7 @@ F40   | 240    | S; RAAMATTU
 243$o | <B43$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
 243$? | <B43$? | S
 
-B43 | 243 | S; RAAMATTU
+B43 | 243 | S
 
 #if (Not Exists(%100)) And (Not Exists(%110)) And (Not Exists(%111))
 245I1 | 245I1  | '0'
@@ -854,11 +856,12 @@ T36(ns)$a | 336(n)$8 | T36$8
 #endif
 
 600$o | <C60$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+600$p | <C60$p | RAAMATTU
 600$4 | <C60$e | If (Not (Exists(@600$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 600$? | <C60$? | S
 
 // LCSH:n loppupisteen asettaminen
-C60 | 600 | FUNKTIOVALIMERKIT; RAAMATTU; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+C60 | 600 | FUNKTIOVALIMERKIT; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 610I1 | 610I1  | S
 610I2 | 610I2  | S
@@ -882,10 +885,11 @@ C60 | 600 | FUNKTIOVALIMERKIT; RAAMATTU; If (@600I2 = '0') And (RegFind('[^A-Za-
 #endif
 
 610$o | <D61$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+610$p | <D61$p | RAAMATTU
 610$4 | <C61$e | If (Not (Exists(@610$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 610$? | <D61$? | S
 
-D61 | 610 | FUNKTIOVALIMERKIT; RAAMATTU; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+D61 | 610 | FUNKTIOVALIMERKIT; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 611I1 | <K61I1  | S
 611I2 | <K61I2  | S
@@ -915,10 +919,11 @@ K61   | 611     | FUNKTIOT2
 #endif
 
 630$o | <E63$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+630$p | <E63$p | RAAMATTU
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | FUNKTIOVALIMERKIT; RAAMATTU; If (@630I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+E63 | 630 | FUNKTIOVALIMERKIT; If (@630I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
@@ -978,11 +983,12 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 #endif
 
 700$o | <G70$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+700$p | <G70$p | RAAMATTU
 700$4 | <G70$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.'
 700$4 | <G70$4 | If (Not InTable(S, 'Funktiokoodit.tbl')) Then S 
 700$? | <G70$? | S
 
-G70 | 700 | FUNKTIOVALIMERKIT; RAAMATTU
+G70 | 700 | FUNKTIOVALIMERKIT
 
 710I1 | 710I1  | S
 710I2 | 710I2  | S
@@ -1006,10 +1012,11 @@ G70 | 700 | FUNKTIOVALIMERKIT; RAAMATTU
 #endif
 
 710$o | <H71$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+710$p | <H71$p | RAAMATTU
 710$4 | <H71$e | If InTable(S, 'Funktiokoodit.tbl') Then Table ('Funktiokoodit.tbl') + '.' Else S
 710$? | <H71$? | S
 
-H71 | 710 | FUNKTIOVALIMERKIT; RAAMATTU
+H71 | 710 | FUNKTIOVALIMERKIT
 
 711I1 | 711I1  | S
 711I2 | 711I2  | S
@@ -1047,9 +1054,10 @@ Y72   | 720    | S
 #endif
 
 730$o | <J73$o | SOVITUSMERKINTO; ESITYSKOKOONPANO
+730$p | <J73$p | RAAMATTU
 730$? | <J73$? | S
 
-J73 | 730 | S; RAAMATTU
+J73 | 730 | S
 
 76?I1 | 76?I1 | S
 76?I2 | 76?I2 | S
@@ -1091,10 +1099,11 @@ J73 | 730 | S; RAAMATTU
 #endif
 
 800$o | <K80$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+800$p | <K80$p | RAAMATTU
 800$4 | <K80$e | If (Not (Exists(@800$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 800$? | <K80$? | S
 
-K80 | 800 | FUNKTIOVALIMERKIT; RAAMATTU
+K80 | 800 | FUNKTIOVALIMERKIT
 
 810I1 | 810I1  | S
 810I2 | 810I2  | S
@@ -1116,10 +1125,11 @@ K80 | 800 | FUNKTIOVALIMERKIT; RAAMATTU
 #endif
 
 810$o | <L81$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+810$p | <L81$p | RAAMATTU
 810$4 | <L81$e | If Not (Exists(@810$e)) Then Table ('Funktiokoodit.tbl') + '.'
 810$? | <L81$? | S
 
-L81 | 810 | FUNKTIOVALIMERKIT; RAAMATTU
+L81 | 810 | FUNKTIOVALIMERKIT
 
 811I1 | 811I1  | S
 811I2 | 811I2  | S
@@ -1148,11 +1158,11 @@ W81   | 811    | FUNKTIOT2
 #endif
 
 830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
+830$p | <M83$p | RAAMATTU
 830$v | <M83$v | S; Delete ('.', At Ending)
 830$? | <M83$? | S
 
-M83 | 830 | RAAMATTU; \
-            RegReplace('\\b;$v| ; $v', ' ;$v'); \
+M83 | 830 | RegReplace('\\b;$v| ; $v', ' ;$v'); \
             If (NextSubIn(S, $v) = '') Then S + '.' Else S
 
 856I1 | 856I1 | S
