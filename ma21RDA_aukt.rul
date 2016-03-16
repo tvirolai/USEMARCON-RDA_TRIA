@@ -6,26 +6,26 @@ versio 15.3.2016 / Kansalliskirjasto (TV)
 #define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('\\bork\\.', 'orkesteri', 'g'); \
-                                 RegReplace('jousiork[\\.|\\b]', 'jousiorkesteri'); \
-                                 RegReplace('kamariork[\\.|\\b]', 'orkesteri'); \
-                                 RegReplace('puhallinork[\\.|\\b]', 'puhallinorkesteri'); \
-                                 RegReplace('kät[\\.|\\b]', 'kätisesti'); \
+                                 RegReplace('\\bork\\.|\\bork(\$|\\b)', 'orkesteri', 'g'); \
+                                 RegReplace('jousiork\\.|jousiork(\$|\\b)', 'jousiorkesteri'); \
+                                 RegReplace('kamariork\\.|kamariork(\$|\\b)', 'orkesteri'); \
+                                 RegReplace('puhallinork\\.|puhallinork(\$|\\b)', 'puhallinorkesteri'); \
+                                 RegReplace('\\bkät\\.|\\bkät(\$|\\b)', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
                                  RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
-                                 RegReplace('\\bS\\b', 'sopraano', 'g'); \
+                                 RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopraano\\1', 'g'); \
                                  RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraanot \\1', 'g'); \
-                                 RegReplace('\\bMz\\b', 'mezzosopraano', 'g'); \
+                                 RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopraano\\1', 'g'); \
                                  RegReplace('\\bA\\s*(\\(\\d+)', 'altot \\1', 'g'); \
-                                 RegReplace('\\bA\\b', 'altto', 'g'); \
+                                 RegReplace('\\bA(,|\\s|/|\\)|\$)', 'altto\\1', 'g'); \
                                  RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorit \\1', 'g'); \
-                                 RegReplace('\\bKt\\b', 'kontratenori', 'g'); \
+                                 RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenori\\1', 'g'); \
                                  RegReplace('\\bT\\s*(\\(\\d+)', 'tenorit \\1', 'g'); \
-                                 RegReplace('\\bT\\b', 'tenori', 'g'); \
-                                 RegReplace('\\bBar\\b', 'baritoni', 'g'); \
+                                 RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenori\\1', 'g'); \
                                  RegReplace('\\bBar\\s*(\\(\\d+)', 'baritonit \\1', 'g'); \
+                                 RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baritoni\\1', 'g'); \
                                  RegReplace('\\bB\\s*(\\(\\d+)', 'bassot \\1', 'g'); \
-                                 RegReplace('\\bB\\b', 'basso', 'g'); \
+                                 RegReplace('\\bB(,|\\s|/|\\)|\$)', 'basso\\1', 'g'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') < 0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') < 0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
@@ -48,10 +48,10 @@ versio 15.3.2016 / Kansalliskirjasto (TV)
 #define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)'); \
                                  RegReplace('fiktiivinen henkilö', '(fiktiivinen hahmo)')
 
-#define macro AIKAMAAREET | RegReplace('\\bs[\\b|\\.]', 'syntynyt', 'g'); \
-                            RegReplace('\\bk[\\b|\\.]', 'kuollut', 'g'); \
-                            RegReplace('\\bn[\\b|\\.]', 'noin', 'g'); \
-                            RegReplace('\\bvs[\\b|\\.]', 'vuosisata', 'g')
+#define macro AIKAMAAREET | RegReplace('\\bs\\.', 'syntynyt', 'g'); \
+                            RegReplace('\\bk\\.', 'kuollut', 'g'); \
+                            RegReplace('\\bn\\.', 'noin', 'g'); \
+                            RegReplace('\\bvs\\.', 'vuosisata', 'g')
 
 000     | 000     | S
 
