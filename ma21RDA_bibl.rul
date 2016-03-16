@@ -343,10 +343,15 @@ F45 | 245 | S
 
 336I1 | 336I1 | S
 336I2 | 336I2 | S
-336(ns)$a | 336(n)$a | Delete('.', At Ending); \
-                       Delete(';', At Ending); \
+
+// Toistuvat 336$a-osakentät pilkotaan erillisiin 336-kenttiin. Mahdollinen $8 kopioidaan $a-osakentän mukaan. 
+336   | <T36 | S
+T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
+                       Delete(',', At Ending); \
                        If (InTable(S, '336_a_svenska.tbl')) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
-336$8 | 336$8 | S
+#if (Exists(T36$8))
+T36(ns)$a | 336(n)$8 | T36$8
+#endif
 
 #if Not (Exists(@336$b))
 336(ns)$a | 336(no)$b | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
@@ -358,7 +363,7 @@ F45 | 245 | S
 336$a | 336(no)$2 | 'rdacontent'
 #endif
 
-336   | 336   | Sort('8ab2')
+336(ns)$a | 336(n) | Sort('8ab2')
 
 337I1 | 337I1 | S
 337I2 | 337I2 | S
