@@ -79,8 +79,8 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
 
 #define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu', 'g')
 
-#define macro RAAMATTU | RegReplace('\\bUT[\\b|\\.]', 'Uusi testamentti', 'g'); \
-                         RegReplace('\\bVT[\\b|\\.]', 'Vanha testamentti', 'g')
+#define macro RAAMATTU | RegReplace('\\bUT(\\b|\\.)', 'Uusi testamentti', 'g'); \
+                         RegReplace('\\bVT(\\b|\\.)', 'Vanha testamentti', 'g')
 
 
 #define macro FIKTIIVINENHAHMO | RegReplace('fikt\\.', '(fiktiivinen hahmo)', 'g'); \
@@ -88,10 +88,10 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
 
 #define macro FIKTIIVINENYHTEISO | RegReplace('fikt\\.', '(fiktiivinen yhteisö)')
 
-#define macro AIKAMAAREET | RegReplace('\\bs[\\b|\\.]', 'syntynyt', 'g'); \
-                            RegReplace('\\bk[\\b|\\.]', 'kuollut', 'g'); \
-                            RegReplace('\\bn[\\b|\\.]', 'noin', 'g'); \
-                            RegReplace('\\bvs[\\b|\\.]', 'vuosisata', 'g')
+#define macro AIKAMAAREET | RegReplace('\\bs\\.', 'syntynyt', 'g'); \
+                            RegReplace('\\bk\\.', 'kuollut', 'g'); \
+                            RegReplace('\\bn\\.', 'noin', 'g'); \
+                            RegReplace('\\bvs\\.', 'vuosisata', 'g')
 
 #define macro SIDOSASUT |  RegReplace('\\bsid\\.|\\bsid\\b', 'sidottu', 'g'); \
                            RegReplace('\\bnid\\.|\\bnid\\b', 'nidottu', 'g'); \
@@ -389,21 +389,20 @@ T36(ns)$a | 336(n)$8 | T36$8
 // NIDE
 
 #if (Not Exists(@338)) \
-  And ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e' Or \
-      (RegFind(@300$a, '[Tt]ekstivihko|[Kk]irja|[Kk]artasto') >= 0) Or (RegFind(%336$a, 'Kartografinen') >=0) ) \
   And (Not Exists(@773)) \
-  And (RegFind(@337, 'laitetta') >= 0)
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'nide'
-000 | 338(newest)$b | 'nc'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-#if (Not Exists(%338)) \
-  And (Not Exists(@773)) \
-  And (RegFind(%336$a, 'Teksti') >= 0) \
-  And (RegFind(%337$a, 'laitetta') >= 0)
+  And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e') Or \
+          ( \
+            ( (RegFind(@336(1)$a, 'eksti') >= 0) Or \
+              (RegFind(@336(2)$a, 'eksti') >= 0) Or \
+              (RegFind(@336(3)$a, 'eksti') >= 0) Or \
+              (RegFind(@336(4)$a, 'eksti') >= 0) ) And \
+            ( (RegFind(@337(1)$a, 'laitetta') >= 0) Or \
+              (RegFind(@337(2)$a, 'laitetta') >= 0) Or \
+              (RegFind(@337(3)$a, 'laitetta') >= 0) Or \
+              (RegFind(@337(4)$a, 'laitetta') >= 0) ) \
+          ) \
+        Or (RegFind(@300$a, '[Tt]ekstivihko|[Kk]irja|[Kk]artasto') >= 0) \
+        Or (RegFind(%336$a, 'Kartografinen') >=0) )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'nide'
@@ -951,8 +950,8 @@ T55   | 655    | FUNKTIOVALIMERKIT
 
 662I1 | 662I1  | S
 662I2 | 662I2  | S
-662$4 | <Z62$e  | If (Not (Exists(@662$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-662$? | <Z62$?  | S
+662$4 | <Z62$e | If (Not (Exists(@662$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+662$? | <Z62$? | S
 
 Z65   | 662    | FUNKTIOVALIMERKIT
 
@@ -960,7 +959,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700I2 | 700I2  | S
 700$c | <G70$c | FIKTIIVINENHAHMO
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Table ('Funktiotermit.tbl')
+700$e | <G70$e | Delete('.', At Ending); Table ('Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
