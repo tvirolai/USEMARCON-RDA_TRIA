@@ -397,7 +397,8 @@ T36(ns)$a | 336(n)$8 | T36$8
             ( (RegFind(@336(1)$a, 'eksti') >= 0) Or \
               (RegFind(@336(2)$a, 'eksti') >= 0) Or \
               (RegFind(@336(3)$a, 'eksti') >= 0) Or \
-              (RegFind(@336(4)$a, 'eksti') >= 0) ) And \
+              (RegFind(@336(4)$a, 'eksti') >= 0) Or \
+              (RegFind(@336$a, 'notatoitu') >= 0 ) ) And \
             ( (RegFind(@337(1)$a, 'laitetta') >= 0) Or \
               (RegFind(@337(2)$a, 'laitetta') >= 0) Or \
               (RegFind(@337(3)$a, 'laitetta') >= 0) Or \
@@ -439,7 +440,7 @@ T36(ns)$a | 336(n)$8 | T36$8
 
 // VIDEOKASETTI
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokase') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Vv]ideokas') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'videokasetti'
@@ -459,7 +460,7 @@ T36(ns)$a | 336(n)$8 | T36$8
 
 // PIIRTOHEITINKALVO
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Kk]alvo') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, 'heijastuskuva|[Kk]alvo') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'piirtoheitinkalvo'
@@ -663,6 +664,7 @@ T36(ns)$a | 336(n)$8 | T36$8
     Or (RegFind(000/8/, 's') >= 0) \
     Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
     Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) \
+    Or (RegFind(@336, 'eksti') >= 0) \
   )
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
@@ -718,9 +720,9 @@ T36(ns)$a | 336(n)$8 | T36$8
 
 #if (Not Exists(@338)) \
   And If ( \
-  (RegFind(@300$a, '[Cc]-kase') >= 0) \
-  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kase|[Ää]nikas|kasettia') >= 0) \
-  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kase|[Ää]nikas|kasettia') >= 0) \
+  (RegFind(@300$a, '[Cc]-kas') >= 0) \
+  Or (RegFind(@300$a, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
+  Or (RegFind(@300$e, '[Dd][Aa][Tt]-kase|[Dd][Cc][Cc]-kas|[Ää]nikas|kasettia') >= 0) \
   ) \
   And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
