@@ -14,7 +14,7 @@ Ruotsinkielinen konversioversio on lisätty. Konversio tuottaa tai kääntää k
 
 Käyttö
 --------
-Konversio ajetaan USEMARCON-ohjelmalla. Ohjelman voit ladata osoitteesta http://www.nationallibrary.fi/libraries/format/usemarcon.html. Lähdekoodi on saatavissa USEMARCONin GitHub-sivuilta: https://github.com/NatLibFi/usemarcon.
+Konversio ajetaan USEMARCON-ohjelmalla. Ohjelman voit ladata osoitteesta https://www.kiwi.fi/display/Marc21/USEMARCON. Lähdekoodi on saatavissa USEMARCONin GitHub-sivuilta: https://github.com/NatLibFi/usemarcon.
 
 Kopioi konversiopaketti päätteellesi esimerkiksi "Download ZIP" -painikkeesta. Pura paketti haluamaasi sijaintiin esimerkiksi C:\Usemarcon\ -hakemiston alle. USEMARCONilla käytettävät varsinaiset konversiotiedostot ovat ma21RDA_bibliografiset.ini (bibliografisten tietueiden konversio) ja ma21RDA_auktoriteetit.ini.
 

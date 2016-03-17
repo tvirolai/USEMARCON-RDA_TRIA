@@ -1161,7 +1161,7 @@ W81   | 811    | FUNKTIOT2
 #endif
 
 830$o | <M83$o | SOVITUSMERKINTO, ESITYSKOKOONPANO
-830$p | <M83$p | If (Not Exists(@830$p(2))) Then RAAMATTU Else S
+830$p | <M83$p | S; If (Not Exists(@830$p(2))) Then RAAMATTU
 830$v | <M83$v | S; Delete ('.', At Ending)
 830$? | <M83$? | S
 
