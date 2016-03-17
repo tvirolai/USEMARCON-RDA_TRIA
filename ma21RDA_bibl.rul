@@ -353,6 +353,7 @@ T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        If (InTable(S, '336_a_svenska.tbl')) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
 #if (Exists(T36$8))
 T36(ns)$a | 336(n)$8 | T36$8
+T36   | <DEL  | S
 #endif
 
 #if Not (Exists(@336$b))
@@ -896,8 +897,8 @@ C60 | 600 | FUNKTIOVALIMERKIT; If (@600I2 = '0') And (RegFind('[^A-Za-z]\$') < 0
 
 D61 | 610 | FUNKTIOVALIMERKIT; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
-611I1 | <K61I1  | S
-611I2 | <K61I2  | S
+611I1 | 611I1  | S
+611I2 | 611I2  | S
 611$j | <K61$j  | Table ('Funktiotermit.tbl')
 611$4 | <K61$j  | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 611$? | <K61$?  | If (@612I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
