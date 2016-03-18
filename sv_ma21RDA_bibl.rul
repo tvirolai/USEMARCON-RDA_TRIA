@@ -14,6 +14,8 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('kuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
                       RegReplace('vär\\.', 'värillinen', 'g'); \
+                      RegReplace('\\bl\\.', 'blad', 'g'); \
+                      RegReplace('\\bfig\\.', 'figurer', 'g'); \
                       RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
                       RegReplace('nuott\\.', 'nuotteja', 'g'); \
                       RegReplace('\\bbil\\.', 'bilder', 'g'); \
@@ -42,26 +44,26 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
 #define macro ESITYSKOKOONPANO | RegReplace('pianotrio', 'piano, viulu, sello'); \
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
-                                 RegReplace('\\bork\\.|\\bork(\$|\\b)', 'orkesteri', 'g'); \
+                                 RegReplace('\\bork\\.|\\bork(\$|\\b)', 'orkester', 'g'); \
                                  RegReplace('jousiork\\.|jousiork(\$|\\b)', 'jousiorkesteri'); \
                                  RegReplace('kamariork\\.|kamariork(\$|\\b)', 'orkesteri'); \
                                  RegReplace('puhallinork\\.|puhallinork(\$|\\b)', 'puhallinorkesteri'); \
                                  RegReplace('\\bkät\\.|\\bkät(\$|\\b)', 'kätisesti'); \
                                  RegReplace('soitinääni', 'määrittämätön soitin'); \
-                                 RegReplace('\\bS\\s*(\\(\\d+)', 'sopraanot \\1', 'g'); \
-                                 RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopraano\\1', 'g'); \
-                                 RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraanot \\1', 'g'); \
-                                 RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopraano\\1', 'g'); \
-                                 RegReplace('\\bA\\s*(\\(\\d+)', 'altot \\1', 'g'); \
-                                 RegReplace('\\bA(,|\\s|/|\\)|\$)', 'altto\\1', 'g'); \
-                                 RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorit \\1', 'g'); \
-                                 RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenori\\1', 'g'); \
-                                 RegReplace('\\bT\\s*(\\(\\d+)', 'tenorit \\1', 'g'); \
-                                 RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenori\\1', 'g'); \
-                                 RegReplace('\\bBar\\s*(\\(\\d+)', 'baritonit \\1', 'g'); \
-                                 RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baritoni\\1', 'g'); \
-                                 RegReplace('\\bB\\s*(\\(\\d+)', 'bassot \\1', 'g'); \
-                                 RegReplace('\\bB(,|\\s|/|\\)|\$)', 'basso\\1', 'g'); \
+                                 RegReplace('\\bS\\s*(\\(\\d+)', 'sopraner \\1', 'g'); \
+                                 RegReplace('\\bS(,|\\s|/|\\)|\$)', 'sopran\\1', 'g'); \
+                                 RegReplace('\\bMz\\s*(\\(\\d+)', 'mezzosopraner \\1', 'g'); \
+                                 RegReplace('\\bMz(,|\\s|/|\\)|\$)', 'mezzosopran\\1', 'g'); \
+                                 RegReplace('\\bA\\s*(\\(\\d+)', 'altar \\1', 'g'); \
+                                 RegReplace('\\bA(,|\\s|/|\\)|\$)', 'alt\\1', 'g'); \
+                                 RegReplace('\\bKt\\s*(\\(\\d+)', 'kontratenorer \\1', 'g'); \
+                                 RegReplace('\\bKt(,|\\s|/|\\)|\$)', 'kontratenor\\1', 'g'); \
+                                 RegReplace('\\bT\\s*(\\(\\d+)', 'tenorer \\1', 'g'); \
+                                 RegReplace('\\bT(,|\\s|/|\\)|\$)', 'tenor\\1', 'g'); \
+                                 RegReplace('\\bBar\\s*(\\(\\d+)', 'barytoner \\1', 'g'); \
+                                 RegReplace('\\bBar(,|\\s|/|\\)|\$)', 'baryton\\1', 'g'); \
+                                 RegReplace('\\bB\\s*(\\(\\d+)', 'basar \\1', 'g'); \
+                                 RegReplace('\\bB(,|\\s|/|\\)|\$)', 'bas\\1', 'g'); \
                                  If (RegFind(S, 'sovitettu, jousitrio') >= 0) Or (RegFind(S, ', jousitrio') < 0) RegReplace('jousitrio', 'viulu, alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvartetti') >= 0) Or (RegFind(S, ', jousikvartetti') < 0) RegReplace('jousikvartetti', 'viulut (2), alttoviulu, sello'); \
                                  If (RegFind(S, 'sovitettu, jousikvintetti') >= 0) Or (RegFind(S, ', jousikvintetti') < 0) RegReplace('jousikvintetti', 'viulut (2), alttoviulut (2), sello'); \
@@ -79,7 +81,8 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
                                  RegReplace('^piano, jouset', 'piano, viulut (2), alttoviulu, sello'); \
                                  RegReplace('^puhaltimet', 'huilu, oboe, klarinetti, käyrätorvi, fagotti')
 
-#define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu', 'g')
+#define macro SOVITUSMERKINTO | RegReplace('sov\\.', 'sovitettu', 'g'); \
+                                RegReplace('arr\\.', 'arrangemang', 'g')
 
 #define macro RAAMATTU | RegReplace('\\bUT(\\b|\\.)', 'Uusi testamentti', 'g'); \
                          RegReplace('\\bVT(\\b|\\.)', 'Vanha testamentti', 'g')
@@ -392,11 +395,11 @@ T36   | <DEL  | S
   And (Not Exists(@773)) \
   And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
           ( \
-            ( (RegFind(@336(1)$a, 'eksti|ext') >= 0) Or \
-              (RegFind(@336(2)$a, 'eksti|ext') >= 0) Or \
-              (RegFind(@336(3)$a, 'eksti|ext') >= 0) Or \
-              (RegFind(@336(4)$a, 'eksti|ext') >= 0) Or \
-              (RegFind(@336$a, 'notatoitu') >= 0 ) ) And \
+            ( (RegFind(@336(1)$a, 'eksti|ext|otat') >= 0) Or \
+              (RegFind(@336(2)$a, 'eksti|ext|otat') >= 0) Or \
+              (RegFind(@336(3)$a, 'eksti|ext|otat') >= 0) Or \
+              (RegFind(@336(4)$a, 'eksti|ext|otat') >= 0) ) \
+               And \
             ( (RegFind(@337(1)$a, 'laitetta|medietyp|oförmedlad') >= 0) Or \
               (RegFind(@337(2)$a, 'laitetta|medietyp|oförmedlad') >= 0) Or \
               (RegFind(@337(3)$a, 'laitetta|medietyp|oförmedlad') >= 0) Or \
@@ -524,8 +527,8 @@ T36   | <DEL  | S
     Or (RegFind(@516$a, '[Vv]erkkoaineisto') >= 0) \
     Or (RegFind(@500, '[Ii]nternet-julkaisu') >= 0) \
     Or (RegFind(@538$a, '[Ii]nternet|[Ww][Ww][Ww]|selain|[Aa]dobe|[Vv]iewer') >= 0) \
-    Or (RegFind(@256$a, '[Vv]erkkoaineisto') >= 0) \
-    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
+    Or (RegFind(@256$a, '[Tt]ekstiä|ext|[Vv]erkkoaineisto') >= 0) \
+    Or ( (RegFind(@300, '[Ii][Bb]ooks|[Pp][Dd][Ff]-[Ff][Ll][Aa][Cc]|[Hh][Tt][Mm][Ll]|online') >= 0) And (@008/24/ = 'o') ) \
     Or (RegFind(000/8/, 's') >= 0) \
     Or (RegFind(@256, '[Vv]erkko|[Ss]uorakäyttöjärjestelmä') >= 0) \
     Or (RegFind(@020, '[Pp][Dd][Ff]') >= 0) \
@@ -565,19 +568,9 @@ T36   | <DEL  | S
 000 | 338(newest)$2 | 'rdacarrier'
 #endif
 
-// TIETOLEVY
+// DATORSKIVA
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773)) And (InTable(@336$a, '336_a.tbl'))
-000 | 338(new)I1 | ' '
-000 | 338(newest)I2 | ' '
-000 | 338(newest)$a | 'tietolevy'
-000 | 338(newest)$b | 'cd'
-000 | 338(newest)$2 | 'rdacarrier'
-#endif
-
-// SAMMA PÅ SVENSKA : DATORSKIVA
-
-#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773)) And (InTable(@336$a, '336_a_svenska.tbl'))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Rr][Oo][Mm]') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'datorskiva'
