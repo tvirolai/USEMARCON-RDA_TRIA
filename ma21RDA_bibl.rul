@@ -1,4 +1,4 @@
-RDA-konversio - bibliografiset tietueet
+RDA-konversio - bibliografiset tietueet, Tritonia
 versio 18.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
@@ -113,7 +113,9 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
                                RegReplace('paperisena', 'painettuna', 'g'); \
                                RegReplace('[Ee]lektroninen aineisto', 'Verkkoaineisto', 'g'); \
                                RegReplace('verkkojulkaisuun', 'verkkoaineistoon'); \
-                               RegReplace('Elektroninen julkaisu|Verkkojulkaisuun', 'Linkki verkkoaineistoon')
+                               RegReplace('Elektroninen julkaisu|Verkkojulkaisuun', 'Linkki verkkoaineistoon'); \
+                               RegReplace('[Tt]ekstiä|[Tt]ext|[Pp][Dd][Ff]-fil|[Pp][Dd][Ff]-tiedosto', '1 verkkoaineisto', 'g'); \
+                               RegReplace('(\\d+) s\\.', '\\1 sivua')
 
 #define macro FUNKTIOVALIMERKIT | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$e)', '\\1,\\2', 'g'); \
                                   RegReplace('\\.($[e|4])', ',\\1', 'g'); \
@@ -296,9 +298,9 @@ B43 | 243 | S
 
 F45 | 245 | S
 
-256I1 | 256I1 | S
-256I2 | 256I2 | S
-256   | 256   | VERKKOAINEISTO
+256I1 | 300I1 | S
+256I2 | 300I2 | S
+256   | 300   | VERKKOAINEISTO
 
 #if (Not Exists(@773))
 260I1 | 260I1 | S
@@ -338,7 +340,7 @@ F45 | 245 | S
 300$e | <Y30$e | 300BE
 300$? | <Y30$? | S
 
-Y30   | 300    | S
+Y30   | 300(new)    | S; VERKKOAINEISTO
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
