@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 17.3.2016 / Kansalliskirjasto (TV)
+versio 18.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -144,7 +144,7 @@ versio 17.3.2016 / Kansalliskirjasto (TV)
 
 020I1 | 020I1 | S
 020I2 | 020I2 | S
-020$a | 020$a | If (RegFind(S, '\\d+') >= 0) Then RegReplace('[\\s](.*)', '')
+020$a | 020$a | S; RegReplace('[\\s](.*)', '')
 020$a | 020$q | If (RegFind(@020$a, '\\(') >= 0) Then S; RegReplace('(.*)\\(', ''); RegReplace('\\)', ''); SIDOSASUT; Delete(':', At Ending);
 020$c | <DEL  | S
 020$? | 020$? | Replace('.,' By ','); \ // Tapaukset tyyliin "020$q sid., muovikannet"
@@ -298,7 +298,7 @@ F45 | 245 | S
 
 256I1 | 256I1 | S
 256I2 | 256I2 | S
-256   | 256   | VERKKOAINEISTO; Delete ('.', At Ending)
+256   | 256   | VERKKOAINEISTO
 
 #if (Not Exists(@773))
 260I1 | 260I1 | S
@@ -352,8 +352,9 @@ T36(ns)$a | 336(n)$a | Delete('.', At Ending); \
                        If (InTable(S, '336_a_svenska.tbl')) Then Table ('336_a_svenska.tbl') Else Table ('336_a.tbl')
 #if (Exists(T36$8))
 T36(ns)$a | 336(n)$8 | T36$8
-T36   | <DEL  | S
 #endif
+
+T36   | <DEL  | S
 
 #if Not (Exists(@336$b))
 336(ns)$a | 336(no)$b | Delete('.', At Ending); Delete(';', At Ending); If (InTable(S, '336_b.tbl')) Then Table ('336_b.tbl')
@@ -392,7 +393,7 @@ T36   | <DEL  | S
 
 #if (Not Exists(@338)) \
   And (Not Exists(@773)) \
-  And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @007/7/ = 'e') And \
+  And ( ( @000/7/ = 'a' Or @000/7/ = 'c' Or @000/7/ = 'e' Or @000/7/ = 't') And \
           ( \
             ( (RegFind(@336(1)$a, 'eksti') >= 0) Or \
               (RegFind(@336(2)$a, 'eksti') >= 0) Or \
@@ -460,7 +461,7 @@ T36   | <DEL  | S
 
 // PIIRTOHEITINKALVO
 
-#if (Not Exists(@338)) And If (RegFind(@300$a, 'heijastuskuva|[Kk]alvo') >= 0) And If (Not Exists(@773))
+#if (Not Exists(@338)) And If (RegFind(@300$a, '[Hh]eijastuskuva|[Kk]alvo') >= 0) And If (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
 000 | 338(newest)$a | 'piirtoheitinkalvo'
@@ -593,6 +594,7 @@ T36   | <DEL  | S
 
 #if (Not Exists(@338)) \
   And ( (RegFind(@300$a, '[Mm]ikrofilm\\b') >= 0) Or (007/2/ = 'j') ) \
+  And (Not (000/7/ = 'e') Or (000/7/ = 'f')) \
   And (Not Exists(@773))
 000 | 338(new)I1 | ' '
 000 | 338(newest)I2 | ' '
