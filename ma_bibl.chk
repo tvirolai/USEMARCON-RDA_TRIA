@@ -289,6 +289,9 @@ Generated: 2016-02-08 10:45:49
 // Digitaalisen tiedoston ominaisuudet
 347* | I1=_ | I2=_ | $a* | $b* | $c* | $d* | $e* | $f* | $0* | $2? | $3? | $6? | $8* | $5* | $9* | 
 
+// Format of Notated Music
+348* | I1=_ | I2=_ | $a* | $b* | $c* | $0* | $2? | $3? | $6? | $8* | $5* | $9* | 
+
 // Aineiston järjestysperiaatteet
 351* | I1=_ | I2=_ | $a* | $b* | $c? | $3? | $6? | $8* | $5* | $9* | 
 

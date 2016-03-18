@@ -1,5 +1,5 @@
 RDA-konversio - bibliografiset tietueet
-versio 16.3.2016 / Kansalliskirjasto (TV)
+versio 17.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
@@ -20,7 +20,7 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('diagrs\\.', 'diagrams', 'g'); \
                       RegReplace('incl\\.', 'includes', 'g'); \
                       RegReplace('fold(\\.)* maps', 'folded maps', 'g'); \
-                      RegReplace('\\d irtol\\.', '\\1 irtolehteä'); \
+                      RegReplace('(\\d+) irtol\\.', '\\1 irtolehteä'); \
                       Replace('kuvas.' By 'kuvasivua'); \
                       RegReplace('([^0-9]) (taul[.,])', '\\1 taulukkoja', 'g'); \
                       RegReplace('\\btaul\\.', 'taulukkoja', 'g'); \
@@ -33,6 +33,7 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
                       RegReplace('\\] kuvas\\.|\\] kuvas(\$|\\b)', '] kuvasivua', 'g'); \
                       RegReplace('1 liites\\.|1 liites(\$|\\b)', '1 liitesivu', 'g'); \
                       RegReplace('liites\\.|liites(\$|\\b)', 'liitesivua', 'g'); \
+                      RegReplace('liitt\\.', 'liitteitä', 'g'); \
                       RegReplace('[Vv]erkkokirja', 'verkkoaineisto', 'g')
 
 // Musiikin esityskokoonpanotermien avaaminen, osakenttä $m kentissä 130, 240, 600, 610, 630, 700, 710, 730, 800, 810, 830
@@ -122,6 +123,9 @@ versio 16.3.2016 / Kansalliskirjasto (TV)
 #define macro FUNKTIOT2 | RegReplace('(\\)|[Mm]r\\.|[Mm]rs\\.|[Jj]r\\.|Ph\\.+\\s+D\\.|Dr\\.|Sr\\.|[Rr]ev\\.|\\s[A-Za-z]\\.|\\.[A-Za-z]\\.)($4|$j)', '\\1,\\2', 'g'); \
                           RegReplace('\\.($[j|4])', ',\\1', 'g'); \
                           RegReplace(',,', ',')
+
+// Lisää loppupisteen kenttään, jos se ei lopu johonkin seuraavista merkeistä: ), ], ?, !, -, .
+#define macro LOPPUPISTE | If ( (RegFind('(\\)|\\]|\\?|\\!|-|\\.)\$') <0 ) ) Then S + '.' Else S
 
 000/1-9/ | 000/1-9/ | S
 000/10/ | 000/10/ | 'a'
@@ -213,7 +217,7 @@ C11   | 111    | FUNKTIOT2
 130$p | <A30$p | RAAMATTU
 130$? | <A30$? | S
 
-A30 | 130 | S
+A30 | 130 | LOPPUPISTE
 
 222I1 | 222I1 | S
 222I2 | 222I2 | S
@@ -292,9 +296,9 @@ B43 | 243 | S
 
 F45 | 245 | S
 
-256I1 | 300I1 | S
-256I2 | 300I2 | S
-256   | 300   | VERKKOAINEISTO; Delete ('.', At Ending)
+256I1 | 256I1 | S
+256I2 | 256I2 | S
+256   | 256   | VERKKOAINEISTO; Delete ('.', At Ending)
 
 #if (Not Exists(@773))
 260I1 | 260I1 | S
@@ -303,14 +307,7 @@ F45 | 245 | S
                    RegReplace('[Ss]\\.\\s*[Ll]\\.', 'kustannuspaikka tuntematon');
                    RegReplace('[Ss]\\.\\s*[Nn]\\.', 'kustantaja tuntematon')
 260$b | 260$b | S; RegReplace('[Ss]\\.\\s*[Nn]\\.', 'kustantaja tuntematon')
-260$c | 260$c | RegReplace('[Ss]\\.\\s*[Aa]\\.*', 'julkaisuaika tuntematon'); \
-                If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) \
-                  And (RegFind(S, '\\d{4}-\\d{4}') >= 0) \
-                  Then '[' + RegMatch(0) + ']' \
-                Else If (RegFind(S, 'cop|©|℗|[Cc]|^p') >= 0) \
-                  And (RegFind(S, '\\d{4}') >= 0) \
-                  Then '[' + RegMatch(0) + ']' \
-                Else S
+260$c | 260$c | S; RegReplace('[Ss]\\.\\s*[Aa]\\.*', 'julkaisuaika tuntematon')
 260$? | 260$? | S
 #endif
 
@@ -329,17 +326,19 @@ F45 | 245 | S
 300I2 | 300(newest)I2 | S
 
 #if (RegFind(@041, 'eng') >= 0)
-300$a | 300(newest)$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages'); Delete ('.', At Ending)
+300$a | <Y30$a | 300AE; 300BE; RegReplace('(\\d*) p\\.', '\\1 pages'); Delete ('.', At Ending)
 #endif
 
 #if (RegFind(@041, 'eng') < 0)
-300$a | 300(newest)$a | 300AE; 300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
+300$a | <Y30$a | 300AE; 300BE // Ei avata p.-lyhennettä jos kyseessä on esim. ranska
 #endif
 
-300$b | 300(newest)$b | 300BE
-300$c | 300(newest)$c | S; Delete('.', At Ending)
-300$e | 300(newest)$e | 300BE
-300$? | 300(newest)$? | S
+300$b | <Y30$b | 300BE
+300$c | <Y30$c | S; Delete('.', At Ending)
+300$e | <Y30$e | 300BE
+300$? | <Y30$? | S
+
+Y30   | 300    | S
 
 // OLEMASSA OLEVIEN 336- JA 337-KENTTIEN KÄÄNTÄMINEN, $b- JA $2-OSAKENTTIEN LUOMINEN
 
@@ -809,7 +808,7 @@ T36   | <DEL  | S
 
 500I1 | 500I1 | S
 500I2 | 500I2 | S
-500   | 500   | S; RegReplace('et al\\.', 'ja muita'); Delete('['); Delete(']')
+500   | 500   | S; RegReplace('et al\\.', 'ja muita')
 
 502I1 | 502I1 | S
 502I2 | 502I2 | S
@@ -899,9 +898,9 @@ D61 | 610 | FUNKTIOVALIMERKIT; If (@610I2 = '0') And (RegFind('[^A-Za-z]\$') < 0
 
 611I1 | 611I1  | S
 611I2 | 611I2  | S
-611$j | <K61$j  | Table ('Funktiotermit.tbl')
-611$4 | <K61$j  | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
-611$? | <K61$?  | If (@612I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+611$j | <K61$j | Table ('Funktiotermit.tbl')
+611$4 | <K61$j | If (Not (Exists(@611$j)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
+611$? | <K61$? | If (@611I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
 
 K61   | 611     | FUNKTIOT2
 
@@ -929,7 +928,7 @@ K61   | 611     | FUNKTIOT2
 630$4 | <E63$e | If (Not (Exists(@630$e)) And InTable(S, 'Funktiokoodit.tbl')) Then Table ('Funktiokoodit.tbl') + '.' Else S
 630$? | <E63$? | S
 
-E63 | 630 | FUNKTIOVALIMERKIT; If (@630I2 = '0') And (RegFind('[^A-Za-z]\$') < 0) Then S + '.' Else S
+E63 | 630 | FUNKTIOVALIMERKIT; LOPPUPISTE
 
 650I1 | 650I1  | S
 650I2 | 650I2  | S
@@ -970,7 +969,7 @@ Z65   | 662    | FUNKTIOVALIMERKIT
 700I2 | 700I2  | S
 700$c | <G70$c | FIKTIIVINENHAHMO
 700$d | <G70$d | AIKAMAAREET
-700$e | <G70$e | Delete('.', At Ending); Table ('Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
+700$e | <G70$e | Table ('Funktiotermit.tbl'); Delete ('.', At Ending); S + '.'
 
 #if (RegFind(@700$t, 'Triot') >= 0)
 700$m | <G70$m | TRIOT; ESITYSKOKOONPANO
@@ -1063,7 +1062,7 @@ Y72   | 720    | S
 730$p | <J73$p | RAAMATTU
 730$? | <J73$? | S
 
-J73 | 730 | S
+J73 | 730 | LOPPUPISTE
 
 76?I1 | 76?I1 | S
 76?I2 | 76?I2 | S
@@ -1169,7 +1168,7 @@ W81   | 811    | FUNKTIOT2
 830$? | <M83$? | S
 
 M83 | 830 | RegReplace('\\b;$v| ; $v', ' ;$v'); \
-            If (NextSubIn(S, $v) = '') Then S + '.' Else S
+            LOPPUPISTE 
 
 856I1 | 856I1 | S
 856I2 | 856I2 | S
