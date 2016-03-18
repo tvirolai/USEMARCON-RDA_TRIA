@@ -287,7 +287,7 @@ B43 | 243 | S; RAAMATTU
 
 245$a | <F45$a | S
 245$b | <F45$b | S
-245$c | <F45$c | S
+245$c | <F45$c | S; RegReplace('\\[et al\\.\\]', '[och andra]')
 245$f | <F45$f | S
 245$g | <F45$g | S
 245$p | <F45$p | S
@@ -612,7 +612,7 @@ T36   | <DEL  | S
 
 500I1 | 500I1 | S
 500I2 | 500I2 | S
-500   | 500   | S
+500   | 500   | S; RegReplace('\\[et al\\.\\]', '[och andra]')
 
 502I1 | 502I1 | S
 502I2 | 502I2 | S
@@ -622,7 +622,7 @@ T36   | <DEL  | S
 
 510I1 | 510I1 | S
 510I2 | 510I2 | S
-510   | 510   | S
+510   | 510   | S; RegReplace('\\[et al\\.\\]', '[och andra]')
 
 511I1 | 511I1 | S
 511I2 | 511I2 | S
