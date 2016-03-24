@@ -1,24 +1,42 @@
-RDA-konversio - bibliografiset tietueet, ruotsi
-versio 18.3.2016 / Kansalliskirjasto (TV)
+RDA-konversio, Tritonialle mukautettu versio - bibliografiset tietueet, ruotsi
+versio 24.3.2016 / Kansalliskirjasto (TV)
 
 #define version 317
 
 #define macro 300AE | RegReplace('\\b[Nn]\\.', 'noin', 'g'); \
+                      RegReplace('(\\d+) s\\.', '\\1 sidor', 'g'); \
+                      RegReplace('(\\[\\d+\\]) s\\.', '\\1 sidor', 'g'); \
+                      RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
+                      RegReplace('\\bs\\. (\\d+-\\d+)', 'sidor \\1', 'g'); \
+                      RegReplace('S\\. (\\d+-\\d+)', 'sidor \\1', 'g'); \
+                      RegReplace('\\bill\\.', 'illustrerad', 'g'); \
+                      RegReplace('\\bkuv\\.', 'illustrerad', 'g'); \
                       RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
-                      RegReplace('ss\\.', 'sivut', 'g'); \
+                      RegReplace('ss\\.', 'sidor', 'g'); \
                       RegReplace('\\bkuv\\.', 'kuvitettu', 'g'); \
                       RegReplace('verkkojulkaisu', 'verkkoaineisto', 'g'); \
                       RegReplace('Verkkojulkaisu', 'Verkkoaineisto', 'g')
                       
 #define macro 300BE | RegReplace('kartt\\.', 'karttoja', 'g'); \
-                      RegReplace('kuv\\.', 'kuvitettu', 'g'); \
+                      RegReplace('\\bill\\.', 'illustrerad', 'g'); \
+                      RegReplace('(\\d+) s\\.', '\\1 sidor', 'g'); \
+                      RegReplace('(\\[\\d+\\]) s\\.', '\\1 sidor', 'g'); \
+                      RegReplace('(\\d+) bl\\.', '\\1 blad', 'g'); \
+                      RegReplace('\\bs\\. (\\d+-\\d+)', 'sidor \\1', 'g'); \
+                      RegReplace('S\\. (\\d+-\\d+)', 'sidor \\1', 'g'); \
+                      RegReplace('\\bill\\.', 'illustrerad', 'g'); \
+                      RegReplace('\\bkuv\\.', 'illustrerad', 'g'); \
+                      RegReplace('\\bsek([^A-Z-a-z])', 's\\1', 'g'); \
+                      RegReplace('ss\\.', 'sidor', 'g'); \
+                      RegReplace('kuv\\.', 'illustrerad', 'g'); \
                       RegReplace('mv\\.', 'mustavalkoinen', 'g'); \
+                      RegReplace('\\btab\\.', 'tabeller', 'g'); \
                       RegReplace('vär\\.', 'värillinen', 'g'); \
                       RegReplace('\\bl\\.', 'blad', 'g'); \
                       RegReplace('\\bfig\\.', 'figurer', 'g'); \
                       RegReplace('värikuv\\.', 'värikuvitus', 'g'); \
                       RegReplace('nuott\\.', 'nuotteja', 'g'); \
-                      RegReplace('\\bbil\\.', 'bilder', 'g'); \
+                      RegReplace('\\bbil\\.', 'bilagor', 'g'); \
                       RegReplace('kuval\\.', 'kuvalehteä', 'g'); \
                       RegReplace('diagrs\\.', 'diagrams', 'g'); \
                       RegReplace('incl\\.', 'includes', 'g'); \
@@ -45,6 +63,7 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
                                  RegReplace('pianokvartetti', 'piano, viulu, alttoviulu, sello'); \
                                  RegReplace('pianokvintetti', 'piano, viulut (2), alttoviulu, sello'); \
                                  RegReplace('\\bork\\.|\\bork(\$|\\b)', 'orkester', 'g'); \
+                                 RegReplace('\\barr\\.', 'arrangemang', 'g'); \
                                  RegReplace('jousiork\\.|jousiork(\$|\\b)', 'jousiorkesteri'); \
                                  RegReplace('kamariork\\.|kamariork(\$|\\b)', 'orkesteri'); \
                                  RegReplace('puhallinork\\.|puhallinork(\$|\\b)', 'puhallinorkesteri'); \
@@ -98,8 +117,8 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
                             RegReplace('\\bn\\.', 'noin', 'g'); \
                             RegReplace('\\bvs\\.', 'vuosisata', 'g')
 
-#define macro SIDOSASUT |  RegReplace('\\bsid\\.|\\bsid\\b', 'sidottu', 'g'); \
-                           RegReplace('\\bnid\\.|\\bnid\\b', 'nidottu', 'g'); \
+#define macro SIDOSASUT |  RegReplace('\\bsid\\.|\\bsid\\b', 'inbunden', 'g'); \
+                           RegReplace('\\bnid\\.|\\bnid\\b', 'häftad', 'g'); \
                            RegReplace('\\bvirh\\b|\\bvirh\\.', 'virheellinen', 'g'); \
                            RegReplace('\\binb\\b|\\binb\\.', 'inbunden', 'g'); \
                            RegReplace('\\bhft\\b|\\bhft\\.', 'häftad', 'g'); \
@@ -111,6 +130,7 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
 
 #define macro VERKKOAINEISTO | RegReplace('paperimuodossa', 'painettuna', 'g'); \
                                RegReplace('[Pp]aperisena', 'painettuna', 'g'); \
+                               RegReplace('Text\\b|Text\\.', '1 onlineresurs', 'g'); \
                                RegReplace('Verkkojulkaisu\\b', 'Verkkoaineisto', 'g'); \
                                RegReplace('verkkojulkaisuna', 'verkkoaineistona', 'g'); \
                                RegReplace('[Ii]nternet-julkaisu\\b', 'verkkoaineisto', 'g'); \
@@ -175,7 +195,7 @@ versio 18.3.2016 / Kansalliskirjasto (TV)
 100$b | <A10$b | S; If ((100$c Follows 100$b) And RegFind(@100$c, 'fikt') >= 0) Delete (',', At Ending)
 100$c | <A10$c | FIKTIIVINENHAHMO
 100$d | <A10$d | AIKAMAAREET
-100$e | <A10$e | Delete('.', At Ending); Table ('sv_Funktiotermit.tbl'); If (NextSub($e) = '') Then S + '.' Else S
+100$e | <A10$e | Table ('sv_Funktiotermit.tbl'); Delete('.', At Ending); If (NextSub($e) = '') Then S + '.' Else S + ','
 100$4 | <A10$e | If (Not (Exists(@100$e)) And InTable(S, 'sv_Funktiokoodit.tbl')) Then Table ('sv_Funktiokoodit.tbl') + '.' Else S
 100$? | <A10$? | S
 
@@ -300,6 +320,10 @@ B43 | 243 | S; RAAMATTU
 245$n | <F45$n | S
 
 F45 | 245 | S
+
+256I1 | 300I1 | S
+256I2 | 300I2 | S
+256   | 300   | VERKKOAINEISTO; 300AE; Delete('.', At Ending)
 
 #if (Not Exists(@773))
 260I1 | 260I1 | S
